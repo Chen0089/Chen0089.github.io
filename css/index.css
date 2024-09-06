@@ -1,6 +1,8 @@
 .head {
+  text-align:center;
   background-color:rgb(128, 128, 255)
 }
 .footer {
+  text-align:center;
   background-color:rgba(128,128,255,128)
 }
