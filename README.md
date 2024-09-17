@@ -1,3 +1,4 @@
-# 这是我的网站
+<b><a href="README.md">这里也有中文的介绍</a></b>
+# This is my site.
 
-<h6>悄悄告诉你：这里的所有代码你都可以复制哦</h6>
+<h6>Tips：You can copy my all codes!</h6>
