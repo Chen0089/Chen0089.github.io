@@ -1,43 +1,355 @@
-.head {
-  text-align:center;
-  background-color:rgb(128, 128, 255)
+.main a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #333;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px
 }
-.footer {
-  text-align:center;
-  background-color:rgba(128,128,255,128)
+.main a:hover {
+    background: #bbb;
+    color: #000;
+    text-decoration: none;
+    font-size: 20px
 }
-body {
+.main
+{
+    margin: auto;/*让它水平居中*/
+}
+/*设置盒子样式*/
+.header, .nav, .container, .footer
+{
+    /*左浮动*/
+    float: left;
+    /*满浏览器*/
+    width: 100%;
+    /*内边距会影响整个盒子的实际大小，而这里有一种方法可以处理，让它不影响*/
+    box-sizing: border-box;/*就是这句*/
+}
+/*先做出头*/
+.header
+{
+    background: #ccc;
+    padding: 20px;
+    text-align: center;
+}
+/*导航栏*/
+.nav
+{
+    background: #333;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+}
+.nav div
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav div a
+{
+    text-align:center;
+    box-align: center;
+}
+#nav-elaborate
+{
+    width: 100px;
+    height: 50px;
+    display: inline-block;
+}
+.nav a
+{
+    color: #fff;
+    padding: 10px 20px;
+    display:inline-block; 
+    vertical-align:middle;
+}
+/*设置鼠标选择时的样式*/
+.nav div :hover
+{
+    background: #bbb;
+    color: #000;
+}
+/*设置导航栏的字体*/
+.nav a
+{
+    font-size: 20px;
+}
+
+
+/*等待效果*/
+#loader {
+    border: 12px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 12px solid #444444;
+    width: 70px;
+    height: 70px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+/*跳动的文字*/
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: orange; }
+}
+.typewriter {
+  overflow: hidden; /* 隐藏溢出的文字 */
+  border-right: .15em solid orange; /* 光标效果 */
+  white-space: nowrap; /* 文字不换行 */
+  margin: 0 auto; /* 居中显示 */
+  letter-spacing: .15em; /* 字符间距 */
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+@keyframes jump {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.jump-text {
+  animation: jump 3s infinite;
+}
+
+
+/*其他私有ID或Class*/
+#products
+{
+    text-align: center;
+}
+#1
+{
+    color: #333;
+}
+.logo img
+{
+    width: 100%;
+    height: 100%;
+}
+.nav
+{
+    width: 100%;
+    height: 100px;
+    background-color: #333;
+}
+.nav ul
+{
+    list-style-type: none;
     margin: 0;
-    font-family: Arial, sans-serif;
+    padding: 0;
+    overflow: hidden;
 }
-        .nav {
-            display: flex;
-            background-color: #333;
+.nav li
+{
+    float: left;
+}
+.nav li a
+{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.nav li a:hover
+{
+    background-color: #111;
+}
+.nav li a.active
+{
+    background-color: #4CAF50;
+}
+.nav li a.active:hover
+{
+    background-color: #45a049;
+}
+.nav li a.active:focus
+{
+    background-color: #45a049;
+}
+.nav li a.active:focus::after
+{
+    transform: rotate(225deg);
+}
+
+#text-container {
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    height: 20px;
+  }
+  
+  #text-container span {
+    display: inline-block;
+    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    color: #fff;
+    font-size: 16px;
+    animation: typing 10s infinite;
+  }
+  
+  @keyframes typing {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }  
+.fly-fish {
+    background-color: #333;
+    color: #666;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    animation: typing 10s infinite;
+    background: linear-gradient(to right, #333, #333);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: typing 10s infinite;
+    background-size: 200% 100%;
+}
+    @keyframes typing {
+        0% {
+            background-position: 0 0;
         }
-        .nav a {
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            position: relative;
+        100% {
+            background-position: -100% 0;
         }
-        .nav a.active {
-            background-color: #00f;
-            color: #fff;
+    }
+#ILikeFish-mc {
+    color: #666;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    animation: typing 10s infinite;
+    background: linear-gradient(to right, #333, #333);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: typing 10s infinite;
+    background-size: 200% 100%;
+}
+    @keyframes typing {
+        0% {
+            background-position: 0 0;
         }
-        .nav a::before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: #00f;
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s ease;
+        100% {
+            background-position: -100% 0;
         }
-        .nav a.active::before {
-            transform: scaleX(1);
-           transform-origin: bottom left;
-        }
+    }
+/*服务器*/
+.one {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 20px;
+    background-color: #333;
+    font-weight: bold;
+    float: left;
+    width: 50%;
+    height: 250px;
+    color: #fff;
+    margin-left: 25px;
+    margin-bottom: 50px;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation-duration: 2s;
+    animation-name: slidein;
+}
+@keyframes slidein {
+    from {
+      margin-left: -100%;
+      width: 50%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 50%;
+    }
+}
+.one img {
+    width: 200px;
+    height: 92px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+.one .OrightBox {
+    margin-top: 1px;
+    margin-left: 10px;
+    float: right;
+    margin-right: 25px;
+    margin-bottom: 50px;
+    padding: 50px;
+    border-radius: 10px;
+    animation-duration: 2s;
+    animation-name: slidein;
+    background-color: #333;
+    font-weight: bold;
+    float: right;
+    width: 50%;
+    height: 100px;
+    color: #fff;
+}
+@keyframes slidein {
+    from {
+      margin-left: -100%;
+      width: 50%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 50%;
+    }
+}
+.one img {
+    width: 300px;
+    height: 100%;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+.one .OrightBox {
+    margin-top: 1px;
+    margin-left: 10px;
+    float: right;
+}
+/*尾部*/
+.footer {
+    padding: 10px;
+    background: #ccc;
+    text-align: center;
+    height: 30%; /* 设置一个固定的高度 */
+    position: absolute; /* 确保footer元素在页面中的位置正确 */
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
