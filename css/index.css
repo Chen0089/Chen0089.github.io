@@ -38,7 +38,7 @@
 /*导航栏*/
 .nav
 {
-    background: #333;
+    background: #11c;
     width: 100%;
     height: 50px;
     text-align: center;
@@ -64,7 +64,7 @@
 }
 .nav a
 {
-    color: #fff;
+    color: #333;
     padding: 10px 20px;
     display:inline-block; 
     vertical-align:middle;
@@ -72,8 +72,8 @@
 /*设置鼠标选择时的样式*/
 .nav div :hover
 {
-    background: #bbb;
-    color: #000;
+    background: #33b;
+    color: #333;
 }
 /*设置导航栏的字体*/
 .nav a
