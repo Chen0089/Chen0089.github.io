@@ -31,14 +31,14 @@
 /*先做出头*/
 .header
 {
-    background: #aaf;
+    background: #aaa;
     padding: 20px;
     text-align: center;
 }
 /*导航栏*/
 .nav
 {
-    background: #11c;
+    background: #ccc;
     width: 100%;
     height: 50px;
     text-align: center;
@@ -72,7 +72,7 @@
 /*设置鼠标选择时的样式*/
 .nav div :hover
 {
-    background: #33b;
+    background: #333;
     color: #333;
 }
 /*设置导航栏的字体*/
