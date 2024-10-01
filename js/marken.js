@@ -2,7 +2,7 @@
 var database = {
     Marken: {
         name: "Marken",
-        company: "Kei"
+        company: "业余开发者Chen0089"
     }
 };
 
@@ -14,16 +14,22 @@ function getResponse() {
 
 function generateResponse(userInput) {
     if (userInput.includes("你好")) {
-        return "你好！我是" + database.Marken.name + "，是" + database.Marken.company + "的产品。有什么我能帮助你的？";
+        return "你好！我是" + database.Marken.name + "，是" + database.Marken.company + "的作品。有什么我能帮助你的？";
     } else if (userInput.includes("Marken")) {
-        return "我是" + database.Marken.name + "，是" + database.Marken.company + "的产品，有什么我可以为你解答的吗？";
-    } else {
+        return "你好，我是" + database.Marken.name + "，是" + database.Marken.company + "的作品，有什么我可以为你解答的吗？话说你是怎么知道我的名字的？";
+    } else if (userInput.includes("你个傻逼")) {
+        return "请您不要骂我好不好:("
+    } else if (userInput.includes("傻逼")) {
+        return "请您不要骂我好不好:("
+    }
+    else {
         var fuzzyResponses = [
-            "我不确定我理解你的意思。",
+            "我不理解你的意思呜呜呜",
             "让我想想怎么回答。",
             "这是个有趣的问题，让我思考一下。",
             "很抱歉，我暂时没有相关的答案。",
-            "我还在学习中，还不能回答这个问题。"
+            "我还在学习中，还不能回答这个问题呜呜呜。",
+            "请问你再说什么？我听不懂！"
         ];
         var randomIndex = Math.floor(Math.random() * fuzzyResponses.length);
         return fuzzyResponses[randomIndex];
