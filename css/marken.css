@@ -37,5 +37,14 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #007bff;
+    animation: zoomInOut 2s infinite;
+}
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1); /* 初始状态，缩放比例为1 */
+  }
+  100% {
+    transform: scale(2); /* 动画结束状态，缩放比例为1.5 */
+  }
 }
