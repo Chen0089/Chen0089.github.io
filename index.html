@@ -99,6 +99,27 @@
                             <p id="project-description"></p>
                             <p><a id="project-link" href="" target="_blank">查看项目</a></p>
                           </div>
+			<script>
+				fetch('js/projects.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // 随机选择一个项目
+        const randomIndex = Math.floor(Math.random() * data.length);
+        const project = data[randomIndex];
+
+        // 更新页面内容
+        document.getElementById('project-name').innerText = project.name + " (Star: " + project.stars + "+)";
+        document.getElementById('project-description').innerText = project.description;
+        document.getElementById('project-link').setAttribute('href', project.url);
+    })
+    .catch(error => console.error('Error fetching project data:', error));
+
+			</script>
                 </section>
 			<div id="flyfish" class="fly-fish" height="200"></div>
 			<h6 id="ILike'Fish-MC">这鱼我能玩一整天(doge)</h6>
