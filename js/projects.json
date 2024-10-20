@@ -1,0 +1,32 @@
+[
+    {
+        "name": "React",
+        "url": "https://github.com/facebook/react",
+        "stars": 210000,
+        "description": "用于构建用户界面的JavaScript库。"
+    },
+    {
+        "name": "Vue.js",
+        "url": "https://github.com/vuejs/vue",
+        "stars": 210000,
+        "description": "渐进式JavaScript框架。"
+    },
+    {
+        "name": "Bootstrap",
+        "url": "https://github.com/twbs/bootstrap",
+        "stars": 160000,
+        "description": "最流行的HTML、CSS框架。"
+    },
+    {
+        "name": "TensorFlow",
+        "url": "https://github.com/tensorflow/tensorflow",
+        "stars": 190000,
+        "description": "用于机器学习的开源软件库。"
+    },
+    {
+        "name": "Django",
+        "url": "https://github.com/django/django",
+        "stars": 100000,
+        "description": "高级Python Web框架。"
+    }
+]
