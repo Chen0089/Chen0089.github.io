@@ -8,3 +8,6 @@
 a {
     text-decoration: none; /* 取消下划线 */
 }
+h1, h2 {
+    text-align: center;
+}
