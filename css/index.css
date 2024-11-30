@@ -98,33 +98,6 @@
     right: 0;
     margin: auto;
 }
-/*跳动的文字*/
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: orange; }
-}
-.typewriter {
-  overflow: hidden; /* 隐藏溢出的文字 */
-  border-right: .15em solid orange; /* 光标效果 */
-  white-space: nowrap; /* 文字不换行 */
-  margin: 0 auto; /* 居中显示 */
-  letter-spacing: .15em; /* 字符间距 */
-  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-}
-@keyframes jump {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
-}
-.jump-text {
-  animation: jump 3s infinite;
-}
-
-
 /*其他私有ID或Class*/
 #products
 {
@@ -267,4 +240,8 @@ form {
     left: 0;
     right: 0;
     padding-up:10000px;
+}
+.fps{
+    background: #00eeee;
+    border-radius: 3px
 }
