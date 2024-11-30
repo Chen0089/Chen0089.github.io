@@ -1,28 +1,28 @@
-const textContainer = document.getElementById('text-container');
-const texts = ['Hello world!!!', 'welcome to my website!', 'have a nice day!'];
+document.addEventListener('DOMContentLoaded', (event) => {
+    const starsThreshold = 10000;
+    const githubSearchApiUrl = `https://api.github.com/search/repositories?q=stars:>${starsThreshold}&per_page=10`;
 
-function randomText() {
-  const randomIndex = Math.floor(Math.random() * texts.length);
-  return texts[randomIndex];
-}
-
-function updateText() {
-  const span = textContainer.querySelector('span');
-  span.textContent = randomText();
-}
-
-setInterval(updateText, 1000);
-
-fetch('projects.json')
-    .then(response => response.json())
-    .then(data => {
-        // 随机选择一个项目
-        const randomIndex = Math.floor(Math.random() * data.length);
-        const project = data[randomIndex];
-
-        // 更新页面内容
-        document.getElementById('project-name').innerText = project.name + " (Star: " + project.stars + "+)";
-        document.getElementById('project-description').innerText = project.description;
-        document.getElementById('project-link').setAttribute('href', project.url);
-    })
-    .catch(error => console.error('Error fetching project data:', error));
+    fetch(githubSearchApiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const repoList = document.getElementById('repo-list');
+            data.items.forEach(repo => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Repository: ${repo.name}, Stars: ${repo.stargazers_count}, URL: ${repo.html_url}`;
+                repoList.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            // 可选：在HTML中显示错误信息
+            const errorDiv = document.createElement('div');
+            errorDiv.textContent = 'Failed to load repositories. Please try again later.';
+            errorDiv.style.color = 'red';
+            document.getElementById('repo-container').appendChild(errorDiv);
+        });
+});
