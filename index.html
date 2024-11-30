@@ -86,13 +86,10 @@
 			<br>
 		</div>
 		<div class="container">
+			<div id="repo-container">
+                        <h1>推荐的高Star GitHub项目</h1>
+                        <ul class="repo-list" id="repo-list"></ul>
 		<section>
-                          <h2>推荐的高Star GitHub项目</h2>
-                          <div id="project">
-                            <p id="project-name"></p>
-                            <p id="project-description"></p>
-                            <p><a id="project-link" href="" target="_blank">查看项目</a></p>
-                          </div>
 			<script>
 				fetch('js/projects.json')
     .then(response => {
