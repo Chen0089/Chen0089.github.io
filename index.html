@@ -86,35 +86,6 @@
 			<br>
 		</div>
 		<div class="container">
-			<div class="one">
-			    <div class="OleftBox">
-				<img src="./assets/minecraftServerLobby.png" width="100%" height="100%" alt="">
-			    </div>
-			    <div class="OrightBox">
-				<h2><a href="mcServer.html">我的服务器</a></h2>
-			            我使用雨云(rainyun.com)租赁了一个服务器,使用Spigot服务器核心,加入公民等插件,上传地图后做出了起床战争、空岛战争、2b2t、搭路练习等地图。
-				<a href="mcServer.html">点击前往服务器简介</a>
-			</div>
-		</div>	
-	</div>
-	<script type="text/javascript">
-		//左侧菜单栏伸缩效果
-		$('.slideBtn').click(
-			function() {
-				$('.leftBox').toggle();
-				var status = $('.leftBox').css("display");
-				if (status == 'none') {
-					$('.rightBox').css("marginLeft", "0");
-					$(this).css("background",
-							"red");
-				} else {
-					$('.rightBox').css("marginLeft", "241px");
-					$(this).css("background",
-							"green");
-				}
-			});
-	</script>
-	<br><br><br><br><br>
 		<section>
                           <h2>推荐的高Star GitHub项目</h2>
                           <div id="project">
@@ -143,7 +114,28 @@
     .catch(error => console.error('Error fetching project data:', error));
 
 			</script>
-                </section>
+                </section>	
+		</div>	
+	</div>
+	<script type="text/javascript">
+		//左侧菜单栏伸缩效果
+		$('.slideBtn').click(
+			function() {
+				$('.leftBox').toggle();
+				var status = $('.leftBox').css("display");
+				if (status == 'none') {
+					$('.rightBox').css("marginLeft", "0");
+					$(this).css("background",
+							"red");
+				} else {
+					$('.rightBox').css("marginLeft", "241px");
+					$(this).css("background",
+							"green");
+				}
+			});
+	</script>
+	<br><br><br><br><br>
+		
 		</div>
 		<div class="footer">
 			<div id="flyfish" class="fly-fish" height="200"></div>
