@@ -112,7 +112,7 @@ form {
     height: 100px;
     background-color: #5656cd;
 }
-.nav ultimate {
+.nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -223,7 +223,6 @@ form {
     bottom: 0;
     left: 0;
     right: 0;
-    padding-up:10000px;
 }
 #fps{
     position: absolute;
