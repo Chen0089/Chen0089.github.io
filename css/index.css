@@ -21,7 +21,6 @@
 {
     /*满浏览器*/
     width: 100%;
-    /*内边距会影响整个盒子的实际大小，而这一句可以处理，让它不影响*/
     box-sizing: border-box;
 }
 /*先做出头*/
@@ -29,7 +28,6 @@
 {
     background: #8989ff;
     padding: 20px;
-    float: left;
 }
 /*导航栏*/
 .nav {
