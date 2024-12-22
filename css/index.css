@@ -29,7 +29,7 @@
 {
     background: #8989ff;
     padding: 20px;
-    text-align: center;
+    float: left;
 }
 /*导航栏*/
 .nav {
