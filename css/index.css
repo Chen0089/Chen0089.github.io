@@ -249,20 +249,3 @@ form {
     padding: 10px;
     border-radius:3px
 }
-.repo-list {
-    list-style-type: none;
-    padding: 0;
-}
-.repo-item {
-    background: #f4f4f4;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-}
-.repo-item a {
-    text-decoration: none;
-    color: #0366d6;
-}
-.repo-item a:hover {
-    text-decoration: underline;
-}
