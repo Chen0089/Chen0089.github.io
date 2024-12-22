@@ -158,7 +158,9 @@ form {
 {
     transform: rotate(225deg);
 }
-
+.note {
+    color:white;
+}
 #text-container {
     position: relative;
     overflow: hidden;
