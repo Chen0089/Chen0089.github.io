@@ -21,8 +21,8 @@
 {
     /*满浏览器*/
     width: 100%;
-    /*内边距会影响整个盒子的实际大小，而这里有一种方法可以处理，让它不影响*/
-    box-sizing: border-box;/*就是这句*/
+    /*内边距会影响整个盒子的实际大小，而这一句可以处理，让它不影响*/
+    box-sizing: border-box;
 }
 /*先做出头*/
 .header
@@ -32,9 +32,8 @@
     text-align: center;
 }
 /*导航栏*/
-.nav
-{
-    background: #6767de;
+.nav {
+    background-color: #6767de;
     width: 100%;
     height: 50px;
     text-align: center;
@@ -215,7 +214,7 @@ form {
             background-position: -100% 0;
         }
     }
-.footer{
+.footer {
     background: #8989ff;
     text-align: center;
     height: 30%; /* 设置一个固定的高度 */
@@ -224,7 +223,7 @@ form {
     left: 0;
     right: 0;
 }
-#fps{
+#fps {
     position: absolute;
     top: 10px;
     right: 10px;
