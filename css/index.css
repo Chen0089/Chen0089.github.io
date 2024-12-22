@@ -1,15 +1,15 @@
 .main a {
     display: inline-block;
     padding: 10px 20px;
-    background: #333;
+    background: #5656cd;
     border-radius: 5px;
     text-align: center;
     color: #fff;
     font-size: 20px
 }
 .main a:hover {
-    background: #bbb;
-    color: ccc;
+    background: #8989ff;
+    color: #555;
     font-size: 20px
 }
 .main
@@ -27,14 +27,14 @@
 /*先做出头*/
 .header
 {
-    background: #aaa;
+    background: #8989ff;
     padding: 20px;
     text-align: center;
 }
 /*导航栏*/
 .nav
 {
-    background: #ccc;
+    background: #6767de;
     width: 100%;
     height: 50px;
     text-align: center;
@@ -69,16 +69,16 @@
 /*设置鼠标选择时的样式*/
 .nav div :hover
 {
-    background: #333;
-    color: #333;
+    background: #8989ff;
+    color: #fff;
 }
 
 
 /*等待效果*/
 #loader {
-    border: 12px solid #f3f3f3;
+    border: 12px solid #aaaaff;
     border-radius: 50%;
-    border-top: 12px solid #444444;
+    border-top: 12px solid #5656cd;
     width: 70px;
     height: 70px;
     animation: spin 1s linear infinite;
@@ -102,10 +102,6 @@
 #products {
     text-align: center;
 }
-#1 {
-    color: #333;
-}
-
 form {
     display: flex;
     flex-direction: column;
@@ -114,9 +110,9 @@ form {
 .nav {
     width: 100%;
     height: 100px;
-    background-color: #333;
+    background-color: #5656cd;
 }
-.nav ultimate {
+.nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -132,13 +128,13 @@ form {
     padding: 14px 16px;
     text-decoration: none;
 }
-.nav li a:h over {
-    background-color: #111;
+.nav li a:hover {
+    background-color: #114;
 }
 .nav li a.active {
     background-color: #4CAF50;
 }
-.nav li a.active:h over {
+.nav li a.active:hover {
     background-color: #45a049;
 }
 .nav li a.active:focus {
@@ -179,8 +175,8 @@ form {
     }
   }  
 .fly-fish {
-    background-color: #333;
-    color: #666;
+    background-color: #5656cd;
+    color: #8989ff;
     font-family: Arial, sans-serif;
     font-size: 16px;
     animation: typing 10s infinite;
@@ -200,7 +196,7 @@ form {
         }
     }
 #ILikeFish-mc {
-    color: #666;
+    color: #5656cd;
     font-family: Arial, sans-serif;
     font-size: 16px;
     animation: typing 10s infinite;
@@ -220,20 +216,19 @@ form {
         }
     }
 .footer{
-    background: #ccc;
+    background: #8989ff;
     text-align: center;
     height: 30%; /* 设置一个固定的高度 */
     position: absolute; /* 确保footer元素在页面中的位置正确 */
     bottom: 0;
     left: 0;
     right: 0;
-    padding-up:10000px;
 }
 #fps{
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: lightblue;
+    background-color: #bbbbff;
     padding: 10px;
-    border-radius:3px
+    border-radius:3px;
 }
