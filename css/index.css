@@ -36,7 +36,7 @@
     background-color: #6767de;
     width: 100%;
     height: 50px;
-    text-align: center;
+    float: left;
 }
 .nav div
 {
@@ -44,7 +44,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    float: left;
 }
 .nav div a
 {
