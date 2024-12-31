@@ -233,3 +233,13 @@ form {
 body {
     background-color: #ccccff;
 }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .countdown {
+            font-size: 30px;
+            font-weight: bold;
+        }
