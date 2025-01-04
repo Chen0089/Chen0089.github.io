@@ -28,6 +28,7 @@
 {
     background: #8989ff;
     padding: 20px;
+    display: inline-block;
 }
 /*导航栏*/
 .nav {
