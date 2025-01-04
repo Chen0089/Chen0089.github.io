@@ -12,12 +12,8 @@
     color: #555;
     font-size: 20px
 }
-.main
-{
-    margin: auto;/*让它水平居中*/
-}
 /*设置盒子样式*/
-.header, .nav, .container, .footer
+.container, .footer
 {
     /*满浏览器*/
     width: 100%;
