@@ -1,5 +1,5 @@
 const url = 'https://api.github.com/search/repositories?q=language:JavaScript&sort=stars&order=desc';  // GitHub API URL，按星标排序
-const token = 'gh' + 'p_LF1Wc' + 'USIdWHMPx' + 'yK' + 'xT13Gh8tz' + 'uARQX1kXWjj';
+const token = process.env.PAT;
 let page = 1; // 当前页数
 const perPage = 10; // 每页请求数量
 const loadingElement = document.getElementById('loading'); // 加载提示元素
