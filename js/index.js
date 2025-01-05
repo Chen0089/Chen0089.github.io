@@ -1,3 +1,15 @@
+// 使用 fetch 加载外部 JSON 文件
+  fetch('path/to/data.json')
+    .then(response => response.json())  // 解析 JSON 数据
+    .then(data => {
+      // 将加载的 JSON 数据插入到页面中
+      const scriptTag = document.getElementById('flarum-json-payload');
+      scriptTag.textContent = JSON.stringify(data);  // 将数据转化为字符串并插入
+    })
+    .catch(error => {
+      console.error('Error loading JSON:', error);
+    });
+
 var fpsElement = document.getElementById('fps');
 		var frameCount = 0;
 		var fps = 0;
