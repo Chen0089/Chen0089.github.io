@@ -13,7 +13,7 @@ body {
 /* 设置页面整体背景为紫色渐变 */
   margin: 0;
   background: linear-gradient(45deg, #8e44ad, #9b59b6); /* 渐变色从左上到右下 */
-  color: white;
+  color: black;
 }
 
 .container {
