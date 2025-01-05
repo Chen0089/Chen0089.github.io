@@ -9,6 +9,18 @@
     .catch(error => {
       console.error('Error loading JSON:', error);
     });
+const data = JSON.parse(document.getElementById('flarum-json-payload').textContent);
+	        			document.getElementById('flarum-loading').style.display = 'none';
+					
+	            			try {
+	            			    flarum.core.app.load(data);
+	            			    flarum.core.app.bootExtensions(flarum.extensions);
+	            			    flarum.core.app.boot();
+	            			} catch (e) {
+	                			var error = document.getElementById('flarum-loading-error');
+	                			error.innerHTML += document.getElementById('flarum-content').textContent;
+	                			error.style.display = 'block';
+	                			throw e;}
 
 var fpsElement = document.getElementById('fps');
 		var frameCount = 0;
