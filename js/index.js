@@ -1,5 +1,5 @@
 // 使用 fetch 加载外部 JSON 文件
-  fetch('path/to/data.json')
+  fetch('json/indexData.json')
     .then(response => response.json())  // 解析 JSON 数据
     .then(data => {
       // 将加载的 JSON 数据插入到页面中
