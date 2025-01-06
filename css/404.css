@@ -10,10 +10,25 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-/* 设置页面整体背景为紫色渐变 */
+  /* 设置页面整体背景为动态紫色渐变 */
   margin: 0;
-  background: linear-gradient(45deg, #8e44ad, #9b59b6); /* 渐变色从左上到右下 */
-  color: black;
+  background: linear-gradient(45deg, #8e44ad, #9b59b6);
+  background-size: 400% 400%; /* 背景的大小，增加渐变的动态效果 */
+  animation: gradientAnimation 10s ease infinite; /* 定义渐变动画 */
+  color: white;
+}
+
+/* 定义渐变背景的动画 */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .container {
