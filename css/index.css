@@ -13,7 +13,7 @@
     font-size: 20px
 }
 /*设置盒子样式*/
-.container, .footer
+.container, .footer, .header, .nav
 {
     /*满浏览器*/
     width: 100%;
