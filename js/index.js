@@ -18,7 +18,8 @@ const data = JSON.parse(document.getElementById('flarum-json-payload').textConte
 	            			    flarum.core.app.boot();
 	            			} catch (e) {
 	                			var error = document.getElementById('flarum-loading-error');
-	                			error.innerHTML += document.getElementById('flarum-content').textContent;
+	                			var textNode = document.createTextNode(document.getElementById('flarum-content').textContent);
+	                			error.appendChild(textNode);
 	                			error.style.display = 'block';
 	                			throw e;}
 
