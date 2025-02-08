@@ -22,13 +22,19 @@ function sendMessage() {
     const userMessage = userInput.value.trim();
     if (userMessage) {
         // 添加用户消息到聊天框
-        chatBox.innerHTML += `<div class="user-message">You: ${userMessage}</div>`;
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.className = 'user-message';
+        userMessageDiv.textContent = `You: ${userMessage}`;
+        chatBox.appendChild(userMessageDiv);
         
         // 获取机器人回复
         const botReply = net.run(userMessage);
         
         // 添加机器人回复到聊天框
-        chatBox.innerHTML += `<div class="bot-message">Bot: ${botReply}</div>`;
+        const botReplyDiv = document.createElement('div');
+        botReplyDiv.className = 'bot-message';
+        botReplyDiv.textContent = `Bot: ${botReply}`;
+        chatBox.appendChild(botReplyDiv);
         
         // 清空输入框
         userInput.value = '';
