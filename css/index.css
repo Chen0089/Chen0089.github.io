@@ -26,6 +26,9 @@
 }
 /*导航栏*/
 .nav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5px;
     background-color: #6767de;
     width: 100%;
     height: 50px;
