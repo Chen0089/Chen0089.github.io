@@ -1,28 +1,3 @@
-// 使用 fetch 加载外部 JSON 文件
-  fetch('json/indexData.json')
-    .then(response => response.json())  // 解析 JSON 数据
-    .then(data => {
-      // 将加载的 JSON 数据插入到页面中
-      const scriptTag = document.getElementById('flarum-json-payload');
-      scriptTag.textContent = JSON.stringify(data);  // 将数据转化为字符串并插入
-    })
-    .catch(error => {
-      console.error('Error loading JSON:', error);
-    });
-const data = JSON.parse(document.getElementById('flarum-json-payload').textContent);
-	        			document.getElementById('flarum-loading').style.display = 'none';
-					
-	            			try {
-	            			    flarum.core.app.load(data);
-	            			    flarum.core.app.bootExtensions(flarum.extensions);
-	            			    flarum.core.app.boot();
-	            			} catch (e) {
-	                			var error = document.getElementById('flarum-loading-error');
-	                			var textNode = document.createTextNode(document.getElementById('flarum-content').textContent);
-	                			error.appendChild(textNode);
-	                			error.style.display = 'block';
-	                			throw e;}
-
 var fpsElement = document.getElementById('fps');
 		var frameCount = 0;
 		var fps = 0;
