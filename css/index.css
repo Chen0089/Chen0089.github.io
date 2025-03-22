@@ -163,22 +163,23 @@ form {
     animation: typing 10s infinite;
     background-size: 200% 100%;
 }
-.footer {
-    background: #8989ff;
-    text-align: center;
-    height: 30%; /* 设置一个固定的高度 */
-    position: absolute; /* 确保footer元素在页面中的位置正确 */
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
 #fps {
     position: fixed;
     top: 10px;
     right: 10px;
+    color: white;
     background-color: #000080;
     padding: 10px;
-    border-radius:3px;
+    border-radius:3px
+}
+.footer {
+    background: #8989ff;
+    text-align: center;
+    height: 0; /* 设置一个固定的高度 */
+    position: absolute; /* 确保footer元素在页面中的位置正确 */
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 body {
