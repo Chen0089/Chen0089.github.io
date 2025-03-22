@@ -15,11 +15,9 @@
 /*设置盒子样式*/
 .container, .footer, .header, .nav
 {
-    /*满浏览器*/
     width: 100%;
     box-sizing: border-box;
 }
-/*先做出头*/
 .header
 {
     background: #8989ff;
@@ -31,8 +29,8 @@
     background-color: #6767de;
     width: 100%;
     height: 50px;
-    float: left;
-    display:inline-block
+    display: flex;
+    justify-content: space-around;
 }
 .nav div
 {
@@ -137,37 +135,6 @@ form {
 .nav li a.active:focus::after {
     transform: rotate(225deg);
 }
-#text-container {
-    position: relative;
-    overflow: hidden;
-    width: 300px;
-    height: 20px;
-  }
-  
-  #text-container span {
-    display: inline-block;
-    position: absolute;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    background: #333;
-    color: #fff;
-    font-size: 16px;
-    animation: typing 10s infinite;
-  }
-  
-  @keyframes typing {
-    0% {
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }  
 .fly-fish {
     background-color: #5656cd;
     color: #8989ff;
@@ -181,14 +148,6 @@ form {
     animation: typing 10s infinite;
     background-size: 200% 100%;
 }
-    @keyframes typing {
-        0% {
-            background-position: 0 0;
-        }
-        100% {
-            background-position: -100% 0;
-        }
-    }
 #ILikeFish-mc {
     color: #5656cd;
     font-family: Arial, sans-serif;
@@ -201,14 +160,6 @@ form {
     animation: typing 10s infinite;
     background-size: 200% 100%;
 }
-    @keyframes typing {
-        0% {
-            background-position: 0 0;
-        }
-        100% {
-            background-position: -100% 0;
-        }
-    }
 .footer {
     background: #8989ff;
     text-align: center;
@@ -229,14 +180,11 @@ form {
 
 body {
     background-color: #ccccff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
 }
-
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        .countdown {
-            font-size: 30px;
-            font-weight: bold;
-        }
+.countdown {
+    font-size: 30px;
+    font-weight: bold;
+}
