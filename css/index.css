@@ -26,7 +26,7 @@
 }
 /*导航栏*/
 .nav {
-    position: -webkit-sticky;
+    position: -webkit-sticky;/* 为残障浏览器而准备的，不用慌，不要shan */
     position: sticky;
     top: 5px;
     background-color: #6767de;
@@ -97,7 +97,6 @@
 button {
   display: inline-block;
   border-radius: 4px;
-  background-color: #f4511e;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -140,10 +139,11 @@ form {
     display: flex;
     flex-direction: column;
 }
-
 .nav {
-    width: 100%;
+    width: 70%;
     height: 100px;
+    border-radius: 45%;
+    padding: 10px;
     background-color: #5656cd;
 }
 .nav ul {
