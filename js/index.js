@@ -63,28 +63,16 @@ setInterval(updateCountdown, 1000);
 updateCountdown();
 
 document.onreadystatechange = function() {
-    	        if (document.readyState !== "complete") {
-    	            document.querySelector(
-    	                "body").style.visibility = "hidden";
-    	            document.querySelector(
-    	                "#loader").style.visibility = "visible";}
-						else {
-    	            document.querySelector(
-    	                "#loader").style.display = "none";
-    	            document.querySelector(
-    	                "body").style.visibility = "visible";}};
-
+    if (document.readyState !== "complete") {
+        document.querySelector("body").style.visibility = "hidden";
+		document.querySelector("#loader").style.visibility = "visible";
+	}
+	else {
+   		document.querySelector("#loader").style.display = "none";
+        document.querySelector("body").style.visibility = "visible";
+	}
+};
 document.getElementById('flarum-loading').style.display = 'block';
-	        	    var flarum = {extensions: {}};
-
-	const starButton = document.getElementById('starButton');
-
-        // Toggle the "active" class when the button is clicked
-        starButton.addEventListener('click', function() {
-            starButton.classList.toggle('active');
-            if (starButton.classList.contains('active')) {
-                alert("You've starred this!");
-            } else {
-                alert("Unstarred.");
-            }
-        });
+var flarum = {
+	extensions: {}
+};
