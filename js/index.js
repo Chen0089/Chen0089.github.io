@@ -76,3 +76,43 @@ document.getElementById('flarum-loading').style.display = 'block';
 var flarum = {
 	extensions: {}
 };
+const { Leafer } = LeaferUI // 全局变量，包含 leafer-ui 的所有功能
+
+// Image、PointerEvent、DragEvent 会与浏览器的全局变量冲突，请使用以下别名代替
+const { MyImage, MyPointerEvent, MyDragEvent } = LeaferUI
+
+import { Leafer, Rect, PointerEvent } from 'leafer-ui'
+
+const leafer = new Leafer({ view: window })
+
+const rect = new Rect({
+  x: 100,
+  y: 100,
+  width: 200,
+  height: 200,
+  fill: '#32cd79', // 背景色
+  stroke: 'black', // 边框
+  strokeWidth: 2, // 边框粗细
+  draggable: true,
+})
+
+leafer.add(rect)
+
+// 事件
+rect.on(PointerEvent.ENTER, (e: PointerEvent) => {
+  rect.fill = '#42dd89'
+  rect.strokeWidth = 4
+})
+
+rect.on(PointerEvent.LEAVE, (e: PointerEvent) => {
+  rect.fill = '#32cd79'
+  rect.strokeWidth = 2
+})
+
+rect.on(PointerEvent.DOWN, (e: PointerEvent) => {
+  rect.fill = '#229d49'
+})
+
+rect.on(PointerEvent.UP, (e: PointerEvent) => {
+  rect.fill = '#32cd79'
+})
