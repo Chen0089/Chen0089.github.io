@@ -43,9 +43,19 @@
 					<div class="spinner"></div>
         		</div>	
 		</div>
-	<script src="js/index.js"></script>
+		<!-- JS -->
 	<script src="https://bbs.breeze.asia/assets/forum.js?v=4aef43e5"></script>
 	<script src="https://bbs.breeze.asia/assets/forum-zh-Hans.js?v=85512547"></script>
+	<script src="https://unpkg.com/leafer-ui@1.5.1/dist/web.min.js"></script>
+	<script>
+  		const { Leafer } = LeaferUI // 全局变量，包含 leafer-ui 的所有功能
+
+  		// Image、PointerEvent、DragEvent 会与浏览器的全局变量冲突，请使用以下别名代替
+  		const { MyImage, MyPointerEvent, MyDragEvent } = LeaferUI
+
+  		// ...
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>		  
+	<script src="js/index.js"></script>
 </body>
 </html>
-<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>-->
