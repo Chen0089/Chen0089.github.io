@@ -1,7 +1,7 @@
 // 用户数据
 try {
   // 使用 fetch 请求获取 JSON 数据
-  const response = await fetch("json/accountData.json");
+  const response = await fetch("json/AccountData.json");
 
   // 确保请求成功
   if (!response.ok) {
@@ -28,7 +28,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         // 如果找到匹配的用户，登录成功
         alert("登录成功！");
         // 这里可以重定向到用户的主页或者执行其他操作
-        window.location.href = "home.html";  // 成功后跳转到 home.html
+        window.location.href = "https://chen0089.github.io/";  // 成功后跳转到主页
     } else {
         // 如果没有匹配的用户，显示错误信息
         document.getElementById("errorMessage").style.display = "block";
