@@ -1,8 +1,17 @@
-body {
-    background-color: #ccccff;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 50px;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: consolas;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #131417;
+    background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
 }
 .main a {
     display: inline-block;
