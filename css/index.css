@@ -5,18 +5,9 @@
     font-family: consolas;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #131417;
-    background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
-}
 .main a {
     display: inline-block;
     padding: 10px 20px;
-    background: #5656cd;
     border-radius: 5px;
     text-align: center;
     color: #fff;
@@ -26,6 +17,17 @@ body{
     background: #8989ff;
     color: #555;
     font-size: 20px
+}
+/* 把页数的玩意给换了 */
+.page1 {
+	height: 100%;
+	width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #131417;
+    background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
 }
 /*设置盒子样式*/
 .container, .footer, .header, .nav
