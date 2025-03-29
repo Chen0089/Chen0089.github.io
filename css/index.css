@@ -18,36 +18,28 @@
     width: 100%;
     box-sizing: border-box;
 }
-.header
-{
-    background: #8989ff;
-    padding: 20px;
-    display: inline-block;
-}
 /*导航栏*/
-.nav {
-    position: -webkit-sticky;/* 为残障浏览器而准备的，不用慌，不要shan */
-    position: sticky;
+.glass {
     top: 5px;
     background-color: #6767de;
     height: 100px;
+    width:50px;
     display: flex;
     justify-content: space-around;
-    width: 70%;
-    border-radius: 50px;
+    border-radius: 5%;
     padding: 10px;
-    background-color: #5656cd;
 }
-.nav div
-{
+.glassBackground {
     width: 75%;
     height: 60%;
     display: flex;
     justify-content: center;
     float: left;
 }
-.nav div a
-{
+.glassBackground :hover {
+    width: 
+}
+.nav div a {
     text-align:center;
 }
 #nav-elaborate
