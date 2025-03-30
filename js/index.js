@@ -19,48 +19,7 @@ var fpsElement = document.getElementById('fps');
 
     var lastTime = Date.now();
     requestAnimationFrame(updateFPS);
-    // 获取当前日期
-const now = new Date();
-
-// 获取当前年份
-const currentYear = now.getFullYear();
-
-// 计算下一年（或上一年）0点的日期对象
-const nextYearDate = new Date(currentYear + 1, 0, 1); // 下一年1月1日0点
-// const previousYearDate = new Date(currentYear - 1, 0, 1); // 上一年1月1日0点（如有需要可以替换）
-
-// 更新倒计时
-function updateCountdown() {
-    const now = new Date();
-    const timeDiff = nextYearDate - now; // 时间差（毫秒）
-
-    if (timeDiff <= 0) {
-        // 如果时间到了下一年，重新计算
-        const nextYear = new Date(currentYear + 1, 0, 1);
-        const nextDiff = nextYear - now;
-        displayCountdown(nextDiff);
-        return;
-    }
-
-    displayCountdown(timeDiff);
-}
-
-// 计算并显示剩余的时间
-function displayCountdown(timeDiff) {
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // 天数
-    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // 小时数
-    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60)); // 分钟数
-    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000); // 秒数
-
-    const countdownDisplay = `${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
-    document.getElementById("countdown").innerHTML = countdownDisplay;
-}
-
-// 每秒钟更新倒计时
-setInterval(updateCountdown, 1000);
-
-// 初始化显示
-updateCountdown();
+    
 
 document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
@@ -116,3 +75,76 @@ rect.on(PointerEvent.DOWN, (e: PointerEvent) => {
 rect.on(PointerEvent.UP, (e: PointerEvent) => {
   rect.fill = '#32cd79'
 })
+document.addEventListener('DOMContentLoaded', function() {
+const container = document.getElementById('gallery-container');
+let photos = [];
+
+// 示例照片数据 - 替换为你自己的作品链接
+const samplePhotos = [
+    { 
+    	url: 'https://github.com/chen0089/operatingsystem', 
+    	image: 'https://source.unsplash.com/random/300x200?1', 
+    	title: '操作系统' 
+    },
+    { 
+    	url: 'chen0089.github.io', 
+    	image: 'https://source.unsplash.com/random/300x200?2', 
+    	title: '个人网站' 
+    },
+    { 
+    	url: 'https://chen0089.github.io/mcFastPack/', 
+    	image: 'https://source.unsplash.com/random/300x200?3', 
+    	title: 'MC快速制作资源包工具（未完成）' 
+    }
+];
+
+// 初始化照片
+samplePhotos.forEach(photoData => {
+addPhoto(photoData);
+});
+
+// 添加照片函数
+function addPhoto(photoData) {
+const photo = document.createElement('div');
+photo.className = 'photo';
+
+// 随机3D位置
+const radius = Math.random() * 300 + 300;
+const theta = Math.random() * Math.PI * 2;
+const phi = Math.random() * Math.PI;
+
+const x = radius * Math.sin(phi) * Math.cos(theta);
+const y = radius * Math.cos(phi);
+const z = radius * Math.sin(phi) * Math.sin(theta);
+
+photo.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
+
+// 照片内容
+photo.innerHTML = `
+    <a href="${photoData.url}" target="_blank">
+    <img src="${photoData.image}" alt="${photoData.title}">
+    <div class="caption">${photoData.title}</div>
+    </a>
+`;
+
+container.appendChild(photo);
+photos.push({ element: photo, radius, theta, phi });
+}
+
+// 动画循环
+function animate() {
+// 让照片轻微浮动
+photos.forEach(photo => {
+    photo.theta += 0.001;
+    const x = photo.radius * Math.sin(photo.phi) * Math.cos(photo.theta);
+    const y = photo.radius * Math.cos(photo.phi) + Math.sin(Date.now() * 0.001) * 20;
+    const z = photo.radius * Math.sin(photo.phi) * Math.sin(photo.theta);
+    
+    photo.element.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+});
