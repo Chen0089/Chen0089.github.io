@@ -226,6 +226,10 @@
         transform: translate(-10px);
     }
 }
+@keyframes fromUntilInclined {
+	0%,
+	100% { transform: skewX(15deg) };
+}
 /* 装饰用的球 */
 decorateBall1, decorateBall2, decorateBall3 {
     position: relative;
