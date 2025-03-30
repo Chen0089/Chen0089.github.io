@@ -661,9 +661,59 @@ body {
 }
 
 /* Carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full height carousel */
+  overflow: hidden;
+}
+
+.list {
+  display: flex;
+  transition: transform var(--transition-time);
+  width: 100%;
+}
+
+.item {
+  min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+}
+
+.content {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 20px;
+  width: 100%;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.name {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.des {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
 
 /* next prev arrows */
-
 .arrows {
   position: absolute;
   bottom: 50px;
@@ -705,7 +755,7 @@ body {
   margin-left: auto;
   letter-spacing: 5px;
   opacity: 0;
-  animation: animate 0.5s ease-in-out 0.3s 1 forwards;
+  animation: animateA 0.5s ease-in-out 0.3s 1 forwards;
 }
 
 .progress-bar-container {
@@ -722,24 +772,11 @@ body {
   background-color: #d36e10;
   transition: all var(--transition-time);
 }
-
-/* time running */
-.carousel .timeRunning {
-  position: fixed;
-  z-index: 1000;
-  width: 0%;
-  height: 4px;
-  background-color: #ffffff;
-  left: 0;
-  top: 0;
-  animation: runningTime 7s linear 1 forwards;
-}
-
-@keyframes runningTime {
+@keyframes animateA {
   from {
-    width: 0%;
+    opacity: 0;
   }
   to {
-    width: 100%;
+    opacity: 1;
   }
 }
