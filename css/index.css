@@ -216,7 +216,9 @@
     height: 100px;
     opacity: 1;
 }
-
+.glass:hover glassBackground {
+	animation: fromUntilInclined 1s;
+}
 @keyframes animate {
     0%,
     100%{
@@ -227,8 +229,8 @@
     }
 }
 @keyframes fromUntilInclined {
-	0%,
-	100% { transform: skewX(15deg) };
+	0% {transform: skewX(15deg);}
+	100% {transform: skewX(0deg);}
 }
 /* 装饰用的球 */
 decorateBall1, decorateBall2, decorateBall3 {
@@ -239,17 +241,16 @@ decorateBall1, decorateBall2, decorateBall3 {
     background-image: linear-gradient(to bottom right, deepskyblue , dodgerblue);
 }
 decorateBall1 {
-    animation: ball1;
+    animation: ball1 1s;
 }
 decorateBall2 {
-    animation: ball2;
+    animation: ball2 1s;
 }
 decorateBall3 {
-    animation: ball3;
+    animation: ball3 1s;
 }
 @keyframe ball1 {
     0% {
-        re
         top: -20px;
         left: -10px;
         transform: rotate(0deg);
