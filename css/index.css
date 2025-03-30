@@ -5,23 +5,7 @@
     font-family: consolas;
 }
 
-.main a {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-align: center;
-    color: #fff;
-    font-size: 20px
-}
-.main a:hover {
-    background: #8989ff;
-    color: #555;
-    font-size: 20px
-}
-/* 把页数的玩意给换了 */
-.page1 {
-	height: 100%;
-	width: 100%;
+body{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,13 +13,7 @@
     background-color: #131417;
     background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
 }
-/*设置页脚样式*/
-.footer
-{
-    width: 100%;
-    box-sizing: border-box;
-}
-/*导航栏*/
+
 .container{
     display: flex;
     justify-content: center;
@@ -44,7 +22,7 @@
     padding: 40px 0;
 }
 
-.glass{
+.box{
     position: relative;
     display: flex;
     width: 320px;
@@ -93,7 +71,7 @@
     transition: 0.6s;
 }
 
-.glass:hover .content{
+.box:hover .content{
     left: -25px;
     padding: 60px 40px;
 }
@@ -105,7 +83,7 @@
     box-shadow: 0 2px 15px #222;
 }
 
-.glass::before{
+.box::before{
     content: "";
     position: absolute;
     background: #fff;
@@ -119,7 +97,7 @@
     transition: 0.5s;
 }
 
-.glass::after{
+.box::after{
     content: "";
     position: absolute;
     background: #fff;
@@ -133,30 +111,31 @@
     transition: 0.5s;
 }
 
-.glass:hover::before,
-.glass:hover::after{
+.box:hover::before,
+.box:hover::after{
     transform: skewX(0deg);
     left: 20px;
     width: calc(100% - 90px);
 }
 
-.glass:nth-child(1)::before,
-.glass:nth-child(1)::after{
-    background: linear-gradient(to bottom right, #ffbc00, #ff0058);
+.box:nth-child(1)::before,
+.box:nth-child(1)::after{
+    background: linear-gradient(315deg, #ffbc00, #ff0058);
 }
 
-.glass:nth-child(2):before,
-.glass:nth-child(2):after{
-    background: linear-gradient(to bottom right, #03a9f4, #ff0058);
+.box:nth-child(2):before,
+.box:nth-child(2):after{
+    background: linear-gradient(315deg, #03a9f4, #ff0058);
 }
-/*
-假设有第三个
-.glass:nth-child(3):before,
-.glass:nth-child(3):after{
-    background: linear-gradient(to bottom right, #4dff03, #00d0ff);
+
+/*第三个
+.box:nth-child(3):before,
+.box:nth-child(3):after{
+    background: linear-gradient(315deg, #4dff03, #00d0ff);
 }
 */
-.glass glassBackground {
+
+.box span{
     display: block;
     position: absolute;
     top: 0;
@@ -167,23 +146,23 @@
     pointer-events: none;
 }
 
-.glass glassBackground::before {
+.box span::before{
+    content: "";
+    position: absolute;
     background: rgba(255, 255, 255, 0.1);
     top: 0;
     left: 0;
     width: 0;
     height: 0;
     opacity: 0;
-	content: "";
-	position: absolute;
-    border-radius: 8px;
     transition: 0.3s;
     backdrop-filter: blur(10px);
+    border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     animation: animate 2s ease-in-out infinite;
 }
 
-.glass:hover glassBackground::before {
+.box:hover span::before{
     opacity: 1;
     top: -50px;
     left: 50px;
@@ -191,8 +170,7 @@
     height: 100px;
 }
 
-.glass glassBackground::after 
-{
+.box span::after{
     content: "";
     position: absolute;
     bottom: 0;
@@ -209,7 +187,7 @@
     animation-delay: -1s;
 }
 
-.glass:hover glassBackground::after{
+.box:hover span::after{
     bottom: -50px;
     right: 50px;
     width: 100px;
@@ -228,9 +206,21 @@
         transform: translate(-10px);
     }
 }
-@keyframes fromUntilInclined {
-	0% {transform: skewX(15deg);}
-	100% {transform: skewX(0deg);}
+.page1 {
+	height: 100%;
+	width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #131417;
+    background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
+}
+/*设置页脚样式*/
+.footer
+{
+    width: 100%;
+    box-sizing: border-box;
 }
 /* 装饰用的球 */
 decorateBall1, decorateBall2, decorateBall3 {
