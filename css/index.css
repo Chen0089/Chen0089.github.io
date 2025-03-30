@@ -142,18 +142,18 @@
 
 .glass:nth-child(1)::before,
 .glass:nth-child(1)::after{
-    background: linear-gradient(315deg, #ffbc00, #ff0058);
+    background: linear-gradient(to bottom right, #ffbc00, #ff0058);
 }
 
 .glass:nth-child(2):before,
 .glass:nth-child(2):after{
-    background: linear-gradient(315deg, #03a9f4, #ff0058);
+    background: linear-gradient(to bottom right, #03a9f4, #ff0058);
 }
 /*
 假设有第三个
 .glass:nth-child(3):before,
 .glass:nth-child(3):after{
-    background: linear-gradient(315deg, #4dff03, #00d0ff);
+    background: linear-gradient(to bottom right, #4dff03, #00d0ff);
 }
 */
 .glass glassBackground {
@@ -168,17 +168,17 @@
 }
 
 .glass glassBackground::before {
-    content: "";
-    position: absolute;
     background: rgba(255, 255, 255, 0.1);
     top: 0;
     left: 0;
     width: 0;
     height: 0;
     opacity: 0;
+	content: "";
+	position: absolute;
+    border-radius: 8px;
     transition: 0.3s;
     backdrop-filter: blur(10px);
-    border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     animation: animate 2s ease-in-out infinite;
 }
