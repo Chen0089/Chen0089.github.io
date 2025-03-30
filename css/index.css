@@ -5,18 +5,9 @@
     font-family: consolas;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #131417;
-    background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
-}
 .main a {
     display: inline-block;
     padding: 10px 20px;
-    background: #5656cd;
     border-radius: 5px;
     text-align: center;
     color: #fff;
@@ -27,8 +18,19 @@ body{
     color: #555;
     font-size: 20px
 }
-/*设置盒子样式*/
-.container, .footer, .header, .nav
+/* 把页数的玩意给换了 */
+.page1 {
+	height: 100%;
+	width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #131417;
+    background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
+}
+/*设置页脚样式*/
+.footer
 {
     width: 100%;
     box-sizing: border-box;
@@ -147,13 +149,14 @@ body{
 .glass:nth-child(2):after{
     background: linear-gradient(315deg, #03a9f4, #ff0058);
 }
-
+/*
+假设有第三个
 .glass:nth-child(3):before,
 .glass:nth-child(3):after{
     background: linear-gradient(315deg, #4dff03, #00d0ff);
 }
-
-.glass glassBackground1, glassBackground2{
+*/
+.glass glassBackground {
     display: block;
     position: absolute;
     top: 0;
@@ -164,7 +167,7 @@ body{
     pointer-events: none;
 }
 
-.glass glassBackground1, glassBackground2::before{
+.glass glassBackground::before {
     content: "";
     position: absolute;
     background: rgba(255, 255, 255, 0.1);
@@ -180,7 +183,7 @@ body{
     animation: animate 2s ease-in-out infinite;
 }
 
-.glass:hover glassBackground1, glassBackground2::before{
+.glass:hover glassBackground::before {
     opacity: 1;
     top: -50px;
     left: 50px;
@@ -188,7 +191,8 @@ body{
     height: 100px;
 }
 
-.glass glassBackground1, glassBackground2::after{
+.glass glassBackground::after 
+{
     content: "";
     position: absolute;
     bottom: 0;
@@ -332,8 +336,8 @@ form {
     flex-direction: column;
 }
 .fly-fish {
-    background-color: #5656cd;
-    color: #8989ff;
+    background-color: #f3f4f5;
+    color: #f3fff3;
     font-family: Arial, sans-serif;
     font-size: 16px;
     animation: typing 10s infinite;
@@ -361,7 +365,7 @@ form {
     top: 10px;
     right: 10px;
     color: white;
-    background-color: #000080;
+    background-color: #131480;
     padding: 10px;
     border-radius:3px
 }
