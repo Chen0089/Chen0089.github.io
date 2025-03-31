@@ -35,14 +35,3 @@ document.getElementById('flarum-loading').style.display = 'block';
 var flarum = {
 	extensions: {}
 };
-const list = document.querySelector(".list");
-const items = Array.from(document.querySelectorAll(".item"));
-
-const TIME_AUTO_NEXT = 3500; // 自动切换时间间隔，单位毫秒
-
-function autoNext() {
-  const sliderItems = list.querySelectorAll(".item");
-  list.appendChild(sliderItems[0]); // 将第一个项移到末尾
-}
-
-setInterval(autoNext, TIME_AUTO_NEXT); // 每隔一段时间自动切换
