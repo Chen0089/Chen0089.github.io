@@ -12,8 +12,6 @@ body {
   height: 100vh;
   /* 设置页面整体背景为动态紫色渐变 */
   margin: 0;
-  background: linear-gradient(45deg, #8e44ad, #9b59b6);
-  background-size: 400% 400%; /* 背景的大小，增加渐变的动态效果 */
   animation: gradientAnimation 10s ease infinite; /* 定义渐变动画 */
   color: white;
 }
@@ -21,13 +19,13 @@ body {
 /* 定义渐变背景的动画 */
 @keyframes gradientAnimation {
   0% {
-    background-position: 0% 50%;
+    background: linear-gradient(0deg, #8844ad, #9659b6);
   }
   50% {
-    background-position: 100% 50%;
+    background: linear-gradient(180deg, #8d44ad, #9a59b6);
   }
   100% {
-    background-position: 0% 50%;
+    background: linear-gradient(360deg, #8e44ad, #9b59b6);
   }
 }
 
@@ -71,4 +69,27 @@ button {
 
 button:hover {
   background-color: #2980b9;
+}
+
+.fualttext {
+  position: absolute;
+  font-family: Impact, sans-serif;
+  letter-spacing: 0.5rem;
+  user-select: none;
+}
+.fualttext_fault::after, 
+.fualttext_fault::before {
+  content: "404";
+  position: absolute;
+  left: 0;
+  top: 0;
+  mix-blend-mode: screen
+}
+.fualttext_fault::after {
+  color: #ff0000;
+  transform: translateX(2%)
+}
+.fualttext_fault::before {
+  color: #0000ff;
+  transform: translateX(-2%)
 }
