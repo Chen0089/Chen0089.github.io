@@ -220,81 +220,25 @@ body{
 }
 /* 装饰用的球 */
 decorateBall1, decorateBall2, decorateBall3 {
-    position: relative;
     height: 30px;
 	width: 30px;
 	border-radius: 100%;
     background-image: linear-gradient(to bottom right, deepskyblue , dodgerblue);
 }
 decorateBall1 {
-    animation: ball1 1s;
+    position: relative;
+    top: 35px;
+    left: 40px;
 }
 decorateBall2 {
-    animation: ball2 1s;
+	position: relative;
+    top: 75%;
+    left: 70%;
 }
 decorateBall3 {
-    animation: ball3 1s;
-}
-@keyframe ball1 {
-    0% {
-        top: -20px;
-        left: -10px;
-        transform: rotate(0deg);
-    }
-    30% {
-        top: 30px;
-        left: 0px;
-        transform: rotate(108deg);
-    }
-    90% {
-        top: 35px;
-        left: 15px;
-        transform: rotate(324deg);
-    }
-    100% {
-        top: 35px;
-        left: 40px;
-        transform: rotate(360deg);
-    }
-}
-@keyframe ball2 {
-    0% {
-        top: 110%;
-        left: 160%;
-        transform:rotate(0deg);
-    }
-    30% {
-        top: 90%;
-        left: 100%;
-        transform: rotate(108deg);
-    }
-    100% {
-        top: 75%;
-        left: 70%;
-        transform: rotate(360deg);
-    }
-}
-@keyframe ball3 {
-    0% {
-        top: 100%;
-        left: -10px;
-        transform: rotate(0deg);
-    }
-    30% {
-        top: 90%;
-        left: 0px;
-        transform: rotate(108deg);
-    }
-    90% {
-        top: 85%;
-        left: 15px;
-        transform: rotate(324deg);
-    }
-    100% {
-        top: 75%;
-        left: 40px;
-        transform: rotate(360deg);
-    }
+	position: relative;
+    top: 75%;
+    left: 40px;
 }
 
 /*等待效果*/
@@ -332,19 +276,7 @@ form {
     font-family: Arial, sans-serif;
     font-size: 16px;
     animation: typing 10s infinite;
-    background: linear-gradient(to right, #333, #333);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: typing 10s infinite;
-    background-size: 200% 100%;
-}
-#ILikeFish-mc {
-    color: #5656cd;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    animation: typing 10s infinite;
-    background: linear-gradient(to right, #333, #333);
+    background: linear-gradient(to right, #333, #555);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -359,15 +291,6 @@ form {
     background-color: #131480;
     padding: 10px;
     border-radius:3px
-}
-.footer {
-    background: #8989ff;
-    text-align: center;
-    height: 0; /* 设置一个固定的高度 */
-    position: absolute; /* 确保footer元素在页面中的位置正确 */
-    bottom: 0;
-    left: 0;
-    right: 0;
 }
 
 .countdown {
