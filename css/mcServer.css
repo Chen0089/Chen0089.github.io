@@ -1,0 +1,50 @@
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.nav.header {
+    float: left;
+    width: auto;
+    height: 50px;
+}
+.nav.navItem {
+    float: left;
+}
+
+.nav.navItem a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav.navItem a:hover {
+    background-color: #111;
+}
+
+.SectionOne {
+    height: auto;
+    width: 95%;
+	border:1px solid #ccc;
+	padding:10px 40px; 
+	border-radius:25px;
+	box-shadow: 5px 3px 5px #888;
+}
+
+.SectionTwo {
+    height: auto;
+    width:95%;
+    margin-top: 10px;
+	border:1px solid #ccc;
+	padding:10px 40px;
+	border-radius:25px;
+	box-shadow: 5px 3px 5px #888;
+}
+.sectionTwoBedwars {}
