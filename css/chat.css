@@ -36,7 +36,7 @@ body {
 #input-container {
     display: flex;
     align-items: center;
-`}
+}
 #input-field {
     width: 80%;
     padding: 8px;
