@@ -4,17 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的笔记</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        /* 左侧导航栏 */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .sidebar:hover {
+            transform: translateX(5px);
+        }
+
+        .sidebar-header {
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .file-tree {
+            list-style: none;
+        }
+
+        .file-tree li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .file-tree li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+
+        .file-tree li a:hover {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        .file-tree li a.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .folder {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .folder::before {
+            content: '📁 ';
+        }
+
+        .folder.open::before {
+            content: '📂 ';
+        }
+
+        .file::before {
+            content: '📄 ';
+        }
+
+        .sub-tree {
+            list-style: none;
+            padding-left: 20px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .folder.open + .sub-tree {
+            display: block;
+        }
+
+        /* 右侧内容区 */
+        .content {
+            flex: 1;
+            background-color: white;
+            border-radius: 15px;
+            margin: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .welcome-message {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #34495e;
+        }
+
+        .welcome-message h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .welcome-message p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .note-content {
+            display: none;
+        }
+
+        .note-content.active {
+            display: block;
+        }
+
+        .note-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .note-body {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                margin: 0;
+                border-radius: 0;
+            }
+            .content {
+                margin: 0;
+                border-radius: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Maths</h1>
-    <ul>
-      <li>
-        <a href="maths/单位分数.html>单位分数例题解法</a>
-      </li>
-      <li>
-          <a href="maths/浓度问题.html>盐水浓度的计算</a>
-      </li>
-    </ul>
+    <!-- 左侧导航栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>我的笔记</h2>
+        </div>
+        <ul class="file-tree">
+            <li class="folder">数学笔记
+                <ul class="sub-tree">
+                    <li><a href="#" data-note="calculus" class="file">微积分</a></li>
+                    <li><a href="#" data-note="algebra" class="file">线性代数</a></li>
+                    <li><a href="#" data-note="geometry" class="file">几何学</a></li>
+                </ul>
+            </li>
+            <li class="folder">编程笔记
+                <ul class="sub-tree">
+                    <li><a href="#" data-note="javascript" class="file">JavaScript</a></li>
+                    <li><a href="#" data-note="python" class="file">Python</a></li>
+                    <li><a href="#" data-note="css" class="file">CSS技巧</a></li>
+                </ul>
+            </li>
+            <li class="folder">生活笔记
+                <ul class="sub-tree">
+                    <li><a href="#" data-note="recipes" class="file">食谱</a></li>
+                    <li><a href="#" data-note="travel" class="file">旅行计划</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- 右侧内容区 -->
+    <main class="content">
+        <div class="welcome-message" id="welcome">
+            <h1>欢迎来到我的笔记👋</h1>
+            <p>请从左侧导航栏选择您想查看的笔记内容。这里记录了各种学习笔记、编程技巧和生活点滴。</p>
+            <p>📚 点击文件夹可以展开/收起，点击文件可以查看详细内容。</p>
+            <p>你可以：</p>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+
+        <!-- JavaScript笔记 -->
+        <div class="note-content" id="javascript">
+            <h1 class="note-title">JavaScript笔记</h1>
+            <div class="note-body">
+                <h2>ES6新特性</h2>
+                <p>箭头函数：更简洁的函数写法</p>
+                <pre><code>const sum = (a, b) => a + b;</code></pre>
+            </div>
+        </div>
+
+        <!-- 其他笔记内容... -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 文件夹展开/收起功能
+            const folders = document.querySelectorAll('.folder');
+            folders.forEach(folder => {
+                folder.addEventListener('click', function(e) {
+                    // 防止点击链接时触发
+                    if (e.target.tagName === 'A') return;
+                    
+                    this.classList.toggle('open');
+                });
+            });
+
+            // 笔记导航功能
+            const noteLinks = document.querySelectorAll('.file-tree a');
+            const welcome = document.getElementById('welcome');
+            const noteContents = document.querySelectorAll('.note-content');
+
+            noteLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有active类
+                    noteLinks.forEach(l => l.classList.remove('active'));
+                    noteContents.forEach(c => c.classList.remove('active'));
+                    
+                    // 添加active类到当前点击的链接
+                    this.classList.add('active');
+                    
+                    // 隐藏欢迎信息
+                    welcome.style.display = 'none';
+                    
+                    // 显示对应的笔记内容
+                    const noteId = this.getAttribute('data-note');
+                    document.getElementById(noteId).classList.add('active');
+                });
+            });
+
+            // 默认展开第一个文件夹
+            if (folders.length > 0) {
+                folders[0].classList.add('open');
+            }
+        });
+    </script>
 </body>
 </html>
