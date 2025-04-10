@@ -30,8 +30,30 @@
             transition: transform 0.3s ease;
             position: relative;
             z-index: 10;
+            animation: float 5s infinite;
         }
-
+        @keyframes float {
+            0% {
+                transform: translateX(5px);
+                transform: translateY(3px);
+            }
+            25% {
+                transform: translateX(7px);
+                transform: translateY(7px);
+            }
+            50% {
+                transform: translateX(10px);
+                transform: translateY(10px);
+            }
+            75% {
+                transform: translateX(7px);
+                transform: translateX(7px);
+            }
+            100% {
+                transform: translateX(5px);
+                transform: translateY(3px);
+            }
+        }
         .sidebar:hover {
             transform: translateX(5px);
         }
