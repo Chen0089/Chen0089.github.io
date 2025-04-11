@@ -1,52 +1,155 @@
-.nav {
-    list-style-type: none;
+/* 全局样式 */
+body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-.nav.header {
-    float: left;
-    width: auto;
-    height: 50px;
-	color: #fff;
-}
-.nav.navItem {
-    float: left;
-	display: inline-block;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
 }
 
-.nav.navItem a {
-    display: block;
+/* 导航栏样式 */
+.nav {
+    background-color: #2c3e50;
     color: white;
+    padding: 0;
+    position: sticky;
+    top: 10px; /* 顶部留出10px空隙 */
+    margin: 10px 20px; /* 左右各留20px空隙，上下各10px */
+    border-radius: 15px; /* 添加圆角 */
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 增强阴影效果 */
+}
+
+.header {
+    font-size: 1.8rem;
     text-align: center;
-    padding: 14px 16px;
+    padding: 1rem 0; /* 增加内边距 */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    margin: 0; /* 移除默认外边距 */
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+    margin: 0 20px; /* 两侧留出空隙 */
+}
+
+.navItem {
+    margin: 0 1rem;
+}
+
+.navItem a {
+    color: white;
     text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-.nav.navItem a:hover {
-    background-color: #111;
+.navItem a:hover {
+    background-color: #34495e;
 }
 
+/* 通用区块样式 */
+[class^="Section"] {
+    padding: 2rem 10%;
+    margin: 1rem 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+[class$="Header"] h1 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 第一部分样式 */
 .SectionOne {
-    height: auto;
-    width: 95%;
-	border:1px solid #ccc;
-	padding:10px 40px; 
-	border-radius:25px;
-	box-shadow: 5px 3px 5px #888;
+    text-align: center;
 }
 
-.SectionTwo {
-    height: auto;
-    width:95%;
-    margin-top: 10px;
-	border:1px solid #ccc;
-	padding:10px 40px;
-	border-radius:25px;
-	box-shadow: 5px 3px 5px #888;
+.sectionOneContent h3 {
+    color: #2980b9;
+    font-size: 1.5rem;
 }
-.sectionTwoBedwars {}
+
+.comment {
+    background-color: #f8f9fa;
+    border-left: 4px solid #e74c3c;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 600px;
+    text-align: left;
+}
+
+.comment p {
+    margin: 0;
+    color: #7f8c8d;
+}
+
+/* 第二部分样式 */
+.sectionTwoBedwarsHeader h4,
+.sectionTwoBridgeWarsHeader h4,
+.sectionTwoTwoBuildersTwoToolsHeader h4 {
+    color: #16a085;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+[class$="ModeHeader"],
+[class$="PlayingImageHeader"] {
+    font-weight: bold;
+    color: #34495e;
+    margin: 1rem 0 0.5rem;
+}
+
+/* 图片容器样式 */
+[class$="Image"] {
+    background-color: #ecf0f1;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    text-align: center;
+    border-radius: 4px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 第三部分样式 */
+.SectionThree {
+    text-align: center;
+}
+
+.SectionThreeContent {
+    margin-top: 1.5rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .navItem {
+        margin: 0.5rem 0;
+    }
+    
+    [class^="Section"] {
+        padding: 1.5rem 5%;
+    }
+}
+
+/* 滚动动画效果 */
+.scroll-to {
+    cursor: pointer;
+}
