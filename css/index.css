@@ -210,7 +210,6 @@ body{
     align-items: center;
     min-height: 100vh;
     background-color: #131417;
-    background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
 }
 /*设置页脚样式*/
 .footer
@@ -224,18 +223,19 @@ decorateBall1, decorateBall2, decorateBall3 {
 	width: 30px;
 	border-radius: 100%;
     position: relative;
-    background-image: linear-gradient(to bottom right, deepskyblue , dodgerblue);
+    background: linear-gradient(to bottom right, deepskyblue , dodgerblue);
+    animation: animate 22s ease-in-out infinite;
 }
 decorateBall1 {
     top: 35px;
     left: 40px;
 }
 decorateBall2 {
-    top: 75%;
-    left: 70%;
+    top: 150px;
+    left: 370px;
 }
 decorateBall3 {
-    top: 75%;
+    top: 560px;
     left: 40px;
 }
 
