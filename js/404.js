@@ -23,6 +23,7 @@ const faulttext = {
 }
 
 faulttext.init();// 初始化
+faulttext.fault();
 
 function goHome() {
   window.location.href = '/Chen0089/Chen0089.github.io/edit/main/js/index.html'; // 可以根据你的主页路径调整

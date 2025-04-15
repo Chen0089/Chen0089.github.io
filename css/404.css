@@ -12,20 +12,17 @@ body {
   height: 100vh;
   /* 设置页面整体背景为动态紫色渐变 */
   margin: 0;
-  animation: gradientAnimation 10s ease infinite; /* 定义渐变动画 */
+  animation: gradientAnimation 10s ease-in-out infinite; /* 定义渐变动画 */
   color: white;
 }
 
 /* 定义渐变背景的动画 */
 @keyframes gradientAnimation {
-  0% {
+  0%, 100% {
     background: linear-gradient(0deg, #8844ad, #9659b6);
   }
   50% {
-    background: linear-gradient(180deg, #8d44ad, #9a59b6);
-  }
-  100% {
-    background: linear-gradient(360deg, #8e44ad, #9b59b6);
+    background: linear-gradient(360deg, #8d44ad, #9a59b6);
   }
 }
 
@@ -37,11 +34,6 @@ body {
   padding: 30px;
   width: 80%;
   max-width: 500px;
-}
-
-.error-message h1 {
-  font-size: 6rem;
-  color: #e74c3c;
 }
 
 .error-message p {
