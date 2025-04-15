@@ -223,20 +223,18 @@ decorateBall1, decorateBall2, decorateBall3 {
     height: 30px;
 	width: 30px;
 	border-radius: 100%;
+    position: relative;
     background-image: linear-gradient(to bottom right, deepskyblue , dodgerblue);
 }
 decorateBall1 {
-    position: relative;
     top: 35px;
     left: 40px;
 }
 decorateBall2 {
-	position: relative;
     top: 75%;
     left: 70%;
 }
 decorateBall3 {
-	position: relative;
     top: 75%;
     left: 40px;
 }
