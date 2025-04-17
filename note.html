@@ -30,6 +30,15 @@
             transition: transform 0.3s ease;
             position: relative;
             z-index: 10;
+            animation: float 1s ease-in-out infinite;
+        }
+        @keyframe float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(2px);
+            }
         }
 
         .sidebar:hover {
@@ -74,18 +83,28 @@
         .folder {
             font-weight: bold;
             cursor: pointer;
+            display: flex;
+            align-items: center;
         }
 
         .folder::before {
             content: '📁 ';
+            margin-right: 5px;
         }
 
         .folder.open::before {
             content: '📂 ';
         }
 
+        .file {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+
         .file::before {
             content: '📄 ';
+            margin-right: 5px;
         }
 
         .sub-tree {
@@ -95,7 +114,7 @@
             display: none;
         }
 
-        .folder.open + .sub-tree {
+        .folder.open ~ .sub-tree {
             display: block;
         }
 
@@ -224,14 +243,16 @@
             <h2>我的笔记</h2>
         </div>
         <ul class="file-tree">
-            <li class="folder">经典几何模型
+            <li>
+                <div class="folder">经典几何模型</div>
                 <ul class="sub-tree">
                     <li><a href="#" data-note="general-horse" class="file">将军饮马模型</a></li>
                     <li><a href="#" data-note="hand-shake" class="file">手拉手模型</a></li>
                     <li><a href="#" data-note="butterfly" class="file">蝴蝶模型</a></li>
                 </ul>
             </li>
-            <li class="folder">六年级几何
+            <li>
+                <div class="folder">六年级几何</div>
                 <ul class="sub-tree">
                     <li><a href="#" data-note="grade6-1" class="file">长方形中的三角形</a></li>
                     <li><a href="#" data-note="grade6-2" class="file">比例与面积</a></li>
@@ -244,7 +265,8 @@
     <main class="content">
         <div class="welcome-message" id="welcome">
             <h1>欢迎来到我的笔记👋</h1>
-            <p>👆请从左侧导航栏选择您想查看的模型。😺这里收录了常见的题型和解决方法</p>
+            <p>👆 请从左侧导航栏选择您想查看的几何模型。</p>
+            <p>😾 这里收录了常见的题目及其解题方法。</p>
             <p>📚 点击文件夹可以展开/收起，点击文件可以查看详细内容。</p>
         </div>
 
@@ -385,6 +407,12 @@
                     // 防止点击链接时触发
                     if (e.target.tagName === 'A') return;
                     this.classList.toggle('open');
+                    
+                    // 切换相邻的子菜单显示状态
+                    const subTree = this.parentElement.querySelector('.sub-tree');
+                    if (subTree) {
+                        subTree.style.display = this.classList.contains('open') ? 'block' : 'none';
+                    }
                 });
             });
 
@@ -412,6 +440,10 @@
             // 默认展开第一个文件夹
             if (folders.length > 0) {
                 folders[0].classList.add('open');
+                const firstSubTree = folders[0].parentElement.querySelector('.sub-tree');
+                if (firstSubTree) {
+                    firstSubTree.style.display = 'block';
+                }
             }
         });
 
