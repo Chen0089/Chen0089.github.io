@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的笔记</title>
+    <title>几何模型笔记</title>
     <style>
         * {
             margin: 0;
@@ -30,23 +30,8 @@
             transition: transform 0.3s ease;
             position: relative;
             z-index: 10;
-            animation: float 6s ease-in-out infinite;
         }
- 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            25% {
-                transform: translateY(3px);
-            }
-            50% {
-                transform: translateY(5px);
-            }
-            75% {
-                transform: translateY(3px);
-            }
-        }
+
         .sidebar:hover {
             transform: translateX(3px);
         }
@@ -169,6 +154,52 @@
             font-size: 1.1rem;
         }
 
+        /* 几何模型样式 */
+        .geometry-model {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .model-title {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .model-svg {
+            display: block;
+            margin: 15px auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .solution {
+            background-color: #f1f8e9;
+            padding: 15px;
+            border-left: 4px solid #7cb342;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             body {
@@ -193,24 +224,17 @@
             <h2>我的笔记</h2>
         </div>
         <ul class="file-tree">
-            <li class="folder">数学笔记
+            <li class="folder">经典几何模型
                 <ul class="sub-tree">
-                    <li><a href="#" data-note="calculus" class="file">微积分</a></li>
-                    <li><a href="#" data-note="algebra" class="file">线性代数</a></li>
-                    <li><a href="#" data-note="geometry" class="file">几何学</a></li>
+                    <li><a href="#" data-note="general-horse" class="file">将军饮马模型</a></li>
+                    <li><a href="#" data-note="hand-shake" class="file">手拉手模型</a></li>
+                    <li><a href="#" data-note="butterfly" class="file">蝴蝶模型</a></li>
                 </ul>
             </li>
-            <li class="folder">编程笔记
+            <li class="folder">六年级几何
                 <ul class="sub-tree">
-                    <li><a href="#" data-note="javascript" class="file">JavaScript</a></li>
-                    <li><a href="#" data-note="python" class="file">Python</a></li>
-                    <li><a href="#" data-note="css" class="file">CSS技巧</a></li>
-                </ul>
-            </li>
-            <li class="folder">生活笔记
-                <ul class="sub-tree">
-                    <li><a href="#" data-note="recipes" class="file">食谱</a></li>
-                    <li><a href="#" data-note="travel" class="file">旅行计划</a></li>
+                    <li><a href="#" data-note="grade6-1" class="file">长方形中的三角形</a></li>
+                    <li><a href="#" data-note="grade6-2" class="file">比例与面积</a></li>
                 </ul>
             </li>
         </ul>
@@ -220,25 +244,136 @@
     <main class="content">
         <div class="welcome-message" id="welcome">
             <h1>欢迎来到我的笔记👋</h1>
-            <p>请从左侧导航栏选择您想查看的笔记内容。这里记录了各种学习笔记、编程技巧和生活点滴。</p>
+            <p>👆请从左侧导航栏选择您想查看的模型。😺这里收录了常见的题型和解决方法</p>
             <p>📚 点击文件夹可以展开/收起，点击文件可以查看详细内容。</p>
-            <p>你可以：</p>
-            <ul>
-                <li></li>
-            </ul>
         </div>
 
-        <!-- JavaScript笔记 -->
-        <div class="note-content" id="javascript">
-            <h1 class="note-title">JavaScript笔记</h1>
+        <!-- 将军饮马模型 -->
+        <div class="note-content" id="general-horse">
+            <h1 class="note-title">将军饮马模型</h1>
             <div class="note-body">
-                <h2>ES6新特性</h2>
-                <p>箭头函数：更简洁的函数写法</p>
-                <pre><code>const sum = (a, b) => a + b;</code></pre>
+                <p>将军从军营A出发，先到河边（直线l）饮马，再去营地B。求最短行军路线。</p>
+                
+                <div class="geometry-model">
+                    <svg width="300" height="200" viewBox="0 0 300 200" class="model-svg">
+                        <!-- 坐标系 -->
+                        <line x1="50" y1="150" x2="250" y2="150" stroke="blue" stroke-width="2"/>
+                        <text x="255" y="155" font-size="12">直线l</text>
+                        
+                        <!-- 点A和点B -->
+                        <circle cx="100" cy="50" r="5" fill="red"/>
+                        <text x="105" y="45" font-size="12">A</text>
+                        <circle cx="200" cy="100" r="5" fill="red"/>
+                        <text x="205" y="95" font-size="12">B</text>
+                        
+                        <!-- 对称点和辅助线（初始隐藏） -->
+                        <circle id="a-sym" cx="100" cy="250" r="5" fill="green" class="hidden"/>
+                        <line id="sym-line" x1="100" y1="50" x2="100" y2="250" stroke="green" stroke-dasharray="5,5" class="hidden"/>
+                        
+                        <!-- 解决方案（初始隐藏） -->
+                        <path id="shortest-path" d="M100,50 L150,150 L200,100" stroke="red" stroke-width="2" fill="none" class="hidden"/>
+                    </svg>
+                    <button onclick="showSolution('solution1')">显示解析</button>
+                    <div id="solution1" class="solution hidden">
+                        <p><strong>解析：</strong></p>
+                        <ol>
+                            <li>作点A关于直线l的对称点A'</li>
+                            <li>连接A'B与直线l的交点P即为饮马点</li>
+                            <li>AP+PB即为最短路径</li>
+                        </ol>
+                        <button onclick="drawSymmetry()">显示对称点</button>
+                        <button onclick="drawShortestPath()">显示最短路径</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- 其他笔记内容... -->
+        <!-- 手拉手模型 -->
+        <div class="note-content" id="hand-shake">
+            <h1 class="note-title">手拉手模型</h1>
+            <div class="note-body">
+                <p>△ABC和△ADE都是等边三角形，且共顶点A。连接BD、CE，求证：BD=CE。</p>
+                
+                <div class="geometry-model">
+                    <svg width="300" height="250" viewBox="0 0 300 250" class="model-svg">
+                        <!-- 大等边三角形 -->
+                        <polygon points="150,50 70,180 230,180" fill="none" stroke="blue" stroke-width="2"/>
+                        <text x="150" y="40" font-size="12">A</text>
+                        <text x="60" y="190" font-size="12">B</text>
+                        <text x="235" y="190" font-size="12">C</text>
+                        
+                        <!-- 小等边三角形 -->
+                        <polygon id="small-tri" points="150,50 120,120 180,120" fill="none" stroke="green" stroke-width="2" class="hidden"/>
+                        <text x="110" y="125" font-size="12" class="hidden">D</text>
+                        <text x="185" y="125" font-size="12" class="hidden">E</text>
+                        
+                        <!-- 连接线（初始隐藏） -->
+                        <line id="line-bd" x1="70" y1="180" x2="120" y2="120" stroke="red" stroke-width="2" class="hidden"/>
+                        <line id="line-ce" x1="230" y1="180" x2="180" y2="120" stroke="red" stroke-width="2" class="hidden"/>
+                    </svg>
+                    <button onclick="showSolution('solution2')">显示解析</button>
+                    <div id="solution2" class="solution hidden">
+                        <p><strong>解析：</strong></p>
+                        <ol>
+                            <li>显示小等边三角形ADE</li>
+                            <li>证明△ABD ≅ △ACE（SAS）：
+                                <ul>
+                                    <li>AB=AC（等边三角形）</li>
+                                    <li>AD=AE（等边三角形）</li>
+                                    <li>∠BAD=∠CAE=60°-∠CAD</li>
+                                </ul>
+                            </li>
+                            <li>∴ BD=CE（全等三角形对应边相等）</li>
+                        </ol>
+                        <button onclick="drawHandShake()">显示图形构造</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 蝴蝶模型 -->
+        <div class="note-content" id="butterfly">
+            <h1 class="note-title">蝴蝶模型</h1>
+            <div class="note-body">
+                <p>在梯形ABCD中，AB∥CD，对角线交于O点。已知S△AOB=9，S△COD=16，求梯形面积。</p>
+                
+                <div class="geometry-model">
+                    <svg width="300" height="200" viewBox="0 0 300 200" class="model-svg">
+                        <!-- 梯形 -->
+                        <polygon points="80,50 220,50 160,150 140,150" fill="none" stroke="blue" stroke-width="2"/>
+                        <text x="70" y="45" font-size="12">A</text>
+                        <text x="225" y="45" font-size="12">B</text>
+                        <text x="165" y="160" font-size="12">C</text>
+                        <text x="135" y="160" font-size="12">D</text>
+                        
+                        <!-- 对角线 -->
+                        <line x1="80" y1="50" x2="160" y2="150" stroke="black" stroke-width="1"/>
+                        <line x1="220" y1="50" x2="140" y2="150" stroke="black" stroke-width="1"/>
+                        
+                        <!-- 交点O -->
+                        <circle cx="150" cy="100" r="3" fill="red"/>
+                        <text x="155" y="105" font-size="12">O</text>
+                        
+                        <!-- 面积标注（初始隐藏） -->
+                        <text id="area-aob" x="120" y="80" font-size="12" fill="red" class="hidden">S=9</text>
+                        <text id="area-cod" x="150" y="120" font-size="12" fill="red" class="hidden">S=16</text>
+                        <text id="area-aod" x="100" y="120" font-size="12" fill="green" class="hidden">S=12</text>
+                        <text id="area-boc" x="180" y="80" font-size="12" fill="green" class="hidden">S=12</text>
+                    </svg>
+                    <button onclick="showSolution('solution3')">显示解析</button>
+                    <div id="solution3" class="solution hidden">
+                        <p><strong>解析：</strong></p>
+                        <ol>
+                            <li>蝴蝶模型性质：S△AOD = S△BOC = √(S△AOB × S△COD) = √(9×16) = 12</li>
+                            <li>梯形面积 = 9 + 16 + 12 + 12 = 49</li>
+                        </ol>
+                        <button onclick="showButterflyAreas()">显示各部分面积</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 六年级几何内容... -->
     </main>
 
     <script>
@@ -249,7 +384,6 @@
                 folder.addEventListener('click', function(e) {
                     // 防止点击链接时触发
                     if (e.target.tagName === 'A') return;
-                    
                     this.classList.toggle('open');
                 });
             });
@@ -262,17 +396,13 @@
             noteLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
                     // 移除所有active类
                     noteLinks.forEach(l => l.classList.remove('active'));
                     noteContents.forEach(c => c.classList.remove('active'));
-                    
                     // 添加active类到当前点击的链接
                     this.classList.add('active');
-                    
                     // 隐藏欢迎信息
                     welcome.style.display = 'none';
-                    
                     // 显示对应的笔记内容
                     const noteId = this.getAttribute('data-note');
                     document.getElementById(noteId).classList.add('active');
@@ -284,6 +414,32 @@
                 folders[0].classList.add('open');
             }
         });
+
+        // 将军饮马模型函数
+        function showSolution(id) {
+            document.getElementById(id).classList.toggle('hidden');
+        }
+        
+        function drawSymmetry() {
+            document.getElementById('a-sym').classList.remove('hidden');
+            document.getElementById('sym-line').classList.remove('hidden');
+        }
+        
+        function drawShortestPath() {
+            document.getElementById('shortest-path').classList.remove('hidden');
+        }
+        
+        // 手拉手模型函数
+        function drawHandShake() {
+            const elements = document.querySelectorAll('#small-tri, #small-tri + text, #small-tri + text + text, #line-bd, #line-ce');
+            elements.forEach(el => el.classList.remove('hidden'));
+        }
+        
+        // 蝴蝶模型函数
+        function showButterflyAreas() {
+            const areas = document.querySelectorAll('#area-aob, #area-cod, #area-aod, #area-boc');
+            areas.forEach(el => el.classList.remove('hidden'));
+        }
     </script>
 </body>
 </html>
