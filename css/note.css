@@ -23,7 +23,7 @@ body {
     transition: transform 0.3s ease;
     position: relative;
     z-index: 10;
-    animation: float 1s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
 }
 @keyframes float {
     0%, 100% {
