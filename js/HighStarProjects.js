@@ -4,6 +4,8 @@ let page = 1; // 当前页数
 const perPage = 10; // 每页请求数量
 const loadingElement = document.getElementById('loading'); // 加载提示元素
 const repoListElement = document.getElementById('repo-list'); // 仓库列表容器
+// debug
+console.log("init completed")
 
 // 获取仓库数据并渲染
 function fetchRepos() {
@@ -54,8 +56,10 @@ function fetchRepos() {
 
 // 初次加载仓库数据
 fetchRepos();
+// debug
+console.log("load data completed")
 
-// 监听滚动事件，判断是否到达底部
+// 监听滚动事件，判断是否到达底部（懒加载）
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
     page++; // 页数增加
