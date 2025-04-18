@@ -212,6 +212,55 @@ button {
     border-radius: 4px;
 }
 
+.solution {
+    background-color: #f1f8e9;
+    padding: 15px;
+    border-left: 4px solid #7cb342;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.step {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-left: 3px solid #3498db;
+    background-color: #f0f8ff;
+}
+
+.method {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.basic-method {
+    border-color: #3498db;
+    background-color: #ebf5fb;
+}
+
+.advanced-method {
+    border-color: #e74c3c;
+    background-color: #fdedec;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     body {

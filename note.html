@@ -163,6 +163,138 @@
                 </div>
             </div>
         </div>
+        <!-- 复制一个角 -->
+        <div class="note-content" id="copy-angle">
+            <h1 class="note-title">尺规作图：复制一个角</h1>
+            <div class="note-body">
+                <p>已知∠AOB，用尺规作图复制这个角，得到∠CPD = ∠AOB。</p>
+                
+                <div class="geometry-model">
+                    <svg width="600" height="300" viewBox="0 0 600 300" class="model-svg">
+                        <!-- 原始角 -->
+                        <g id="original-angle">
+                            <line x1="100" y1="150" x2="200" y2="150" stroke="black" stroke-width="2"/>
+                            <line x1="100" y1="150" x2="150" y2="50" stroke="black" stroke-width="2"/>
+                            <circle cx="100" cy="150" r="5" fill="red"/>
+                            <text x="90" y="170" font-size="14">O</text>
+                            <text x="210" y="155" font-size="14">B</text>
+                            <text x="155" y="40" font-size="14">A</text>
+                            <path d="M120,150 L120,140 L130,140 L130,150 Z" fill="black"/>
+                            <path d="M100,130 L110,130 L110,120 L100,120 Z" fill="black"/>
+                        </g>
+                        
+                        <!-- 作图过程（初始隐藏） -->
+                        <g id="step1" class="hidden">
+                            <line x1="400" y1="150" x2="500" y2="150" stroke="blue" stroke-width="2" stroke-dasharray="5,5"/>
+                            <circle cx="400" cy="150" r="5" fill="red"/>
+                            <text x="390" y="170" font-size="14">P</text>
+                            <text x="510" y="155" font-size="14">D'</text>
+                        </g>
+                        
+                        <g id="step2" class="hidden">
+                            <circle cx="100" cy="150" r="80" stroke="green" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
+                            <circle cx="400" cy="150" r="80" stroke="green" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
+                            <text x="100" y="230" font-size="12" fill="green">半径相同</text>
+                            <text x="400" y="230" font-size="12" fill="green">半径相同</text>
+                        </g>
+                        
+                        <g id="step3" class="hidden">
+                            <line x1="100" y1="150" x2="150" y2="50" stroke="blue" stroke-width="1" stroke-dasharray="5,5"/>
+                            <circle cx="150" cy="50" r="5" fill="blue"/>
+                            <circle cx="150" cy="50" r="60" stroke="purple" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
+                            <text x="150" y="20" font-size="12" fill="blue">A点</text>
+                        </g>
+                        
+                        <g id="step4" class="hidden">
+                            <circle cx="400" cy="150" r="60" stroke="purple" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
+                            <text x="400" y="110" font-size="12" fill="purple">交点为C</text>
+                        </g>
+                        
+                        <g id="step5" class="hidden">
+                            <line x1="400" y1="150" x2="450" y2="70" stroke="red" stroke-width="2"/>
+                            <circle cx="450" cy="70" r="5" fill="red"/>
+                            <text x="460" y="60" font-size="14">C</text>
+                            <path d="M420,150 L420,140 L430,140 L430,150 Z" fill="red"/>
+                            <path d="M400,130 L410,130 L410,120 L400,120 Z" fill="red"/>
+                        </g>
+                        
+                        <text x="300" y="280" font-size="14" id="step-text">请按步骤查看作图过程</text>
+                    </svg>
+                    
+                    <div class="solution">
+                        <h3>作图步骤：</h3>
+                        <div class="step" id="step1-text">
+                            1. 画一条射线PD'，作为新角的一边
+                        </div>
+                        <div class="step hidden" id="step2-text">
+                            2. 以O和P为圆心，相同半径画弧，交两边于E、F和G
+                        </div>
+                        <div class="step hidden" id="step3-text">
+                            3. 以E为圆心，EF为半径画弧
+                        </div>
+                        <div class="step hidden" id="step4-text">
+                            4. 以G为圆心，相同EF长度画弧，交前弧于C
+                        </div>
+                        <div class="step hidden" id="step5-text">
+                            5. 连接PC，∠CPD'即为所求的角
+                        </div>
+                        
+                        <button onclick="nextStep()">下一步</button>
+                        <button onclick="resetSteps()">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 半圆旋转阴影面积 -->
+        <div class="note-content" id="semicircle-rotation">
+            <h1 class="note-title">半圆旋转阴影面积问题</h1>
+            <div class="note-body">
+                <p>问题描述：一个直径为AB的半圆绕A点旋转30°形成新的位置AB'，求阴影部分面积（旋转出现的扇形区域与旋转后半圆的交集部分）。</p>
+                
+                <div class="geometry-model">
+                    <svg width="400" height="300" viewBox="0 0 400 300" class="model-svg">
+                        <!-- 初始半圆 -->
+                        <path id="original-semi" d="M100,150 A50,50 0 0,1 200,150 L100,150 Z" fill="#ddd" stroke="black"/>
+                        <line x1="100" y1="150" x2="200" y2="150" stroke="black" stroke-width="2"/>
+                        <text x="150" y="170" font-size="12">AB=2r</text>
+                        
+                        <!-- 旋转后的半圆（初始隐藏） -->
+                        <path id="rotated-semi" d="M100,150 A50,50 0 0,1 143.3,125 L100,150 Z" fill="none" stroke="blue" stroke-width="2" stroke-dasharray="5,5" class="hidden"/>
+                        
+                        <!-- 扇形区域（初始隐藏） -->
+                        <path id="sector" d="M100,150 L200,150 A50,50 0 0,0 143.3,125 Z" fill="rgba(255,0,0,0.3)" class="hidden"/>
+                        
+                        <!-- 阴影区域（初始隐藏） -->
+                        <path id="shadow-area" d="M100,150 A50,50 0 0,1 200,150 A50,50 0 0,0 143.3,125 Z" fill="purple" opacity="0.5" class="hidden"/>
+                    </svg>
+                    
+                    <div class="method basic-method">
+                        <h3>基础解法（直接计算）：</h3>
+                        <p>阴影面积 = 扇形ABB'面积 + 旋转后半圆面积 - 原始半圆面积</p>
+                        <div id="basic-solution" class="hidden">
+                            <p>1. 扇形ABB'面积 = (30°/360°) × πr² = πr²/12</p>
+                            <p>2. 旋转后半圆面积 = πr²/2 (与原始半圆相同)</p>
+                            <p>3. 原始半圆面积 = πr²/2</p>
+                            <p>∴ 阴影面积 = πr²/12 + πr²/2 - πr²/2 = πr²/12</p>
+                        </div>
+                    </div>
+                    
+                    <div class="method advanced-method">
+                        <h3>进阶解法（观察抵消）：</h3>
+                        <p>由于旋转后的半圆与原半圆面积相同，阴影面积实际就是扇形ABB'的面积</p>
+                        <div id="advanced-solution" class="hidden">
+                            <p>阴影面积 = 扇形ABB'面积 = (旋转角度/360°) × πr²</p>
+                            <p>当旋转30°时，面积 = 30/360 × πr² = πr²/12</p>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showSolution('semi-solution')">显示解法</button>
+                    <button onclick="showRotated()">显示旋转图形</button>
+                    <button onclick="showShadow()">显示阴影区域</button>
+                </div>
+            </div>
+        </div>
 
         <!-- 英语内容 -->
         <div id="table" class="note-content">
