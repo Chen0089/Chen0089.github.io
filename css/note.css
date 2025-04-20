@@ -110,6 +110,14 @@ body {
 .folder.open ~ .sub-tree {
     display: block;
 }
+/* 阿福 */
+iframe {
+    border: none;
+}
+
+iframe::fulllscreen-button {
+    display:none !important;
+}
 
 /* 右侧内容区 */
 .content {
