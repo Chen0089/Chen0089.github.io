@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 在 <head> 引入awesome图标库 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>几何模型笔记</title>
@@ -40,11 +42,20 @@
             </li>
         </ul>
         <div class="afu">
-            <iframe
-                class="mainMedia"
-                src="//player.bilibili.com/player.html?bvid=BV1Yt5fzuEP6&autoplay=1&muted=1&danmaku=0&no-fullscreen=1"
-                allowfullscreen="false"
-            >
+            <img class="mainMedia" src="#">
+            <span class="tips"></span>
+            <div class="controls">
+                <div class="home">
+                    <i class="fas fa-home" aria-hidden="true" id="home"><!-- 回到主页的图标 --></i>
+                    <span class="home-text">主页</span>
+                </div>
+                <div class="search">
+                    <i class="fas fa-search" aria-hidden="true" id="search"><!-- 搜索图标 --></i>
+                    <span class="search-text">搜索</span>
+                    <input id="search-input">你想要的，这里都有（doge</input>
+                    <div id="results-container"></div>
+                </div>
+            </div>
         </div>
     </aside>
 

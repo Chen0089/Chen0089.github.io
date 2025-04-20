@@ -1,3 +1,11 @@
+// 笔记数据
+const jsonData = [
+    { "name": "将军饮马", "position": "经典几何模型>将军饮马" },
+    { "name": "手拉手模型", "url": "经典几何模型>手拉手模型" },
+    { "name": "蝴蝶模型", "url": "经典几何模型>蝴蝶模型" }
+    // 先暂时只来这些作为测试
+];
+
 document.addEventListener('DOMContentLoaded', function() {
     // 文件夹展开/收起功能
     const folders = document.querySelectorAll('.folder');
@@ -45,6 +53,78 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// 阿福apng
+const afuMain = document.getElementById("mainMedia");
+setInterval(
+    () => {
+        afuMain.src = afuMain.src; // 重新加载触发循环
+    },
+    5100
+); // 每5.1秒循环一次（动画时长）
+// 阿福搜索功能
+
+// 数据在最开头
+
+const searchInput = document.getElementById('search-input');
+const resultsContainer = document.getElementById('results-container');
+
+// 高亮关键词
+const highlightMatch = (text, keyword) => {
+    if (!keyword) return text;
+    const regex = new RegExp(`(${keyword})`, 'gi');
+    return text.replace(regex, '<span class="highlight">$1</span>');
+};
+
+searchInput.addEventListener('input', (e) => {
+    const keyword = e.target.value.trim();
+    resultsContainer.innerHTML = '';
+
+    if (!keyword) return;
+
+    // 找到第一个匹配项
+    const firstMatch = jsonData.find(item => 
+        item.name.toLowerCase().includes(keyword.toLowerCase())
+    );
+
+    if (firstMatch) {
+        const highlightedName = highlightMatch(firstMatch.name, keyword);
+        resultsContainer.innerHTML = `
+            <div class="result-item">
+                <div class="name">${highlightedName}</div>
+                <div class="position">${firstMatch.position}</div>
+            </div>
+        `;
+    } else {
+        resultsContainer.innerHTML = '<div class="result-item">无匹配结果</div>';
+    }
+});
+
+// 阿福tips显示
+const tipbubble = document.getElementsByClassName("tips");
+const tips = [
+    "你为啥不动一下导航栏捏",
+    "喵喵喵，可爱不？",
+    "总之，废话不多说=不多说废话，所以这是一个tip(",
+    ":D",
+    ":P",
+    ":)",
+    "(:",
+    "^_^",
+    "^-^",
+    "让我看看你要刷新多少次才能看到这条tip",
+    "666这个入喜欢学习",
+    "114514", // 彩蛋辣，这个的行数也是很臭滴
+    "锟斤拷锟&*斤拷烫烫烫&",
+    "不要慌，这只是一个程序员陷阱：while(1){print(程序员)}",
+    "[空]",
+    "(抓头)到底是哪里出错了呀!!!!",
+    "您有1条未读消息（我发的哈哈哈🤣）"
+]
+tips.textContent = tips[Math.floor(Math.random() * tips.length)];
+
+// 阿福主页跳转
+const gohome = document.getElementsByClassName("home")
 
 // 将军饮马模型函数
 function showSolution(id) {
