@@ -1,10 +1,14 @@
+// tips
+fetch('json/note/tips.json')   // 解析
+    .then(response => response.json())  // 处理
+    .then(data => console.log(data))    // 错误处理
+    .catch(error => console.error('Error:', error));
+
 // 笔记数据
-const jsonData = [
-    { "name": "将军饮马", "position": "经典几何模型>将军饮马" },
-    { "name": "手拉手模型", "url": "经典几何模型>手拉手模型" },
-    { "name": "蝴蝶模型", "url": "经典几何模型>蝴蝶模型" }
-    // 先暂时只来这些作为测试
-];
+fetch('json/note/notes.json')   // 解析
+    .then(response => response.json())  // 处理
+    .then(data => console.log(data))    // 错误处理
+    .catch(error => console.error('Error:', error));
 
 document.addEventListener('DOMContentLoaded', function() {
     // 文件夹展开/收起功能
@@ -103,25 +107,6 @@ searchInput.addEventListener('input', (e) => {
 // 阿福tips显示
 const tipbubble = document.getElementsByClassName("tips");
 const tips = [
-    "你为啥不动一下导航栏捏",
-    "喵喵喵，可爱不？",
-    "总之，废话不多说=不多说废话，所以这是一个tip(",
-    ":D",
-    ":P",
-    ":)",
-    "(:",
-    "^_^",
-    "^-^",
-    "让我看看你要刷新多少次才能看到这条tip",
-    "666这个入喜欢学习",
-    "114514", // 彩蛋辣，这个的行数也是很臭滴
-    "锟斤拷锟&*斤拷烫烫@@烫&",
-    "不要慌，这只是一个程序员陷阱：while(1){print(程序员)}",
-    "[空]",
-    "(抓头)到底是哪里出错了呀!!!!",
-    "您有1条未读消息（我发的哈哈哈🤣）",
-    "程序哥说我只是一个TIP显示器，我不信！你看我还会舔毛呢！",
-    "听说你热爱学习？"
 ]
 tips.textContent = tips[Math.floor(Math.random() * tips.length)];
 

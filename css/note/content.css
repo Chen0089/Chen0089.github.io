@@ -1,0 +1,148 @@
+.content {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 15px;
+    margin: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.welcome-message {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #34495e;
+}
+
+.welcome-message h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.welcome-message p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.note-content {
+    display: none;
+}
+
+.note-content.active {
+    display: block;
+}
+
+.note-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.note-body {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+/* 几何模型样式 */
+.geometry-model {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.model-title {
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.model-svg {
+    display: block;
+    margin: 15px auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.solution {
+    background-color: #f1f8e9;
+    padding: 15px;
+    border-left: 4px solid #7cb342;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.solution {
+    background-color: #f1f8e9;
+    padding: 15px;
+    border-left: 4px solid #7cb342;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.step {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-left: 3px solid #3498db;
+    background-color: #f0f8ff;
+}
+
+.method {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.basic-method {
+    border-color: #3498db;
+    background-color: #ebf5fb;
+}
+
+.advanced-method {
+    border-color: #e74c3c;
+    background-color: #fdedec;
+}

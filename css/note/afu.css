@@ -1,0 +1,74 @@
+img .afu.MainMedia {
+    padding: 2px;
+}
+
+.fas.fa-search:hover {
+    animation: searching 2s ease-in-out infinite;
+}@keyframes searching {
+    0%, 100% {
+        translate: transform(0px, 0px);
+    }
+    50% {
+        translate: transform(2px, 2px);
+    }
+    75% {
+        translate: transform(4px, 0px);
+    }
+}
+/* 搜索结果匹配高亮 */
+.highlight {
+    background-color: #bb0;
+    font-weight: bold;
+}
+/* 搜索结果输出 */
+.result-item {
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #eee;
+    margin-top: 5px;
+}
+.result-item:hover {
+    background-color: #f5f5f5;
+}
+
+/* 位置指明 */
+position {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 基础提示元素 */
+.tips {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+    color: #06c; /* 提示文字颜色 */
+    border-bottom: 1px dotted #06c; /* 可选：下划线 */
+}
+
+/* 提示框本体 */
+.tips::after {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    
+    /* 纯圆角对话框样式 */
+    background: #fff;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 8px; /* 大圆角 */
+    border-bottom-left-radius: 1px; /*小圆角*/
+    font-size: 14px;
+    white-space: nowrap;
+    
+    /* 边框和阴影 */
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    
+    /* 永久显示 */
+    opacity: 1;
+    visibility: visible;
+    margin-bottom: 12px;
+    z-index: 100;
+}
