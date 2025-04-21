@@ -130,7 +130,7 @@ img .afu.MainMedia {
 }
 /* 搜索结果匹配高亮 */
 .highlight {
-    background-color: yellow;
+    background-color: #bb0;
     font-weight: bold;
 }
 /* 搜索结果输出 */
@@ -161,7 +161,6 @@ position {
 
 /* 提示框本体 */
 .tips::after {
-    content: attr(data-tip);
     position: absolute;
     left: 50%;
     bottom: 100%;
@@ -172,6 +171,7 @@ position {
     color: #333;
     padding: 8px 12px;
     border-radius: 8px; /* 大圆角 */
+    border-bottom-left-radius: 1px; /*小圆角*/
     font-size: 14px;
     white-space: nowrap;
     
@@ -184,32 +184,6 @@ position {
     visibility: visible;
     margin-bottom: 12px;
     z-index: 100;
-}
-
-/* 箭头样式（用边框实现三角形） */
-.tips::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: calc(100% - 6px);
-    transform: translateX(-50%);
-    border-width: 6px;
-    border-style: solid;
-    border-color: #ddd transparent transparent transparent;
-    z-index: 101;
-}
-
-/* 箭头内层（白色填充，形成边框效果） */
-.tips::after::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
-    z-index: 102;
 }
 
 /* 右侧内容区 */
