@@ -1,0 +1,11 @@
+.controls.fas.fa-search, .controls.fas.fa-home {
+    display: none !important;
+    padding: 0.1rem;
+}
+.controls :hover {
+    display: block;
+    background-color: azure;
+    border-radius: 3px;
+    width: 1.2rem;
+    height: 2.4rem;
+}

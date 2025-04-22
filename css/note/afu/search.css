@@ -1,0 +1,32 @@
+.fas.fa-search:hover {
+    animation: searching 2s ease-in-out infinite;
+}
+@keyframes searching {
+    0%, 100% {
+        translate: transform(0px, 0px);
+    }
+    50% {
+        translate: transform(2px, 2px);
+    }
+    75% {
+        translate: transform(4px, 0px);
+    }
+}
+
+/* 搜索结果匹配高亮 */
+.highlight {
+    background-color: #bb0;
+    font-weight: bold;
+}
+
+/* 搜索结果输出 */
+.result-item {
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #eee;
+    margin-top: 5px;
+}
+
+.result-item:hover {
+    background-color: #f5f5f5;
+}
