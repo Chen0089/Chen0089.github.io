@@ -50,10 +50,10 @@ const BrowserUtils = {
         } catch {
             return false;
         }
-    }
+    },
 
-    // 使用示例
-    function ALLdebug() {
+    // 全部检测
+    ALLdebug: async function() {
         console.log('当前浏览器是Edge吗？', BrowserUtils.isEdge());
         console.log('当前浏览器是Chromium版Edge吗？', BrowserUtils.isChromiumEdge());
         console.log('当前浏览器是旧版Edge吗？', BrowserUtils.isLegacyEdge());
