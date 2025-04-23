@@ -7,9 +7,6 @@ setInterval(
     5100
 ); // 每5.1秒循环一次（动画时长）
 // 阿福搜索功能
-
-// 数据在最开头
-
 const searchInput = document.getElementById('search-input');
 const resultsContainer = document.getElementById('results-container');
 
@@ -46,9 +43,10 @@ searchInput.addEventListener('input', (e) => {
 
 // 阿福tips显示
 const tipbubble = document.getElementsByClassName("tips");
-const tips = [
-]
 tips.textContent = tips[Math.floor(Math.random() * tips.length)];
 
-// 阿福主页跳转
-const gohome = document.getElementsByClassName("home");
+// 阿福控制键显示
+const controls = document.getelementbyclass("controls");
+afuMain.onMouseOver = function() {
+    controls.style.display = "block";
+}
