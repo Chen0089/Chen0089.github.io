@@ -218,32 +218,68 @@ body{
     box-sizing: border-box;
 }
 /* 装饰用的球 */
-decorateBall1, decorateBall2, decorateBall3 {
-    height: 30px;
-	width: 30px;
-	border-radius: 100%;
-    position: relative;
-    background: linear-gradient(to bottom right, deepskyblue , dodgerblue);
-    animation: animate 22s ease-in-out infinite;
+.ball {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    background-image: linear-gradient(30deg, #3498db, skyblue);/*#3498db*/
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
 }
-decorateBall1 {
-    top: 35px;
-    left: 40px;
+
+/* 第一个球从左边滑入 */
+.ball1 {
+    animation-name: slideInLeft;
 }
-decorateBall2 {
-    top: 150px;
-    left: 370px;
+
+/* 第二个球从右边滑入 */
+.ball2 {
+    animation-name: slideInRight;
 }
-decorateBall3 {
-    top: 560px;
-    left: 40px;
+
+/* 第三个球从下边滑入 */
+.ball3 {
+    animation-name: slideInBottom;
+}
+
+/* 动画定义 */
+@keyframes slideInLeft {
+    from {
+        left: -60px;
+    }
+    to {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        right: -60px;
+    }
+    to {
+        right: 50%;
+        transform: translateX(50%);
+    }
+}
+
+@keyframes slideInBottom {
+    from {
+        bottom: -60px;
+    }
+    to {
+        bottom: 20%;
+        transform: translateX(-50%);
+    }
 }
 
 /*等待效果*/
 #loader {
-    border: 12px solid #a2ac1f4;
+    border: 12px solid #a2c1f4;
     border-radius: 50%;
-    border-top: 12px solid #5374ce;
+    border-top: 12px solid #6384ce;
     width: 70px;
     height: 70px;
     animation: spin 1s linear infinite;
