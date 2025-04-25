@@ -352,6 +352,6 @@ body.loaded iframe {
 }
 
 /* 页面高度及宽度设置 */
-.page1, .page2 {
+.page1 {
     height: 100vh;
 }
