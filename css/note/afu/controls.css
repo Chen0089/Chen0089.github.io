@@ -1,6 +1,8 @@
 .fas.fa-search, .fas.fa-home {
     display: none !important;
     padding: 0.1rem;
+    color: azure;
+    border-bottom: none;
 }
 .controls :hover {
     display: block;
