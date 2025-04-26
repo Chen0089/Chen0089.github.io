@@ -12,72 +12,67 @@
 	
 	<div id="app"></div>
 	
-	<div class="main">
-		<div class="page1">
-			<div id="fps"></div>
-			<div class="ball ball1"></div>
-			<div class="ball ball2"></div>
-			<div class="ball ball3"></div>
-			<div class="container">
-        <div class="box">
-            <span></span>
-            <div class="content">
-                <h2>笔记</h2>
-                <p>尖子班同学整理的笔记，甚至有我自己的编程的笔记</p>
-                <a href="note.html">GO!</a>
+	<div class="page1">
+		<div id="fps"></div>
+		<div class="ball ball1"></div>
+		<div class="ball ball2"></div>
+		<div class="ball ball3"></div>
+		<div class="container">
+    	<div class="box" id="boxOne">
+        	<span></span>
+        	<div class="content">
+        	    <h2>笔记</h2>
+    		    <p>尖子班同学整理的笔记，甚至有我自己的编程的笔记</p>
+            	<a href="note.html">GO!</a>
             </div>
         </div>
-
-        <div class="box">
-            <span></span>
-            <div class="content">
-              	<h2>Minecraft服务器</h2>
-              	<p>我使用Mine Hut获取的免费Java版服务器，有小游戏玩法，甚至有2b2t玩法：完全没有反作弊，甚至没有外挂也能刷物资</p>
-              	<a href="mcServer.html">Read More</a>
+	    <div class="box" id="boxTwo">
+	        <span></span>
+        	<div class="content">
+        	  	<h2>Minecraft服务器</h2>
+          		<p>我使用Mine Hut获取的免费Java版服务器，有小游戏玩法，甚至有2b2t玩法：完全没有反作弊，甚至没有外挂也能刷物资</p>
+        	  	<a href="mcServer.html">Read More</a>
             </div>
     	</div>
-        <div class="box">
-            <span></span>
+    	<div class="box" id="boxThree">
+        	<span></span>
             <div class="content">
-            <h2>作品</h2>
-            <p>使用GitHub制作的一些作品，虽然有许多都是问过AI的...</p>
-            <a href="products.html">View More Details</a>
-        </div>
+        	<h2>作品</h2>
+        	<p>使用GitHub制作的一些作品，虽然有许多都是问过AI的...</p>
+        	<a href="products.html">View More Details</a>
+    	</div>
     </div>
-</div>
-		
-		</div>
-		<div class="page2">
-			<div class="slide-container">
-				<h1>GitHub编程经历</h1>
-				<iframe 
-					src="https://github.com/chen0089" 
-					width="800" height="600"
-					id="iframe"
-					sandbox="allow-scripts"
-				></iframe>
-				</div>
-			<div class="page3">
-				<h2>在线bug上报</h2>
-				<form action="mail.php">
-					<label for="header">Bug标题</label>
-					<input type="text" id="header" required>
-
-					<br>
-
-					<label for="emailContent">Bug描述</label>
-					<textarea name="content" id="emailContent">describe some bugs here...</textarea>
-				</form>
+	<div class="page2">
+		<div class="slide-container">
+			<h1>GitHub编程经历</h1>
+			<iframe 
+				src="https://github.com/chen0089" 
+				width="800" height="600"
+				id="iframe"
+				sandbox="allow-scripts"
+			></iframe>
 			</div>
-		</div>
-		<div class="footer">
-			<div id="flyfish" class="fly-fish" height="200"></div>
-			<script src="https://discuss.flarum.org.cn/fish.js"></script>
-    	  	<div id="flarum-loading" class="flarum-loading">
-				<div class="spinner"></div>
-    		</div>	
+		<div class="page3">
+			<h2>在线bug上报</h2>
+			<form action="mail.php">
+				<label for="header">Bug标题</label>
+				<input type="text" id="header" required>
+
+				<br>
+
+				<label for="emailContent">Bug描述</label>
+				<textarea name="content" id="emailContent">describe some bugs here...</textarea>
+			</form>
 		</div>
 	</div>
+	<div class="footer">
+		<div id="flyfish" class="fly-fish" height="200"></div>
+		<script src="https://discuss.flarum.org.cn/fish.js"></script>
+    	<div id="flarum-loading" class="flarum-loading">
+			<div class="spinner"></div>
+    	</div>	
+	</div>
+</div>
 	<!-- JS -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
 	<script src="https://bbs.breeze.asia/assets/forum.js?v=4aef43e5"></script>
@@ -88,6 +83,7 @@
 	<script src="js/index/browser.js"></script>
 	<script src="js/index/fps.js"></script>
 	<script src="js/index/loading.js"></script>
+	<script src="js/index/cards.js"></script>
 
 </body>
 </html>
