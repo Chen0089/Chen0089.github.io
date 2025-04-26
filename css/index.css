@@ -396,3 +396,7 @@ iframe {
 .page1, .page3 {
     height: 100vh;
 }
+
+form * {
+    color: #fff;
+}
