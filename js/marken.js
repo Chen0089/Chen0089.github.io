@@ -5,12 +5,14 @@ var database = {
         company: "业余开发者Chen0089"
     },
     basicChat: {
-            hello: [
-                "你好👋，有什么能帮上忙的吗？",
-                "我不好（",
-                "你也好好的！",
-                "你好！！"
-            ]
+        hello: [
+            "你好👋，有什么能帮上忙的吗？",
+            "你好👋，有什么能可以解答的吗？",
+            "我不好（",
+            "你也好好的！",
+            "你好！！",
+            "你好，我是Marken，是业余开发者Chen0089的作品... May I help you?"
+        ]
     }
 };
 
@@ -22,7 +24,7 @@ function getResponse() {
 
 function generateResponse(userInput) {
     if (userInput.includes("你好")) {
-        return "你好！我是" + database.basicInfo.name + "，是" + database.basicInfo.company + "的作品。有什么我能帮助你的？";
+        return database.basicChat.hello[Math.random * database.basicChat.hello.length];
     } else if (userInput.includes("Marken")) {
         return "你好，我是" + database.basicInfo.name + "，是" + database.basicInfo.company + "的作品，有什么我可以为你解答的吗？话说你是怎么知道我的名字的？";
     } else if (userInput.includes("你好")) {

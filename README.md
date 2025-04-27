@@ -53,6 +53,8 @@ git clone git@github.com:chen0089/chen0089.github.io.git
 
 **\*** 既然github拒绝访问，那我拿出国内版你不就炸了吗
 
+**\*** 找到marken病因辣
+
 ---
 
 > 1 days ago
