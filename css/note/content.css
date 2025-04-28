@@ -146,3 +146,10 @@ button {
     border-color: #e74c3c;
     background-color: #fdedec;
 }
+
+.important {
+    display: block;
+    background-color: #aaa;
+    color: #111;
+    border-radius: 25%;
+}
