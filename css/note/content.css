@@ -148,8 +148,8 @@ button {
 }
 
 .important {
-    display: block;
-    background-color: #aaa;
+    display: inline-block;
+    background-color: #ccc;
     color: #111;
     border-radius: 25%;
 }
