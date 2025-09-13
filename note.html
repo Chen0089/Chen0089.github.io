@@ -1,299 +1,72 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- 引入awesome图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>几何模型笔记</title>
-
-    <!-- CSS引入 -->
-    <link rel="stylesheet" href="css/note/afu.css">
-    <link rel="stylesheet" href="css/note/basic.css">
-    <link rel="stylesheet" href="css/note/content.css">
-    <link rel="stylesheet" href="css/note/fileTree.css">
+    <title>学习笔记</title>
+    <style>
+        
+    </style>
 </head>
 <body>
     <!-- 左侧导航栏 -->
-    <aside class="sidebar">
+    <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h2>我的笔记</h2>
-        </div>
-        <ul class="file-tree">
-            <li>
-                <div class="folder">数学</div>
-                <ul class="sub-tree">
-                    <div class="folder">经典几何模型</div>
-                    <ul class="sub-tree">
-                        <li><a href="#" data-note="general-horse"       class="file">将军饮马模型</a></li>
-                        <li><a href="#" data-note="hand-shake"          class="file">手拉手模型</a></li>
-                        <li><a href="#" data-note="butterfly"           class="file">蝴蝶模型</a></li>
-                    </ul>
-                    <div class="folder">尺规作图</div>
-                    <ul class="sub-tree">
-                        <li><a href="#" data-note="copy-angle"          class="file">复制一个角</a></li>
-                    </ul>
-                    <div class="folder">题目</div>
-                    <ul class="sub-tree">
-                        <li><a href="#" data-note="semicircle-rotation" class="file">半圆旋转问题</a></li>
-                    </ul>
-                </ul>
-                <div class="folder">编程</div>
-                <ul class="sub-tree">
-                    <div class="folder">HTML</div>
-                    <ul>
-                        <li><a href="#" data-note="HTMLPlainText"       class="file">p标签</a></li>
-                    </ul>
-                </ul>
-            </li>
-            <li>
-                <div class="folder">英语</div>
-                <ul class="sub-tree">
-                    <li><a href="#" data-note="table" class="file">代词表</a></li>
-                </ul>
-            </li>
-        </ul>
-        <div class="afu">
-            <video>
-                <source class="mainMedia" src="src/afu.mp4" type="video/mp4" loop autoplay>
-            </video>
-            <span class="tips"></span>
-            <div class="controls">
-                <div class="home">
-                    <a href="index.html">
-                        <i class="fas fa-home" aria-hidden="true" id="home"><!-- 回到主页的图标 --></i>
-                        <span class="home-text">主页</span>
-                    </a>
-                </div>
-                <div class="search">
-                    <i class="fas fa-search" aria-hidden="true" id="search"><!-- 搜索图标 --></i>
-                    <span class="search-text">搜索</span>
-                    <input id="search-input">你想要的，这里都有（doge</input>
-                    <div id="results-container"></div>
+            <div class="sidebar-title">📚 学习中心</div>
+            
+            <div class="control-group">
+                <h4>🌐 语言设置</h4>
+                <div class="control-buttons">
+                    <button class="control-btn active" onclick="setLanguage('zh')" data-lang="zh">中文</button>
+                    <button class="control-btn" onclick="setLanguage('en')" data-lang="en">English</button>
                 </div>
             </div>
-        </div>
-    </aside>
 
-    <!-- 右侧内容区 -->
-    <main class="content">
-        <div class="welcome-message" id="welcome">
-            <h1>欢迎来到我的笔记👋</h1>
-            <p>👆 请从左侧导航栏选择您想查看的几何模型。</p>
-            <p>😾 这里收录了常见的题目及其解题方法。</p>
-            <p>📚 点击文件夹可以展开/收起，点击文件可以查看详细内容。</p>
-        </div>
-
-        <!-- 将军饮马模型 -->
-        <div class="note-content" id="general-horse">
-            <h1 class="note-title">将军饮马模型</h1>
-            <div class="note-body">
-                <p>将军从军营A出发，先到河边（直线l）饮马，再去营地B。求最短行军路线。</p>
-                
-                <div class="geometry-model">
-                    <svg width="300" height="200" viewBox="0 0 300 200" class="model-svg">
-                        <!-- 坐标系 -->
-                        <line x1="50" y1="150" x2="250" y2="150" stroke="blue" stroke-width="2"/>
-                        <text x="255" y="155" font-size="12">直线l</text>
-                        
-                        <!-- 点A和点B -->
-                        <circle cx="100" cy="50" r="5" fill="red"/>
-                        <text x="105" y="45" font-size="12">A</text>
-                        <circle cx="200" cy="100" r="5" fill="red"/>
-                        <text x="205" y="95" font-size="12">B</text>
-                        
-                        <!-- 对称点和辅助线（初始隐藏） -->
-                        <circle id="a-sym" cx="100" cy="250" r="5" fill="green" class="hidden"/>
-                        <line id="sym-line" x1="100" y1="50" x2="100" y2="250" stroke="green" stroke-dasharray="5,5" class="hidden"/>
-                        
-                        <!-- 解决方案（初始隐藏） -->
-                        <path id="shortest-path" d="M100,50 L150,150 L200,100" stroke="red" stroke-width="2" fill="none" class="hidden"/>
-                    </svg>
-                    <button onclick="showSolution('solution1')">显示解析</button>
-                    <div id="solution1" class="solution hidden">
-                        <p><strong>解析：</strong></p>
-                        <ol>
-                            <li>作点A关于直线l的对称点A'</li>
-                            <li>连接A'B与直线l的交点P即为饮马点</li>
-                            <li>AP+PB即为最短路径</li>
-                        </ol>
-                        <button onclick="drawSymmetry()">显示对称点</button>
-                        <button onclick="drawShortestPath()">显示最短路径</button>
-                    </div>
+            <div class="control-group">
+                <h4>🎨 显示模式</h4>
+                <div class="control-buttons">
+                    <button class="control-btn active" onclick="toggleTheme()" id="themeBtn">🌙 暗黑</button>
                 </div>
             </div>
         </div>
 
-        <!-- 手拉手模型 -->
-        <div class="note-content" id="hand-shake">
-            <h1 class="note-title">手拉手模型</h1>
-            <div class="note-body">
-                <p>△ABC和△ADE都是等边三角形，且共顶点A。连接BD、CE，求证：BD=CE。</p>
-                
-                <div class="geometry-model">
-                    <svg width="300" height="250" viewBox="0 0 300 250" class="model-svg">
-                        <!-- 大等边三角形 -->
-                        <polygon points="150,50 70,180 230,180" fill="none" stroke="blue" stroke-width="2"/>
-                        <text x="150" y="40" font-size="12">A</text>
-                        <text x="60" y="190" font-size="12">B</text>
-                        <text x="235" y="190" font-size="12">C</text>
-                        
-                        <!-- 小等边三角形 -->
-                        <polygon id="small-tri" points="150,50 120,120 180,120" fill="none" stroke="green" stroke-width="2" class="hidden"/>
-                        <text x="110" y="125" font-size="12" class="hidden">D</text>
-                        <text x="185" y="125" font-size="12" class="hidden">E</text>
-                        
-                        <!-- 连接线（初始隐藏） -->
-                        <line id="line-bd" x1="70" y1="180" x2="120" y2="120" stroke="red" stroke-width="2" class="hidden"/>
-                        <line id="line-ce" x1="230" y1="180" x2="180" y2="120" stroke="red" stroke-width="2" class="hidden"/>
-                    </svg>
-                    <button onclick="showSolution('solution2')">显示解析</button>
-                    <div id="solution2" class="solution hidden">
-                        <p><strong>解析：</strong></p>
-                        <ol>
-                            <li>显示小等边三角形ADE</li>
-                            <li>证明△ABD ≅ △ACE（SAS）：
-                                <ul>
-                                    <li>AB=AC（等边三角形）</li>
-                                    <li>AD=AE（等边三角形）</li>
-                                    <li>∠BAD=∠CAE=60°-∠CAD</li>
-                                </ul>
-                            </li>
-                            <li>∴ BD=CE（全等三角形对应边相等）</li>
-                        </ol>
-                        <button onclick="drawHandShake()">显示图形构造</button>
-                    </div>
-                </div>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <a href="#semicircle-rotation" class="nav-link active" onclick="showContent('semicircle-rotation', this)">
+                    📐 几何问题
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#table" class="nav-link" onclick="showContent('table', this)">
+                    📝 代词表
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#HTMLPlainText" class="nav-link" onclick="showContent('HTMLPlainText', this)">
+                    💻 HTML基础
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="wordle.html" class="nav-link" target="_blank">
+                    🎯 Wordle游戏
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="wordPuzzle.html" class="nav-link" target="_blank">
+                    🔤 字母谜题
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    📂 更多内容
+                </a>
             </div>
         </div>
+    </nav>
 
-        <!-- 蝴蝶模型 -->
-        <div class="note-content" id="butterfly">
-            <h1 class="note-title">蝴蝶模型</h1>
-            <div class="note-body">
-                <p>在梯形ABCD中，AB∥CD，对角线交于O点。已知S△AOB=9，S△COD=16，求梯形面积。</p>
-                
-                <div class="geometry-model">
-                    <svg width="300" height="200" viewBox="0 0 300 200" class="model-svg">
-                        <!-- 梯形 -->
-                        <polygon points="80,50 220,50 160,150 140,150" fill="none" stroke="blue" stroke-width="2"/>
-                        <text x="70" y="45" font-size="12">A</text>
-                        <text x="225" y="45" font-size="12">B</text>
-                        <text x="165" y="160" font-size="12">C</text>
-                        <text x="135" y="160" font-size="12">D</text>
-                        
-                        <!-- 对角线 -->
-                        <line x1="80" y1="50" x2="160" y2="150" stroke="black" stroke-width="1"/>
-                        <line x1="220" y1="50" x2="140" y2="150" stroke="black" stroke-width="1"/>
-                        
-                        <!-- 交点O -->
-                        <circle cx="150" cy="100" r="3" fill="red"/>
-                        <text x="155" y="105" font-size="12">O</text>
-                        
-                        <!-- 面积标注（初始隐藏） -->
-                        <text id="area-aob" x="120" y="80" font-size="12" fill="red" class="hidden">S=9</text>
-                        <text id="area-cod" x="150" y="120" font-size="12" fill="red" class="hidden">S=16</text>
-                        <text id="area-aod" x="100" y="120" font-size="12" fill="green" class="hidden">S=12</text>
-                        <text id="area-boc" x="180" y="80" font-size="12" fill="green" class="hidden">S=12</text>
-                    </svg>
-                    <button onclick="showSolution('solution3')">显示解析</button>
-                    <div id="solution3" class="solution hidden">
-                        <p><strong>解析：</strong></p>
-                        <ol>
-                            <li>蝴蝶模型性质：S△AOD = S△BOC = √(S△AOB × S△COD) = √(9×16) = 12</li>
-                            <li>梯形面积 = 9 + 16 + 12 + 12 = 49</li>
-                        </ol>
-                        <button onclick="showButterflyAreas()">显示各部分面积</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 复制一个角 -->
-        <div class="note-content" id="copy-angle">
-            <h1 class="note-title">尺规作图：复制一个角</h1>
-            <div class="note-body">
-                <p>已知∠AOB，用尺规作图复制这个角，得到∠CPD = ∠AOB。</p>
-                
-                <div class="geometry-model">
-                    <svg width="600" height="300" viewBox="0 0 600 300" class="model-svg">
-                        <!-- 原始角 -->
-                        <g id="original-angle">
-                            <line x1="100" y1="150" x2="200" y2="150" stroke="black" stroke-width="2"/>
-                            <line x1="100" y1="150" x2="150" y2="50" stroke="black" stroke-width="2"/>
-                            <circle cx="100" cy="150" r="5" fill="red"/>
-                            <text x="90" y="170" font-size="14">O</text>
-                            <text x="210" y="155" font-size="14">B</text>
-                            <text x="155" y="40" font-size="14">A</text>
-                            <path d="M120,150 L120,140 L130,140 L130,150 Z" fill="black"/>
-                            <path d="M100,130 L110,130 L110,120 L100,120 Z" fill="black"/>
-                        </g>
-                        
-                        <!-- 作图过程（初始隐藏） -->
-                        <g id="step1" class="hidden">
-                            <line x1="400" y1="150" x2="500" y2="150" stroke="blue" stroke-width="2" stroke-dasharray="5,5"/>
-                            <circle cx="400" cy="150" r="5" fill="red"/>
-                            <text x="390" y="170" font-size="14">P</text>
-                            <text x="510" y="155" font-size="14">D'</text>
-                        </g>
-                        
-                        <g id="step2" class="hidden">
-                            <circle cx="100" cy="150" r="80" stroke="green" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
-                            <circle cx="400" cy="150" r="80" stroke="green" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
-                            <text x="100" y="230" font-size="12" fill="green">半径相同</text>
-                            <text x="400" y="230" font-size="12" fill="green">半径相同</text>
-                        </g>
-                        
-                        <g id="step3" class="hidden">
-                            <line x1="100" y1="150" x2="150" y2="50" stroke="blue" stroke-width="1" stroke-dasharray="5,5"/>
-                            <circle cx="150" cy="50" r="5" fill="blue"/>
-                            <circle cx="150" cy="50" r="60" stroke="purple" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
-                            <text x="150" y="20" font-size="12" fill="blue">A点</text>
-                        </g>
-                        
-                        <g id="step4" class="hidden">
-                            <circle cx="400" cy="150" r="60" stroke="purple" stroke-width="1" fill="none" stroke-dasharray="5,5"/>
-                            <text x="400" y="110" font-size="12" fill="purple">交点为C</text>
-                        </g>
-                        
-                        <g id="step5" class="hidden">
-                            <line x1="400" y1="150" x2="450" y2="70" stroke="red" stroke-width="2"/>
-                            <circle cx="450" cy="70" r="5" fill="red"/>
-                            <text x="460" y="60" font-size="14">C</text>
-                            <path d="M420,150 L420,140 L430,140 L430,150 Z" fill="red"/>
-                            <path d="M400,130 L410,130 L410,120 L400,120 Z" fill="red"/>
-                        </g>
-                        
-                        <text x="300" y="280" font-size="14" id="step-text">请按步骤查看作图过程</text>
-                    </svg>
-                    
-                    <div class="solution">
-                        <h3>作图步骤：</h3>
-                        <div class="step" id="step1-text">
-                            1. 画一条射线PD'，作为新角的一边
-                        </div>
-                        <div class="step hidden" id="step2-text">
-                            2. 以O和P为圆心，相同半径画弧，交两边于E、F和G
-                        </div>
-                        <div class="step hidden" id="step3-text">
-                            3. 以E为圆心，EF为半径画弧
-                        </div>
-                        <div class="step hidden" id="step4-text">
-                            4. 以G为圆心，相同EF长度画弧，交前弧于C
-                        </div>
-                        <div class="step hidden" id="step5-text">
-                            5. 连接PC，∠CPD'即为所求的角
-                        </div>
-                        
-                        <button onclick="nextStep()">下一步</button>
-                        <button onclick="resetSteps()">重置</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 半圆旋转阴影面积 -->
+    <!-- 主内容区域 -->
+    <main class="main-content" id="mainContent">
+        <!-- 原有的内容保持不变 -->
         <div class="note-content" id="semicircle-rotation">
             <h1 class="note-title">半圆旋转阴影面积问题</h1>
             <div class="note-body">
@@ -394,11 +167,12 @@
                         <td>they</td>
                         <td>them</td>
                         <td>their</td>
-                        <td>thrirs</td>
+                        <td>theirs</td>
                     </tr>
                 </table>
             </div>
         </div>
+        
         <div class="note-content" id="HTMLPlainText">
             <h1 class="note-title">HTML:p标签</h1>
             <div class="note-body">
@@ -414,9 +188,11 @@
         </div>
     </main>
 
-    <script src="js/note/jsonFetch.js"></script>
-    <script src="js/note/fileTree.js"></script>
-    <script src="js/note/onlyForNote.js"></script>
-    <script src="js/note/afu.js"></script>
+    <!-- 切换按钮 -->
+    <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">☰</button>
+
+    <script>
+        
+    </script>
 </body>
 </html>
