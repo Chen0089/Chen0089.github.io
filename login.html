@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - chen0089的个人网站</title>
+    <link rel="stylesheet" href="css/login/style.css">
+    <link rel="stylesheet" href="css/login/auth.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>登录系统</h1>
+        </div>
+        
+        <!-- 登录/注册表单 -->
+        <div id="auth-forms">
+            <!-- 消息提示 -->
+            <div id="message" class="message"></div>
+            
+            <!-- 登录表单 -->
+            <div id="login-form" class="form-container">
+                <h2>用户登录</h2>
+                <div class="form-group">
+                    <label for="login-username">用户名</label>
+                    <input type="text" id="login-username" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" placeholder="请输入密码">
+                </div>
+                <button id="login-btn" class="btn">登录</button>
+                <div class="toggle-form">
+                    还没有账号？<a id="show-register">立即注册</a>
+                </div>
+            </div>
+            
+            <!-- 注册表单 -->
+            <div id="register-form" class="form-container" style="display: none;">
+                <h2>用户注册</h2>
+                <div class="form-group">
+                    <label for="register-username">用户名</label>
+                    <input type="text" id="register-username" placeholder="请输入用户名（至少3个字符）">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" placeholder="请输入密码（至少6个字符）">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">确认密码</label>
+                    <input type="password" id="confirm-password" placeholder="请再次输入密码">
+                </div>
+                <button id="register-btn" class="btn">注册</button>
+                <div class="toggle-form">
+                    已有账号？<a id="show-login">立即登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login/auth.js"></script>
+</body>
+</html>
