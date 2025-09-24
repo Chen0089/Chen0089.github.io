@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地账号登录系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #4776E6;
+            outline: none;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .toggle-form {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 15px;
+        }
+        
+        .toggle-form a {
+            color: #4776E6;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .toggle-form a:hover {
+            text-decoration: underline;
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .user-info {
+            padding: 30px;
+            text-align: center;
+            display: none;
+        }
+        
+        .user-info h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .user-details {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .logout-btn {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .form-container, .user-info {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>本地账号登录系统</h1>
+            <p>使用浏览器本地存储实现账号管理</p>
+        </div>
+        
+        <!-- 登录/注册表单 -->
+        <div id="auth-forms">
+            <!-- 消息提示 -->
+            <div id="message" class="message"></div>
+            
+            <!-- 登录表单 -->
+            <div id="login-form" class="form-container">
+                <h2 style="text-align: center; margin-bottom: 20px; color: #333;">用户登录</h2>
+                <div class="form-group">
+                    <label for="login-username">用户名</label>
+                    <input type="text" id="login-username" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" placeholder="请输入密码">
+                </div>
+                <button id="login-btn" class="btn">登录</button>
+                <div class="toggle-form">
+                    还没有账号？<a id="show-register">立即注册</a>
+                </div>
+            </div>
+            
+            <!-- 注册表单 -->
+            <div id="register-form" class="form-container" style="display: none;">
+                <h2 style="text-align: center; margin-bottom: 20px; color: #333;">用户注册</h2>
+                <div class="form-group">
+                    <label for="register-username">用户名</label>
+                    <input type="text" id="register-username" placeholder="请输入用户名（至少3个字符）">
+                </div>
+                <div class="form-group">
+                    <label for="register-email">电子邮箱</label>
+                    <input type="email" id="register-email" placeholder="请输入电子邮箱">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" placeholder="请输入密码（至少6个字符）">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">确认密码</label>
+                    <input type="password" id="confirm-password" placeholder="请再次输入密码">
+                </div>
+                <button id="register-btn" class="btn">注册</button>
+                <div class="toggle-form">
+                    已有账号？<a id="show-login">立即登录</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 用户信息页面 -->
+        <div id="user-info" class="user-info">
+            <h2>欢迎回来！</h2>
+            <div class="user-details">
+                <p><strong>用户名：</strong> <span id="info-username"></span></p>
+                <p><strong>电子邮箱：</strong> <span id="info-email"></span></p>
+                <p><strong>注册时间：</strong> <span id="info-register-date"></span></p>
+            </div>
+            <button id="logout-btn" class="btn logout-btn">退出登录</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM元素
+        const authForms = document.getElementById('auth-forms');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const userInfo = document.getElementById('user-info');
+        const message = document.getElementById('message');
+        
+        // 登录相关元素
+        const loginUsername = document.getElementById('login-username');
+        const loginPassword = document.getElementById('login-password');
+        const loginBtn = document.getElementById('login-btn');
+        
+        // 注册相关元素
+        const registerUsername = document.getElementById('register-username');
+        const registerEmail = document.getElementById('register-email');
+        const registerPassword = document.getElementById('register-password');
+        const confirmPassword = document.getElementById('confirm-password');
+        const registerBtn = document.getElementById('register-btn');
+        
+        // 用户信息相关元素
+        const infoUsername = document.getElementById('info-username');
+        const infoEmail = document.getElementById('info-email');
+        const infoRegisterDate = document.getElementById('info-register-date');
+        const logoutBtn = document.getElementById('logout-btn');
+        
+        // 切换表单显示
+        document.getElementById('show-register').addEventListener('click', function() {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            hideMessage();
+        });
+        
+        document.getElementById('show-login').addEventListener('click', function() {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            hideMessage();
+        });
+        
+        // 显示消息
+        function showMessage(text, type) {
+            message.textContent = text;
+            message.className = 'message ' + type;
+            message.style.display = 'block';
+        }
+        
+        // 隐藏消息
+        function hideMessage() {
+            message.style.display = 'none';
+        }
+        
+        // 检查是否已登录
+        function checkLoginStatus() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                const user = JSON.parse(localStorage.getItem('user_' + currentUser));
+                if (user) {
+                    showUserInfo(user);
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        // 显示用户信息
+        function showUserInfo(user) {
+            authForms.style.display = 'none';
+            userInfo.style.display = 'block';
+            
+            infoUsername.textContent = user.username;
+            infoEmail.textContent = user.email;
+            infoRegisterDate.textContent = new Date(user.registerDate).toLocaleString();
+        }
+        
+        // 用户注册
+        registerBtn.addEventListener('click', function() {
+            const username = registerUsername.value.trim();
+            const email = registerEmail.value.trim();
+            const password = registerPassword.value;
+            const confirm = confirmPassword.value;
+            
+            // 表单验证
+            if (username.length < 3) {
+                showMessage('用户名至少需要3个字符', 'error');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showMessage('请输入有效的电子邮箱', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showMessage('密码至少需要6个字符', 'error');
+                return;
+            }
+            
+            if (password !== confirm) {
+                showMessage('两次输入的密码不一致', 'error');
+                return;
+            }
+            
+            // 检查用户名是否已存在
+            if (localStorage.getItem('user_' + username)) {
+                showMessage('该用户名已被注册', 'error');
+                return;
+            }
+            
+            // 创建用户对象
+            const user = {
+                username: username,
+                email: email,
+                password: password, // 实际应用中应对密码进行哈希处理
+                registerDate: new Date().toISOString()
+            };
+            
+            // 存储用户信息
+            localStorage.setItem('user_' + username, JSON.stringify(user));
+            
+            showMessage('注册成功！请登录', 'success');
+            
+            // 清空表单
+            registerUsername.value = '';
+            registerEmail.value = '';
+            registerPassword.value = '';
+            confirmPassword.value = '';
+            
+            // 切换到登录表单
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+        
+        // 用户登录
+        loginBtn.addEventListener('click', function() {
+            const username = loginUsername.value.trim();
+            const password = loginPassword.value;
+            
+            // 表单验证
+            if (username === '') {
+                showMessage('请输入用户名', 'error');
+                return;
+            }
+            
+            if (password === '') {
+                showMessage('请输入密码', 'error');
+                return;
+            }
+            
+            // 获取用户信息
+            const userData = localStorage.getItem('user_' + username);
+            
+            if (!userData) {
+                showMessage('用户名或密码错误', 'error');
+                return;
+            }
+            
+            const user = JSON.parse(userData);
+            
+            if (user.password !== password) {
+                showMessage('用户名或密码错误', 'error');
+                return;
+            }
+            
+            // 登录成功
+            localStorage.setItem('currentUser', username);
+            showUserInfo(user);
+        });
+        
+        // 用户退出
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            userInfo.style.display = 'none';
+            authForms.style.display = 'block';
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            
+            // 清空登录表单
+            loginUsername.value = '';
+            loginPassword.value = '';
+            
+            showMessage('已成功退出登录', 'success');
+        });
+        
+        // 邮箱验证函数
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // 页面加载时检查登录状态
+        document.addEventListener('DOMContentLoaded', function() {
+            if (checkLoginStatus()) {
+                // 用户已登录，显示用户信息
+            } else {
+                // 用户未登录，显示登录表单
+                authForms.style.display = 'block';
+                userInfo.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
