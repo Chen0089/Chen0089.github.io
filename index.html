@@ -1,62 +1,75 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="zh-CN">
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<title>chen0089的个人网站</title>
-	<link href="css/shared.css" rel="stylesheet" />
-	<link href="css/index.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chen0089的个人网站</title>
+    <link href="css/shared.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
-	<div id="loader" class="center"></div>
-	
-	<div id="app"></div>
-	
-	<div class="page1">
-		<div id="fps"></div>
-		<div class="container">
-    	<div class="box" id="boxOne">
-        	<span></span>
-        	<div class="content">
-        	    <h2>笔记</h2>
-    		    <p>尖子班同学整理的笔记</p>
-            	<a href="note.html">GO!</a>
+    <div id="loader" class="center"></div>
+    
+    <!-- 登录状态区域 -->
+    <div class="login-status">
+        <a id="login-btn" class="login-btn" href="login.html">登录/注册</a>
+        <div id="user-info" class="user-info" style="display: none;">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <span id="username-display">用户名</span>
+            <button id="logout-btn" class="logout-btn">退出</button>
+        </div>
+    </div>
+    
+    <div id="app"></div>
+    
+    <div class="page1">
+        <div id="fps"></div>
+        <div class="container">
+            <div class="box" id="boxOne">
+                <span></span>
+                <div class="content">
+                    <h2>笔记</h2>
+                    <p>尖子班同学整理的笔记</p>
+                    <a href="note.html">GO!</a>
+                </div>
+            </div>
+            <div class="box" id="boxTwo">
+                <span></span>
+                <div class="content">
+                    <h2>Minecraft服务器</h2>
+                    <p>我使用Mine Hut获取的免费Java版服务器，有小游戏玩法，甚至有2b2t玩法：完全没有反作弊，甚至没有外挂也能刷物资</p>
+                    <a href="mcServer.html">Read More</a>
+                </div>
+            </div>
+            <div class="box" id="boxThree">
+                <span></span>
+                <div class="content">
+                    <h2>作品</h2>
+                    <p>使用GitHub制作的一些作品，虽然有许多都是问过AI的...</p>
+                    <a href="products.html">View More Details</a>
+                </div>
             </div>
         </div>
-	    <div class="box" id="boxTwo">
-	        <span></span>
-        	<div class="content">
-        	  	<h2>Minecraft服务器</h2>
-          		<p>我使用Mine Hut获取的免费Java版服务器，有小游戏玩法，甚至有2b2t玩法：完全没有反作弊，甚至没有外挂也能刷物资</p>
-        	  	<a href="mcServer.html">Read More</a>
-            </div>
-    	</div>
-    	<div class="box" id="boxThree">
-        	<span></span>
-            <div class="content">
-        	<h2>作品</h2>
-        	<p>使用GitHub制作的一些作品，虽然有许多都是问过AI的...</p>
-        	<a href="products.html">View More Details</a>
-    	</div>
-	<div class="footer">
-		<div id="flyfish" class="fly-fish" height="200"></div>
-		<script src="https://discuss.flarum.org.cn/fish.js"></script>
-    	<div id="flarum-loading" class="flarum-loading">
-			<div class="spinner"></div>
-    	</div>	
-	</div>
-</div>
-	<!-- JS -->
-	<script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
-	<script src="https://bbs.breeze.asia/assets/forum.js?v=4aef43e5"></script>
-	<script src="https://bbs.breeze.asia/assets/forum-zh-Hans.js?v=85512547"></script>
+        <div class="footer">
+            <div id="flyfish" class="fly-fish" height="200"></div>
+            <script src="https://discuss.flarum.org.cn/fish.js"></script>
+            <div id="flarum-loading" class="flarum-loading">
+                <div class="spinner"></div>
+            </div>	
+        </div>
+    </div>
 
-	<script src="js/browser.js"></script>
-	<script src="js/index/pageResponse.js"></script>
-	<script src="js/index/browser.js"></script>
-	<script src="js/index/fps.js"></script>
-	<script src="js/index/loading.js"></script>
-	<script src="js/index/cards.js"></script>
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
+    <script src="https://bbs.breeze.asia/assets/forum.js?v=4aef43e5"></script>
+    <script src="https://bbs.breeze.asia/assets/forum-zh-Hans.js?v=85512547"></script>
 
+    <script src="js/browser.js"></script>
+    <script src="js/index/pageResponse.js"></script>
+    <script src="js/index/browser.js"></script>
+    <script src="js/index/fps.js"></script>
+    <script src="js/index/loading.js"></script>
+    <script src="js/index/cards.js"></script>
+    <script></script>
 </body>
 </html>
