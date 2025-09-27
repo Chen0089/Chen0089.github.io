@@ -1,42 +1,48 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: consolas;
 }
 
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #131417;
     background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
+    padding: 20px;
 }
 
-.container{
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 40px 0;
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.box{
+.box {
     position: relative;
     display: flex;
-    width: 320px;
+    width: 100%;
+    max-width: 320px;
+    min-width: 280px;
     height: 400px;
     justify-content: center;
     align-items: center;
-    margin: 40px 30px;
     transition: 0.5s;
+    flex: 1 1 300px;
 }
 
-.content{
+.content {
     position: relative;
     left: 0;
-    padding: 20px 40px;
+    padding: 20px 30px;
     color: #fff;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -44,26 +50,28 @@ body{
     border-radius: 8px;
     z-index: 1;
     transition: 0.5s;
+    width: 100%;
+    margin: 0 10px;
 }
 
-.content h2{
-    font-size: 2em;
+.content h2 {
+    font-size: clamp(1.5em, 4vw, 2em);
     color: #fff;
     margin-bottom: 10px;
 }
 
-.content p{
-    font-size: 1.1em;
+.content p {
+    font-size: clamp(0.9em, 2.5vw, 1.1em);
     margin-bottom: 10px;
     line-height: 1.4em;
 }
 
-.content a{
+.content a {
     display: inline-block;
-    font-size: 1.1em;
+    font-size: clamp(0.9em, 2.5vw, 1.1em);
     color: #111;
     background: #fff;
-    padding: 10px;
+    padding: 8px 16px;
     border-radius: 4px;
     text-decoration: none;
     font-weight: 700;
@@ -71,19 +79,19 @@ body{
     transition: 0.6s;
 }
 
-.box:hover .content{
-    left: -25px;
-    padding: 60px 40px;
+.box:hover .content {
+    left: -15px;
+    padding: 40px 30px;
 }
 
-.content a:hover{
+.content a:hover {
     background: #222;
     color: #fff;
     border-radius: 16px;
     box-shadow: 0 2px 15px #222;
 }
 
-.box::before{
+.box::before {
     content: "";
     position: absolute;
     background: #fff;
@@ -97,7 +105,7 @@ body{
     transition: 0.5s;
 }
 
-.box::after{
+.box::after {
     content: "";
     position: absolute;
     background: #fff;
@@ -112,26 +120,28 @@ body{
 }
 
 .box:hover::before,
-.box:hover::after{
+.box:hover::after {
     transform: skewX(0deg);
-    left: 20px;
-    width: calc(100% - 90px);
+    left: 15px;
+    width: calc(100% - 30px);
 }
 
 .box:nth-child(1)::before,
-.box:nth-child(1)::after{
+.box:nth-child(1)::after {
     background: linear-gradient(315deg, #ffbc00, #ff0058);
 }
-.box:nth-child(2):before,
-.box:nth-child(2):after{
+
+.box:nth-child(2)::before,
+.box:nth-child(2)::after {
     background: linear-gradient(315deg, #03a9f4, #ff0058);
 }
-.box:nth-child(3):before,
-.box:nth-child(3):after{
+
+.box:nth-child(3)::before,
+.box:nth-child(3)::after {
     background: linear-gradient(315deg, #4dff03, #00d0ff);
 }
 
-.box span{
+.box span {
     display: block;
     position: absolute;
     top: 0;
@@ -142,7 +152,7 @@ body{
     pointer-events: none;
 }
 
-.box span::before{
+.box span::before {
     content: "";
     position: absolute;
     background: rgba(255, 255, 255, 0.1);
@@ -158,15 +168,15 @@ body{
     animation: animate 2s ease-in-out infinite;
 }
 
-.box:hover span::before{
+.box:hover span::before {
     opacity: 1;
-    top: -50px;
-    left: 50px;
-    width: 100px;
-    height: 100px;
+    top: -30px;
+    left: 30px;
+    width: 80px;
+    height: 80px;
 }
 
-.box span::after{
+.box span::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -183,11 +193,11 @@ body{
     animation-delay: -1s;
 }
 
-.box:hover span::after{
-    bottom: -50px;
-    right: 50px;
-    width: 100px;
-    height: 100px;
+.box:hover span::after {
+    bottom: -30px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
     opacity: 1;
 }
 
@@ -195,17 +205,17 @@ body{
 #boxOne {
     --clr: #0f0;
 }
+
 #boxTwo {
     --clr: #ff0;
 }
+
 #boxThree {
-    --clr: #88f
+    --clr: #88f;
 }
 
 .box {
     position: relative;
-    width: 320px;
-    height: 400px;
     background-color: rgba(45, 45, 45, 1);
     border-radius: 20px;
     overflow: hidden;
@@ -221,7 +231,7 @@ body{
     width: 700px;
     height: 700px;
     opacity: 0;
-    transition: .5s, top 0, left：0;
+    transition: .5s, top 0s, left 0s;
 }
 
 .box:hover::before {
@@ -235,38 +245,41 @@ body{
     border-radius: 18px;
     background-color: rgba(45, 45, 45, .75);
 }
+
 @keyframes animate {
+
     0%,
-    100%{
+    100% {
         transform: translateY(10px);
     }
-    50%{
+
+    50% {
         transform: translate(-10px);
     }
 }
 
 .page1 {
-	height: 100vh;
-	width: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #131417;
 }
+
 /*设置页脚样式*/
-.footer
-{
+.footer {
     width: 100%;
     box-sizing: border-box;
 }
+
 /* 装饰用的球 */
 .ball {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     position: absolute;
-    background-image: linear-gradient(30deg, #3498db, skyblue);/*#3498db*/
+    background-image: linear-gradient(30deg, #3498db, skyblue);
     animation-duration: 3s;
     animation-timing-function: ease-out;
     animation-iteration-count: 1;
@@ -292,6 +305,7 @@ body{
     from {
         left: -60px;
     }
+
     to {
         left: 50%;
         transform: translateX(-50%);
@@ -302,6 +316,7 @@ body{
     from {
         right: -60px;
     }
+
     to {
         right: 50%;
         transform: translateX(50%);
@@ -312,6 +327,7 @@ body{
     from {
         bottom: -60px;
     }
+
     to {
         bottom: 20%;
         transform: translateX(-50%);
@@ -342,32 +358,35 @@ body{
     right: 0;
     margin: auto;
 }
+
 /*其他私有ID或Class*/
 form {
     display: flex;
     flex-direction: column;
 }
+
 .fly-fish {
     background-color: #f3f4f5;
     color: #f3fff3;
     font-family: Arial, sans-serif;
-    font-size: 16px;
+    font-size: clamp(14px, 3vw, 16px);
     animation: typing 10s infinite;
     background: linear-gradient(to right, #333, #555);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: typing 10s infinite;
     background-size: 200% 100%;
 }
+
 #fps {
     position: fixed;
     top: 10px;
     right: 10px;
     color: white;
     background-color: #131480;
-    padding: 10px;
-    border-radius:3px
+    padding: 8px 12px;
+    border-radius: 3px;
+    font-size: clamp(12px, 2vw, 14px);
 }
 
 .slide-container {
@@ -393,8 +412,10 @@ iframe {
 }
 
 /* 页面高度及宽度设置 */
-.page1, .page3 {
-    height: 100vh;
+.page1,
+.page3 {
+    min-height: 100vh;
+    height: auto;
 }
 
 form * {
@@ -411,12 +432,13 @@ form * {
     align-items: center;
     gap: 10px;
 }
-        
-.login-btn, .user-info {
+
+.login-btn,
+.user-info {
     background: rgba(255, 255, 255, 0.2);
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: clamp(8px, 2vw, 10px) clamp(12px, 2.5vw, 15px);
     border-radius: 20px;
     cursor: pointer;
     font-weight: 600;
@@ -424,39 +446,231 @@ form * {
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: clamp(12px, 2.5vw, 14px);
 }
-        
-.login-btn:hover, .user-info:hover {
+
+.login-btn:hover,
+.user-info:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
 }
 
 .user-avatar {
-    width: 30px;
-    height: 30px;
+    width: clamp(25px, 6vw, 30px);
+    height: clamp(25px, 6vw, 30px);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    font-size: clamp(12px, 3vw, 14px);
 }
-        
+
 .logout-btn {
     background: rgba(255, 255, 255, 0.2);
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 15px;
     cursor: pointer;
-    font-size: 12px;
-    margin-left: 10px;
+    font-size: clamp(10px, 2vw, 12px);
+    margin-left: 8px;
     transition: background 0.3s;
 }
 
 .logout-btn:hover {
     background: rgba(255, 255, 255, 0.3);
+}
+
+/* 响应式设计改进 */
+@media (max-width: 1024px) {
+    .container {
+        gap: 25px;
+        padding: 30px 15px;
+    }
+
+    .box {
+        flex: 1 1 280px;
+        max-width: 300px;
+    }
+
+    .content {
+        padding: 15px 25px;
+    }
+
+    .box:hover .content {
+        padding: 30px 25px;
+        left: -10px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 10px;
+    }
+
+    .box {
+        flex: 1 1 auto;
+        max-width: 100%;
+        width: 100%;
+        height: 350px;
+        margin: 0;
+    }
+
+    .content {
+        margin: 0 5px;
+        padding: 20px;
+    }
+
+    .box:hover .content {
+        left: 0;
+        padding: 30px 20px;
+    }
+
+    .box:hover::before,
+    .box:hover::after {
+        left: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .login-status {
+        top: 15px;
+        left: 15px;
+    }
+
+    #fps {
+        top: 15px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        gap: 15px;
+        padding: 15px 5px;
+    }
+
+    .box {
+        height: 320px;
+    }
+
+    .content {
+        padding: 15px;
+        margin: 0 2px;
+    }
+
+    .content h2 {
+        font-size: 1.3em;
+    }
+
+    .content p {
+        font-size: 0.9em;
+        line-height: 1.3em;
+    }
+
+    .content a {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    .box:hover .content {
+        padding: 25px 15px;
+    }
+
+    .login-status {
+        top: 10px;
+        left: 10px;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    #fps {
+        top: 10px;
+        right: 10px;
+        padding: 6px 10px;
+    }
+
+    .box:hover span::before {
+        top: -20px;
+        left: 20px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .box:hover span::after {
+        bottom: -20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 320px) {
+    .box {
+        height: 300px;
+    }
+
+    .content {
+        padding: 12px;
+    }
+
+    .content h2 {
+        font-size: 1.2em;
+    }
+
+    .content p {
+        font-size: 0.85em;
+    }
+
+    .box:hover .content {
+        padding: 20px 12px;
+    }
+}
+
+/* 横屏手机适配 */
+@media (max-height: 500px) and (orientation: landscape) {
+    .page1 {
+        min-height: 150vh;
+    }
+
+    .container {
+        padding: 20px 10px;
+    }
+
+    .box {
+        height: 280px;
+    }
+}
+
+/* 高分辨率屏幕适配 */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .box {
+        max-width: 380px;
+        height: 450px;
+    }
+
+    .content {
+        padding: 25px 40px;
+    }
+
+    .box:hover .content {
+        padding: 70px 40px;
+    }
 }
