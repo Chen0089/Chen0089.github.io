@@ -586,6 +586,32 @@
     </div>
 
     <script>
+        // 安全的随机数生成器
+        class SecureRandom {
+            constructor() {
+                this.seed = Date.now() ^ (Math.random() * 0x100000000);
+            }
+            
+            // 线性同余生成器
+            next() {
+                this.seed = (this.seed * 1664525 + 1013904223) % 0x100000000;
+                return this.seed / 0x100000000;
+            }
+            
+            // 生成指定范围的随机整数
+            nextInt(min, max) {
+                return Math.floor(this.next() * (max - min + 1)) + min;
+            }
+            
+            // 生成指定范围的随机浮点数
+            nextFloat(min, max) {
+                return this.next() * (max - min) + min;
+            }
+        }
+
+        // 创建安全的随机数生成器实例
+        const secureRandom = new SecureRandom();
+
         // 游戏状态
         const gameState = {
             cash: 1000,
@@ -904,7 +930,7 @@
                 { name: '答题卡', effect: 'quiz' }
             ];
             
-            return cards[Math.floor(Math.random() * cards.length)];
+            return cards[secureRandom.nextInt(0, cards.length - 1)];
         }
 
         // 应用卡片效果
@@ -963,7 +989,7 @@
                 { question: "一年有多少个月？", answer: "12" }
             ];
             
-            const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+            const randomQuestion = questions[secureRandom.nextInt(0, questions.length - 1)];
             quizQuestionEl.textContent = randomQuestion.question;
             quizCardModal.style.display = 'flex';
             quizAnswerEl.value = '';
@@ -980,7 +1006,7 @@
             
             if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
                 const rewards = [200, 400, 800, 1000, 1500];
-                const reward = rewards[Math.floor(Math.random() * rewards.length)];
+                const reward = rewards[secureRandom.nextInt(0, rewards.length - 1)];
                 gameState.cash += reward;
                 addToLog(`回答正确！获得${reward}元奖金`);
                 quizCardModal.style.display = 'none';
@@ -1029,8 +1055,8 @@
             for (let i = 0; i < 3; i++) {
                 let x, y;
                 do {
-                    x = Math.floor(Math.random() * 5);
-                    y = Math.floor(Math.random() * 5);
+                    x = secureRandom.nextInt(0, 4);
+                    y = secureRandom.nextInt(0, 4);
                 } while (grid[x][y] !== 'empty');
                 grid[x][y] = 'police';
             }
@@ -1038,8 +1064,8 @@
             for (let i = 0; i < 2; i++) {
                 let x, y;
                 do {
-                    x = Math.floor(Math.random() * 5);
-                    y = Math.floor(Math.random() * 5);
+                    x = secureRandom.nextInt(0, 4);
+                    y = secureRandom.nextInt(0, 4);
                 } while (grid[x][y] !== 'empty');
                 grid[x][y] = 'camera';
             }
@@ -1205,7 +1231,8 @@
                 addToLog(`你在监狱中，还有${gameState.jailTurns}回合`);
                 
                 // 检查是否可以被赦免
-                if (gameState.jailTurns <= 0 || (Math.random() < 0.3 + gameState.donated / 10000)) {
+                const pardonChance = 0.3 + gameState.donated / 10000;
+                if (gameState.jailTurns <= 0 || secureRandom.next() < pardonChance) {
                     gameState.inJail = false;
                     gameState.jailTurns = 0;
                     addToLog('你被释放了！');
@@ -1236,7 +1263,7 @@
         function updatePropertyPrices() {
             // 更新市场房地产价格
             gameState.propertyMarket.forEach(prop => {
-                const change = (Math.random() * 0.25 - 0.1); // -10% 到 +15%
+                const change = secureRandom.nextFloat(-0.1, 0.15); // -10% 到 +15%
                 const oldPrice = prop.currentPrice;
                 prop.currentPrice = Math.round(prop.currentPrice * (1 + change));
                 prop.trend = Math.round(((prop.currentPrice - oldPrice) / oldPrice) * 100);
@@ -1264,7 +1291,7 @@
             
             // 加权随机选择事件
             const totalWeight = events.reduce((sum, event) => sum + event.weight, 0);
-            let random = Math.random() * totalWeight;
+            let random = secureRandom.next() * totalWeight;
             let selectedEvent = events[0];
             
             for (const event of events) {
@@ -1278,8 +1305,8 @@
             // 执行事件
             switch(selectedEvent.type) {
                 case 'priceChange':
-                    const changeProp = gameState.propertyMarket[Math.floor(Math.random() * gameState.propertyMarket.length)];
-                    const change = (Math.random() * 0.3 - 0.1); // -10% 到 +20%
+                    const changeProp = gameState.propertyMarket[secureRandom.nextInt(0, gameState.propertyMarket.length - 1)];
+                    const change = secureRandom.nextFloat(-0.1, 0.2); // -10% 到 +20%
                     const oldPrice = changeProp.currentPrice;
                     changeProp.currentPrice = Math.round(changeProp.currentPrice * (1 + change));
                     changeProp.trend = Math.round(((changeProp.currentPrice - oldPrice) / oldPrice) * 100);
@@ -1289,8 +1316,8 @@
                     
                 case 'earthquake':
                     if (gameState.properties.length > 0) {
-                        const quakeProp = gameState.properties[Math.floor(Math.random() * gameState.properties.length)];
-                        if (Math.random() < 0.5) {
+                        const quakeProp = gameState.properties[secureRandom.nextInt(0, gameState.properties.length - 1)];
+                        if (secureRandom.next() < 0.5) {
                             quakeProp.status = 'damaged';
                             addToLog(`地震！${quakeProp.name}损毁了，需要修复`);
                         } else {
@@ -1311,7 +1338,7 @@
                         "新区开发计划公布，相关区域房产看涨。",
                         "银行利率调整，存款收益增加。"
                     ];
-                    gameState.news = newsOptions[Math.floor(Math.random() * newsOptions.length)];
+                    gameState.news = newsOptions[secureRandom.nextInt(0, newsOptions.length - 1)];
                     newsContentEl.textContent = gameState.news;
                     addToLog(`新闻更新：${gameState.news}`);
                     break;
@@ -1323,7 +1350,7 @@
             gameState.bankJob.active = true;
             gameState.bankJob.problems = generateMathProblems(5);
             gameState.bankJob.currentProblem = 0;
-            gameState.bankJob.salary = Math.round(Math.random() * 200 + 100);
+            gameState.bankJob.salary = secureRandom.nextInt(100, 300);
             
             showNextProblem();
             bankJobModal.style.display = 'flex';
@@ -1333,9 +1360,9 @@
         function generateMathProblems(count) {
             const problems = [];
             for (let i = 0; i < count; i++) {
-                const a = Math.floor(Math.random() * 50) + 1;
-                const b = Math.floor(Math.random() * 50) + 1;
-                const op = Math.random() > 0.5 ? '+' : '-';
+                const a = secureRandom.nextInt(1, 50);
+                const b = secureRandom.nextInt(1, 50);
+                const op = secureRandom.next() > 0.5 ? '+' : '-';
                 let answer;
                 
                 if (op === '+') {
@@ -1396,4 +1423,4 @@
         window.onload = initGame;
     </script>
 </body>
-</html>
+    </html>
