@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>负翁大冒险 - 增强版</title>
-    <link rel="stylesheet" href="css/RichGame.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -14,6 +14,7 @@
         </header>
         
         <div class="game-area">
+            <!-- 左侧：玩家信息 -->
             <div class="player-info">
                 <div class="assets">
                     <h2>资产状况</h2>
@@ -27,132 +28,4 @@
                     </div>
                     <div class="asset-item">
                         <span>总资产:</span>
-                        <span id="total-assets">1000</span>
-                    </div>
-                    <div class="asset-item">
-                        <span>心情值:</span>
-                        <span id="mood">50</span>
-                    </div>
-                    <div class="mood-bar">
-                        <div class="mood-progress" id="mood-progress" style="width: 50%;"></div>
-                    </div>
-                </div>
-                
-                <div class="wealth-level">
-                    <h2>财富等级</h2>
-                    <div id="wealth-level">1</div>
-                    <div class="level-bar">
-                        <div class="level-progress" id="level-progress" style="width: 10%;"></div>
-                    </div>
-                    <div id="level-benefits">捐献提高赦免几率</div>
-                </div>
-                
-                <div class="properties">
-                    <h2>我的房地产</h2>
-                    <div id="properties-list">
-                        <!-- 房地产列表将通过JS动态生成 -->
-                    </div>
-                </div>
-                
-                <div class="actions">
-                    <button class="bank-btn" id="deposit-btn">存款</button>
-                    <button class="bank-btn" id="withdraw-btn">取款</button>
-                    <button class="card-btn" id="buy-card-btn">购买机遇卡 (200元)</button>
-                    <button class="rob-btn" id="rob-bank-btn">抢银行</button>
-                    <button class="travel-btn" id="travel-btn">旅游</button>
-                    <button class="card-btn" id="donate-btn">捐献</button>
-                </div>
-                
-                <button class="end-turn" id="end-turn">结束回合</button>
-            </div>
-            
-            <div class="market">
-                <h2>房地产市场</h2>
-                <div id="property-market">
-                    <!-- 房地产市场将通过JS动态生成 -->
-                </div>
-            </div>
-            
-            <div class="events">
-                <h2>事件日志</h2>
-                <div class="event-log" id="event-log">
-                    <!-- 事件日志将通过JS动态生成 -->
-                </div>
-                
-                <div class="news">
-                    <h3>今日新闻</h3>
-                    <div id="news-content">科技园区政策利好，房产预计上涨！</div>
-                </div>
-                
-                <div class="card-system">
-                    <h3>机遇卡系统</h3>
-                    <div id="cards-owned">当前拥有卡片: 0张</div>
-                    <button class="card-btn" id="use-card-btn">使用机遇卡</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 银行任务模态框 -->
-    <div class="modal" id="bank-job-modal">
-        <div class="modal-content">
-            <h2>银行职员任务</h2>
-            <p>完成计算任务可获得薪水！</p>
-            <div class="problem" id="math-problem">10 + 15 = ?</div>
-            <input type="number" class="answer-input" id="answer-input" placeholder="输入答案">
-            <button class="submit-btn" id="submit-answer">提交答案</button>
-        </div>
-    </div>
-    
-    <!-- 卡片结果模态框 -->
-    <div class="modal" id="card-modal">
-        <div class="modal-content card-modal">
-            <h2>机遇卡</h2>
-            <div class="card-result" id="card-result">你抽到了现金红包！</div>
-            <button class="submit-btn" id="close-card">确定</button>
-        </div>
-    </div>
-    
-    <!-- 抢银行小游戏模态框 -->
-    <div class="modal" id="rob-bank-modal">
-        <div class="modal-content">
-            <h2>🏦 抢银行大冒险</h2>
-            <p>避开警察👮和监控📹，到达出口🚪！小心规划你的路线！</p>
-            <div class="mini-game">
-                <div class="game-info">
-                    <div class="moves-left">剩余移动次数: <span id="moves-count">8</span></div>
-                    <div class="game-tips">提示：绿色是你的位置，红色是警察，紫色是监控</div>
-                </div>
-                <div class="game-grid" id="game-grid">
-                    <!-- 游戏网格将通过JS动态生成 -->
-                </div>
-            </div>
-            <button class="submit-btn" id="close-rob-game">放弃行动</button>
-        </div>
-    </div>
-    
-    <!-- 答题卡模态框 -->
-    <div class="modal" id="quiz-card-modal">
-        <div class="modal-content">
-            <h2>知识问答</h2>
-            <p>回答正确可获得奖金！</p>
-            <div class="problem" id="quiz-question">问题加载中...</div>
-            <input type="text" class="answer-input" id="quiz-answer" placeholder="输入答案">
-            <button class="submit-btn" id="submit-quiz">提交答案</button>
-        </div>
-    </div>
-    
-    <!-- 旅游模态框 -->
-    <div class="modal" id="travel-modal">
-        <div class="modal-content">
-            <h2>选择旅游目的地</h2>
-            <div id="travel-options">
-                <!-- 旅游选项将通过JS动态生成 -->
-            </div>
-            <button class="submit-btn" id="close-travel">取消</button>
-        </div>
-    </div>
-
-    <script src="js/richGame.js"></script>
-</body>
-</html>
+                        <span id="total-assets">100
