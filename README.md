@@ -19,27 +19,3 @@ git clone https://github.com/chen0089/chen0089.github.io
 git clone git@github.com:chen0089/chen0089.github.io.git
 ```
 如果你没有安装git，安一个?或者自己慢慢COPY?
-
-# 致谢
-|   语言   |   教程提供  |
-|:--------:|:----------:|
-|   html   | runoob.com |
-|javascript| runoob.com |
-|   css    | runoob.com |
-|   php    | runoob.com |
-|  vue.js  | cn.vue.com |
-> \* 所有的语言都有AI参与教程
-
-## 网站模板提供
-|    效果   |         提供          |
-|:---------:|:---------------------:|
-|  主页毛玻璃 |   `B站`淡然的漠看世界   |
-|主页hover颜色|   `B站`淡然的漠看世界   |
-|  作品展示页 |  `不明`PIXEL PERFECT  |
-|  404页面   |`B站`codingstartup起码课|
-> 作品展示页取自`B站`\_技术小白\_的转载，版权信息在源码注释中
-
-## 贡献榜
-1. `B站`淡然的漠看世界
-2. `不明`PIXEL PERFECT
-2. `B站`codingstartup起码课
