@@ -10,8 +10,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #131417;
-    background-image: linear-gradient(315deg, #131417 0%, #1e1f26 74%);
     padding: 20px;
 }
 
@@ -20,8 +18,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 30px;
-    padding: 40px 20px;
+    gapgap: 30px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -273,68 +270,7 @@ body {
     box-sizing: border-box;
 }
 
-/* 装饰用的球 */
-.ball {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    position: absolute;
-    background-image: linear-gradient(30deg, #3498db, skyblue);
-    animation-duration: 3s;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
-}
-
-/* 第一个球从左边滑入 */
-.ball1 {
-    animation-name: slideInLeft;
-}
-
-/* 第二个球从右边滑入 */
-.ball2 {
-    animation-name: slideInRight;
-}
-
-/* 第三个球从下边滑入 */
-.ball3 {
-    animation-name: slideInBottom;
-}
-
-/* 动画定义 */
-@keyframes slideInLeft {
-    from {
-        left: -60px;
-    }
-
-    to {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        right: -60px;
-    }
-
-    to {
-        right: 50%;
-        transform: translateX(50%);
-    }
-}
-
-@keyframes slideInBottom {
-    from {
-        bottom: -60px;
-    }
-
-    to {
-        bottom: 20%;
-        transform: translateX(-50%);
-    }
-}
-
-/*等待效果*/
+/* 等待样式 */
 #loader {
     border: 12px solid #a2c1f4;
     border-radius: 50%;
