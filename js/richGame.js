@@ -912,31 +912,21 @@ function renderRobGame() {
     // 更新模态框标题显示当前银行信息
     const modalTitle = robBankModal.querySelector('h2');
     const modalDesc = robBankModal.querySelector('p');
-    modalTitle.innerHTML = `${bank.name} - ${bank.difficulty}难度`;
-    modalDesc.innerHTML = `${bank.description} - 奖励.baseReward.to: ${bank.baseRewLocaleStringard.toLocaleString()}元`;
-()}元`;
     
-    for (let i =    
-    for (let i = 0; i <  0; i < 5; i++) {
-5; i++) {
-               for (let j =  for (let j = 0;0; j < 5; j j < 5; j++)++) {
-            const cell = document {
-            const cell = document.createElement.createElement('div');
-           ('div');
-            cell.className cell.className = 'grid-cell';
- = 'grid-cell';
+    if (modalTitle) {
+        modalTitle.innerHTML = `${bank.name} - ${bank.difficulty}难度`;
+    }
+    
+    if (modalDesc) {
+        modalDesc.innerHTML = `${bank.description} - 奖励: ${bank.baseReward.toLocaleString()}元`;
+    }
+    
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 5; j++) {
+            const cell = document.createElement('div');
+            cell.className = 'grid-cell';
             
-                       
-            const cellType = gameState const cellType = gameState.robGame.grid[i.robGame.grid[i][j];
-            
-            switch(cellType) {
-                case 'player':
-                    cell.classList.add('player-pos');
-                    cell.textContent = '👤';
-                    cell.title = '你的位置';
-                    break;
-                case 'police':
-                    cell.classList.add('pol][j];
+            const cellType = gameState.robGame.grid[i][j];
             
             switch(cellType) {
                 case 'player':
@@ -946,38 +936,22 @@ function renderRobGame() {
                     break;
                 case 'police':
                     cell.classList.add('police');
-                    cell.textContentice');
-                    cell.textContent = ' = '👮';
-                    cell👮';
-                    cell.title.title = '警察 - 碰到 = '警察 - 碰到会被抓会被抓！';
-                    break！';
+                    cell.textContent = '👮';
+                    cell.title = '警察 - 碰到会被抓！';
                     break;
-               ;
                 case 'camera':
-                    case 'camera':
-                    cell cell.classList.add('camera.classList.add('camera');
-                   ');
-                    cell.text cell.textContentContent = '📹';
-                    cell.title = = '📹';
-                    cell.title = '监控 '监控摄像头 - 碰到会被抓！';
+                    cell.classList.add('camera');
+                    cell.textContent = '📹';
+                    cell.title = '监控摄像头 - 碰到会被抓！';
                     break;
-摄像头 - 碰到会被抓！';
-                    break;
-                               case 'exit':
-                    case 'exit':
-                    cell cell.classList.add('exit');
-                    cell.text.classList.add('exit');
+                case 'exit':
+                    cell.classList.add('exit');
                     cell.textContent = '💰';
-Content = '💰';
-                                       cell.title = '金库 - cell.title = '金库 -  到达这里就成功了！';
-到达这里就成功了！';
-                    break;
+                    cell.title = '金库 - 到达这里就成功了！';
                     break;
                 default:
-                    cell                default:
                     cell.classList.add('empty');
-                   .classList.add('empty');
-                    cell.text cell.textContent = '⬜';
+                    cell.textContent = '⬜';
                     cell.title = '安全区域';
             }
             
@@ -989,257 +963,125 @@ Content = '💰';
 
 // 移动玩家
 function movePlayer(x, y) {
-    if (Content = '⬜';
-                    cell.title = '安全区域';
-            }
-            
-            cell.addEventListener('click', () => movePlayer(i, j));
-            gameGridEl.appendChild(cell);
-        }
-    }
-}
-
-// 移动玩家
-function movePlayer(x, y) {
-    if (gameState.robGame.mgameState.robGame.movesLeftovesLeft <= 0) return;
- <= 0) return;
+    if (gameState.robGame.movesLeft <= 0) return;
     
-    const    
-    const playerPos = game playerPos = gameState.robGame.playerState.robGame.playerPos;
-Pos;
-    const bank = gameState    const bank = gameState.robGame.robGame.selectedBank;
+    const playerPos = gameState.robGame.playerPos;
+    const bank = gameState.robGame.selectedBank;
     
-.selectedBank;
-    
-       const isAdjacent = (
-        Math const isAdjacent = (
-        Math.abs(player.abs(playerPos.x - x) <= 1 && 
+    const isAdjacent = (
         Math.abs(playerPos.x - x) <= 1 && 
         Math.abs(playerPos.y - y) <= 1 &&
-Pos.y - y) <= 1 &&
-        !(        !(playerPos.x === x && playerPos.yplayerPos.x === x && playerPos.y === === y)
-    );
- y)
+        !(playerPos.x === x && playerPos.y === y)
     );
     
-    if    
-    if (!isAdjacent) (!isAdjacent) {
-        {
-        alert('只能移动到相邻的 alert('只能移动到相邻的格子格子（包括对角线）（包括对角线）！');
-       ！');
+    if (!isAdjacent) {
+        alert('只能移动到相邻的格子（包括对角线）！');
         return;
     }
- return;
-    }
     
-    gameState.robGame.grid[playerPos.x][playerPos.y] = 'empty';
-    
-    if (gameState.robGame.grid[x][y] === 'police' || 
-        gameState.robGame.grid[x][y] === 'camera    
     gameState.robGame.grid[playerPos.x][playerPos.y] = 'empty';
     
     if (gameState.robGame.grid[x][y] === 'police' || 
         gameState.robGame.grid[x][y] === 'camera') {
-        addToLog(`') {
-        addToLog(`在${bank.name在${bank.name}被}被警察抓住了！抢银行失败警察抓住了！抢银行失败！`);
-！`);
-        gameState.in        gameState.inJail = trueJail = true;
-        gameState;
-        gameState.jail.jailTTurnsurns = bank.jailT = bank.jailTurnsurns;
-        robBankModal.style;
+        addToLog(`在${bank.name}被警察抓住了！抢银行失败！`);
+        gameState.inJail = true;
+        gameState.jailTurns = bank.jailTurns;
         robBankModal.style.display = 'none';
-       .display = 'none';
         updateUI();
-        return;
-    updateUI();
         return;
     }
     
-    game }
+    gameState.robGame.grid[x][y] = 'player';
+    gameState.robGame.playerPos = { x, y };
+    gameState.robGame.movesLeft--;
     
-    gameState.robGame.grid[xState.robGame.grid[x][y] = '][y] = 'player';
-    gameplayer';
-    gameState.robGameState.robGame.player.playerPos = { x,Pos = { x, y };
- y };
-    
-    gameState.rob    
-    gameState.robGameGame.movesLeft--;
-    
-.movesLeft--;
-    
-    if    if (gameState. (gameState.robGamerobGame.grid[x][y].grid[x][y] === ' === 'exit') {
+    if (gameState.robGame.grid[x][y] === 'exit') {
         const reward = gameState.robGame.reward;
         // 根据银行难度调整奖励比例
         const bonusMultiplier = bank.difficulty === '简单' ? 0.15 : 
                               bank.difficulty === '中等' ? 0.2 :
-                              bank.dexit') {
-        const reward = gameState.robGame.reward;
-        // 根据银行难度调整奖励比例
-        const bonusMultiplier = bank.difficulty === '简单' ? 0.15 : 
-                              bank.difficulty === '中等' ? 0.2ifficulty === :
-                              bank.difficulty === '困难' ? 0 '困难' ? 0..25 : 0.3;
-25 : 0.3;
-        const bonus = Math.round(reward * bonusMultiplier * (game        const bonus = Math.round(reward * bonusMultiplier * (gameState.robState.robGame.movesLeft / bankGame.movesLeft / bank.m.moves));
-        const totalRewoves));
-        const totalRewardard = reward + bonus = reward + bonus;
+                              bank.difficulty === '困难' ? 0.25 : 0.3;
+        const bonus = Math.round(reward * bonusMultiplier * (gameState.robGame.movesLeft / bank.moves));
+        const totalReward = reward + bonus;
         
-;
-        
-        gameState.cash +=        gameState.cash += totalReward;
-        add totalReward;
-        addToLogToLog(`🎉 ${(`🎉 ${bank.namebank.name}抢劫大成功！获得}抢劫大成功！获得${reward${reward.toLocaleString()}元.toLocaleString()}元基础基础奖励 + ${bon奖励 + ${bonus.toLocaleus.toLocaleString()}元步数String()}元步数奖励，奖励，总计${totalRew总计${totalReward.toard.toLocaleString()}元！真正的LocaleString()}元！真正的富豪诞生！`);
-富豪诞生！`);
-        gameState        gameState..robGame.success = true;
-        robBankModal.style.display = 'none';
-        updateUI();
-        return;
-    }
-    
-    if (gameState.robGame.mrobGame.success = true;
+        gameState.cash += totalReward;
+        addToLog(`🎉 ${bank.name}抢劫大成功！获得${reward.toLocaleString()}元基础奖励 + ${bonus.toLocaleString()}元步数奖励，总计${totalReward.toLocaleString()}元！真正的富豪诞生！`);
+        gameState.robGame.success = true;
         robBankModal.style.display = 'none';
         updateUI();
         return;
     }
     
     if (gameState.robGame.movesLeft <= 0) {
-ovesLeft <= 0) {
-        addToLog(`${        addToLog(`${bank.name}抢银行失败！移动次数用完了！`);
-bank.name}抢银行失败！移动次数用完了！`);
+        addToLog(`${bank.name}抢银行失败！移动次数用完了！`);
         gameState.inJail = true;
-               gameState.inJail = true;
-        game gameStateState.jailTurns = Math.floor(bank.j.jailTurns = Math.floor(bank.jailTailTurns / 2);
-        robBankModal.style.display =urns / 2);
-        robBankModal.style.display = ' 'none';
-        updateUI();
-       none';
+        gameState.jailTurns = Math.floor(bank.jailTurns / 2);
+        robBankModal.style.display = 'none';
         updateUI();
         return;
- return;
     }
     
-       }
-    
-    renderRob renderRobGame();
+    renderRobGame();
 }
 
-// 显示Game();
-}
-
-// 显示旅游选项旅游选项
-function showTravel
-function showTravelOptions()Options() {
-    if ( {
+// 显示旅游选项
+function showTravelOptions() {
     if (gameState.inJail) {
-gameState.inJail) {
-               addToLog(' addToLog('你现在你现在在监狱中，在监狱中，无法旅游！');
-       无法旅游！');
+        addToLog('你现在在监狱中，无法旅游！');
         return;
     }
     
-    return;
-    }
-    
-    travel travelOptionsEl.innerHTML = '';
-OptionsEl.innerHTML = '';
-    game    gameState.travelOptions.forEach(optionState.travelOptions.forEach( => {
-        const optionoption => {
-        const optionEl =El = document.createElement('div document.createElement('div');
+    travelOptionsEl.innerHTML = '';
+    gameState.travelOptions.forEach(option => {
+        const optionEl = document.createElement('div');
         optionEl.className = 'property-card';
         optionEl.innerHTML = `
             <div class="property-name">${option.name}</div>
             <div class="property-details">
                 <span>费用: ${option.cost}元</span>
-               ');
-        optionEl.className = 'property-card';
-        optionEl.innerHTML = `
-            <div class="property-name">${option.name}</div>
-            <div class="property-details">
-                <span>费用: ${option.cost}元</span>
-                <span>心情提升: +${option <span>心情提升: +.moodG${option.moodGain}</ain}</span>
-            </span>
+                <span>心情提升: +${option.moodGain}</span>
             </div>
-div>
-            <button class="buy            <button class="buy-btn-btn" onclick="travel('" onclick="travel('${option.name}${option.name}')">')">选择</button>
-        `选择</button>
+            <button class="buy-btn" onclick="travel('${option.name}')">选择</button>
         `;
-       ;
-        travelOptionsEl travelOptionsEl.appendChild(option.appendChild(optionEl);
+        travelOptionsEl.appendChild(optionEl);
     });
     
-   El);
-    });
-    
-    travel travelModal.style.display = 'Modal.style.display = 'flex';
-flex';
+    travelModal.style.display = 'flex';
 }
 
 // 旅游
-function}
-
-// 旅游
-function travel travel(destinationName) {
-    const(destinationName) {
-    const destination = game destination = gameState.travelState.travelOptions.find(opt => optOptions.find(opt => opt.name ===.name === destinationName);
-    if (! destinationName);
+function travel(destinationName) {
+    const destination = gameState.travelOptions.find(opt => opt.name === destinationName);
     if (!destination) return;
-destination) return;
     
-       
-    if (gameState if (gameState.cash >=.cash >= destination.cost) {
- destination.cost) {
-        game        gameStateState.cash -= destination.cost;
-        gameState.mood = Math.min(100, gameState.mood + destination.moodGain);
-        addToLog(`去了${destinationName}旅游，心情值提升${destination.moodG.cash -= destination.cost;
+    if (gameState.cash >= destination.cost) {
+        gameState.cash -= destination.cost;
         gameState.mood = Math.min(100, gameState.mood + destination.moodGain);
         addToLog(`去了${destinationName}旅游，心情值提升${destination.moodGain}`);
-       ain}`);
-        travelModal.style.display travelModal.style.display = 'none';
-        = 'none';
+        travelModal.style.display = 'none';
         updateUI();
- updateUI();
     } else {
-        alert    } else {
-        alert('现金不足('现金不足，无法旅游！');
-    }
-，无法旅游！');
+        alert('现金不足，无法旅游！');
     }
 }
-
-//}
 
 // 捐献
 function donate() {
-    if 捐献
-function donate() {
-    if (game (gameState.wealthLevel < 5) {
-State.wealthLevel < 5) {
-        alert('需要达到        alert('需要达到财富等级5才能捐献！');
-        return财富等级5才能捐献！');
+    if (gameState.wealthLevel < 5) {
+        alert('需要达到财富等级5才能捐献！');
         return;
-    }
-    
-    const;
     }
     
     const amount = parseInt(prompt('请输入捐献金额:'));
-    if amount = parseInt(prompt('请输入捐献金额:'));
-    if (isNaN( (isNaN(amount) || amount <= amount) || amount <= 0) {
-        alert('请输入0) {
-        alert('请输入有效有效金额');
+    if (isNaN(amount) || amount <= 0) {
+        alert('请输入有效金额');
         return;
     }
     
-    if金额');
-        return;
-    }
-    
- (gameState    if.cash >= (gameState.cash >= amount amount) {
-        gameState) {
+    if (gameState.cash >= amount) {
         gameState.cash -= amount;
-        gameState.cash -= amount;
-        gameState.donated += amount.donated += amount;
-        addTo;
-        addToLog(`捐献Log(`捐献了${amount}元，了${amount}元，提高了赦免几率`);
+        gameState.donated += amount;
+        addToLog(`捐献了${amount}元，提高了赦免几率`);
         updateUI();
     } else {
         alert('现金不足！');
@@ -1254,48 +1096,20 @@ function endTurn() {
     updateInterestRates();
     
     // 计算所有存款的利息
-    game提高了赦免几率`);
-        updateUI();
-    } else {
-        alert('现金不足！');
-    }
-}
-
-// 结束回合
-function endTurn() {
-    gameState.turn++;
-    
-    // 更新利率
-    updateInterestRates();
-    
-    // 计算所有存款的利息
-State.depos    gameState.deposits.forEachits.forEach(deposit =>(deposit => {
-        {
-        const interest = calculate const interest = calculateInterest(dInterest(deposit);
-        if (eposit);
-        if (interest >interest > 0) {
- 0) {
-            //            // 利息自动计入存款本金（复利）
- 利息自动计入存款本金（复            deposit利）
-            deposit.amount.amount += interest;
-        }
-    += interest;
+    gameState.deposits.forEach(deposit => {
+        const interest = calculateInterest(deposit);
+        if (interest > 0) {
+            // 利息自动计入存款本金（复利）
+            deposit.amount += interest;
         }
     });
     
-    if (game });
-    
-    if (gameStateState.inJail) {
-.inJail) {
-        game        gameState.jailTurns--;
-State.jailTurns--;
-        add        addToLog(`你在监狱中ToLog(`你在监狱中，还有${game，还有${gameState.jState.jailTurns}回合`);
+    if (gameState.inJail) {
+        gameState.jailTurns--;
+        addToLog(`你在监狱中，还有${gameState.jailTurns}回合`);
         
-ailTurns}回合`);
-        
-        const pardonChance        const pardonChance =  = 0.3 +0.3 + gameState gameState.donated / 100.donated / 10000;
-00;
-        if (gameState.j        if (gameState.jailTurns <= 0ailTurns <= 0 || || secureRandomFloat secureRandomFloat(0,(0, 1) < pardonChance) {
+        const pardonChance = 0.3 + gameState.donated / 10000;
+        if (gameState.jailTurns <= 0 || secureRandomFloat(0, 1) < pardonChance) {
             gameState.inJail = false;
             gameState.jailTurns = 0;
             addToLog('你被释放了！');
@@ -1304,43 +1118,20 @@ ailTurns}回合`);
         updatePropertyPrices();
         triggerRandomEvent();
         
-        gameState.mood = Math.max(0, game 1) < pardonChance) {
-            gameState.inJail = false;
-            gameState.jailTurns = 0;
-            addToLog('你被释放了！');
-        }
-    } else {
-        updatePropertyPrices();
-        triggerRandomEvent();
-        
-        gameState.mood = Math.max(0, gameState.mood -State.mood - 5);
+        gameState.mood = Math.max(0, gameState.mood - 5);
     }
     
- 5);
-    }
-    
-       addToLog(`第${ addToLog(`第${gamegameState.turn}回合开始State.turn}回合开始`);
-    updateUI();
-}
-
-// 更新房地产价格
-function updatePropertyPrices`);
+    addToLog(`第${gameState.turn}回合开始`);
     updateUI();
 }
 
 // 更新房地产价格
 function updatePropertyPrices() {
-    gameState.propertyMarket.forEach() {
-    gameState.propertyMarket.forEach((prop => {
-prop => {
-        const change =        const change = secureRandomFloat(-0 secureRandomFloat(-0.1, 0..1, 0.1515);
-        const old);
-        const oldPrice =Price = prop.currentPrice;
-        prop.current prop.currentPrice;
-        prop.currentPrice = MathPrice = Math.round(.round(prop.currentPrice * (prop.currentPrice * (11 + change));
-        + change));
-        prop.trend = Math prop.trend = Math.round(((prop.currentPrice - oldPrice) / old.round(((prop.currentPrice - oldPrice) / oldPrice)Price) * 100);
-    * 100);
+    gameState.propertyMarket.forEach(prop => {
+        const change = secureRandomFloat(-0.1, 0.15);
+        const oldPrice = prop.currentPrice;
+        prop.currentPrice = Math.round(prop.currentPrice * (1 + change));
+        prop.trend = Math.round(((prop.currentPrice - oldPrice) / oldPrice) * 100);
     });
     
     gameState.properties.forEach(prop => {
@@ -1348,51 +1139,25 @@ prop => {
         if (marketProp) {
             const oldPrice = prop.currentPrice;
             prop.currentPrice = marketProp.currentPrice;
-            prop.trend = Math.round(((prop.currentPrice - oldPrice });
-    
-    gameState.properties.forEach(prop => {
-        const marketProp = gameState.propertyMarket.find(p => p.id === prop.id);
-        if (marketProp) {
-            const oldPrice = prop.currentPrice;
-            prop.currentPrice = marketProp.currentPrice;
-            prop.trend = Math.round(((prop.currentPrice - oldPrice) /) / oldPrice) *  oldPrice) * 100);
+            prop.trend = Math.round(((prop.currentPrice - oldPrice) / oldPrice) * 100);
         }
     });
 }
 
-100);
-        }
-    });
-}
-
-// 触发随机// 触发随机事件
-事件
+// 触发随机事件
 function triggerRandomEvent() {
-function triggerRandomEvent() {
-    const    const events = [
-        { type events = [
-        { type: 'priceChange', weight: 'priceChange', weight:: 4 },
-        4 },
-        { type: { type: 'earthquake', 'earthquake', weight: weight: 1 },
- 1 },
-        { type:        { type: 'bankJob', weight:  'bankJob', weight: 2 },
-        {2 },
-        { type: 'news', weight:  type: 'news', weight: 3 }
-3 }
+    const events = [
+        { type: 'priceChange', weight: 4 },
+        { type: 'earthquake', weight: 1 },
+        { type: 'bankJob', weight: 2 },
+        { type: 'news', weight: 3 }
     ];
     
-    const totalWeight    ];
-    
-    const totalWeight = = events.reduce((sum events.reduce((sum, event) => sum + event.weight, event) => sum + event.weight,, 0);
- 0);
-       let let random random = secureRandomFloat(0, totalWeight);
-    let selected = secureRandomFloat(0, totalWeight);
+    const totalWeight = events.reduce((sum, event) => sum + event.weight, 0);
+    let random = secureRandomFloat(0, totalWeight);
     let selectedEvent = events[0];
     
-    for (Event = events[0];
-    
-    for (const eventconst event of events) {
-        random of events) {
+    for (const event of events) {
         random -= event.weight;
         if (random <= 0) {
             selectedEvent = event;
@@ -1403,147 +1168,73 @@ function triggerRandomEvent() {
     switch(selectedEvent.type) {
         case 'priceChange':
             const changeProp = secureRandomChoice(gameState.propertyMarket);
-            const change = secureRandom -= event.weight;
-        if (random <= 0) {
-            selectedEvent = event;
+            const change = secureRandomFloat(-0.1, 0.2);
+            const oldPrice = changeProp.currentPrice;
+            changeProp.currentPrice = Math.round(changeProp.currentPrice * (1 + change));
+            changeProp.trend = Math.round(((changeProp.currentPrice - oldPrice) / oldPrice) * 100);
+            
+            addToLog(`突发新闻：${changeProp.name}价格${change > 0 ? '上涨' : '下跌'}了${Math.abs(Math.round(change * 100))}%`);
             break;
-        }
-    }
-    
-    switch(selectedEvent.type) {
-        case 'priceChange':
-            const changeProp = secureRandomChoice(gameState.propertyMarket);
-            const change = secureRandomFloat(-0.1,Float(-0.1,  0.20.2);
-           );
-            const old const oldPrice =Price = changeProp.currentPrice;
-            changeProp.currentPrice;
-            change changeProp.currentPrice = Math.round(changeProp.currentPrice = Math.round(changeProp.currentPriceProp.currentPrice * (1 + change));
-            change * (1 + change));
-            changeProp.trendProp.trend = Math.round(((changeProp.currentPrice = Math.round(((changeProp.currentPrice - oldPrice - oldPrice) / oldPrice) * 100);
-            
-) / oldPrice) * 100);
-            
-            addTo            addToLog(`突发新闻：${changeProp.nameLog(`突发新闻：${changeProp.name}价格${change}价格${change > 0 ? '上涨 > 0 ? '上涨'' : '下跌'}了 : '下跌'}了${Math${Math.abs(Math.round(.abs(Math.round(change * change * 100))}%`);
-100))}%`);
-                       break;
-            
-        case 'earth break;
             
         case 'earthquake':
-            if (gamequake':
-            if (gameState.propertiesState.properties.length > 0.length > 0) {
-) {
-                const quakeProp =                const quakeProp = secure secureRandomChoice(gameState.propertiesRandomChoice(gameState.properties);
-               );
-                if (secureRandomFloat(0 if (secureRandomFloat(0, 1) < 0.5) {
+            if (gameState.properties.length > 0) {
+                const quakeProp = secureRandomChoice(gameState.properties);
+                if (secureRandomFloat(0, 1) < 0.5) {
                     quakeProp.status = 'damaged';
                     addToLog(`地震！${quakeProp.name}损毁了，需要修复`);
                 } else {
                     quakeProp.status = 'destroyed';
-                    addToLog(`强烈, 1) < 0.5) {
-                    quakeProp.status = 'damaged';
-                    addToLog(`地震！${quakeProp.name}损毁了，需要修复`);
-                } else {
-                    quakeProp.status = 'destroyed';
-地震！${quakeProp                    addToLog(`强烈地震.name！${quakeProp.name}永久}永久消失了`);
+                    addToLog(`强烈地震！${quakeProp.name}永久消失了`);
                 }
             }
-消失了`);
-                }
-            }
-                       break;
+            break;
             
-        case break;
-            
-        case 'bank 'bankJob':
-            startBankJobJob':
+        case 'bankJob':
             startBankJob();
             break;
             
-       ();
-            break;
-            
-        case ' case 'news':
-           news':
-            const newsOptions const newsOptions = [
- = [
-                               "政府推出购房补贴政策，房地产市场活跃！ "政府推出购房补贴政策，房地产市场活跃！",
-",
-                "经济形势不佳，房地产价格可能下跌                "经济形势不佳，房地产价格可能下跌。。",
-                "新区开发计划公布，相关区域",
-                "新区开发计划公布，相关区域房产看涨房产看涨。",
-                "银行。",
-                "银行利率调整，利率调整，存款收益存款收益增加。"
-           增加。"
+        case 'news':
+            const newsOptions = [
+                "政府推出购房补贴政策，房地产市场活跃！",
+                "经济形势不佳，房地产价格可能下跌。",
+                "新区开发计划公布，相关区域房产看涨。",
+                "银行利率调整，存款收益增加。"
             ];
-            gameState.news = ];
-            gameState.news = secureRandomChoice secureRandomChoice(new(newsOptions);
-            newssOptions);
-            newsContentElContentEl.textContent = gameState..textContent = gameState.newsnews;
+            gameState.news = secureRandomChoice(newsOptions);
+            newsContentEl.textContent = gameState.news;
             addToLog(`新闻更新：${gameState.news}`);
             break;
-;
     }
 }
 
-//            break;
-    }
-}
-
-//  开始银行开始银行任务
-function startBankJob() {
-    gameState.bankJob.active = true;
-    gameState.bankJob.problems = generateMathProblems(5);
-    gameState.bankJob.currentProblem = 0;
-    gameState.bankJob.salary = secureRandomInt(100,任务
+// 开始银行任务
 function startBankJob() {
     gameState.bankJob.active = true;
     gameState.bankJob.problems = generateMathProblems(5);
     gameState.bankJob.currentProblem = 0;
     gameState.bankJob.salary = secureRandomInt(100, 300);
     
- 300);
-    
-    show    showNextProblem();
-   NextProblem();
-    bankJob bankJobModal.style.display = 'flex';
-}
-
-Modal.style.display = 'flex';
+    showNextProblem();
+    bankJobModal.style.display = 'flex';
 }
 
 // 生成数学问题
-function generateMathProblems(countfunction generateMathProblems(count) {
-   ) {
+function generateMathProblems(count) {
     const problems = [];
- const problems = [];
-    for    for (let i =  (let i = 0;0; i < count; i++) {
- i < count; i++) {
-        const a = secure        const a = secureRandomRandomInt(Int(1, 50);
-       1, 50);
-        const b = const b = secureRandomInt secureRandomInt(1, 50);
-(1, 50);
-        const op = secureRandomFloat(        const op = secureRandomFloat(0, 0, 1) > 0.1) > 0.5 ? '+' :5 ? '+' : '-';
-        let answer;
-        
-        if (op '-';
+    for (let i = 0; i < count; i++) {
+        const a = secureRandomInt(1, 50);
+        const b = secureRandomInt(1, 50);
+        const op = secureRandomFloat(0, 1) > 0.5 ? '+' : '-';
         let answer;
         
         if (op === '+') {
-            answer = a + b === '+') {
             answer = a + b;
-        };
         } else {
-            answer = a else {
             answer = a - b;
         }
         
- - b;
-        }
-        
         problems.push({
-            question:        problems.push({
-            question: `${a} ${op} `${a} ${op} ${b} = ?`,
+            question: `${a} ${op} ${b} = ?`,
             answer: answer
         });
     }
@@ -1552,47 +1243,24 @@ function generateMathProblems(countfunction generateMathProblems(count) {
 
 // 显示下一个问题
 function showNextProblem() {
-    if (gameState.bankJob.currentProblem < gameState.bankJob.problems.length) < gameState.bankJob.problems.length) {
- {
-        const problem = gameState.b        const problem = gameState.bankJob.problemsankJob.problems[gameState.bankJob.currentProblem[gameState.bankJob.currentProblem];
-       ];
-        mathProblemEl.text mathProblemEl.textContent = problemContent = problem.question;
-        answerInputEl.question;
-        answerInputEl.value.value = '';
-        answerInput = '';
-        answerInputElEl.focus.focus();
-   ();
+    if (gameState.bankJob.currentProblem < gameState.bankJob.problems.length) {
+        const problem = gameState.bankJob.problems[gameState.bankJob.currentProblem];
+        mathProblemEl.textContent = problem.question;
+        answerInputEl.value = '';
+        answerInputEl.focus();
     } else {
-        game } else {
-        gameStateState.cash += game.cash += gameState.bankState.bankJob.salary;
-        addToLog(`完成Job.salary;
-        addToLog(`完成银行任务，获得薪水${gameState.b银行任务，获得薪水${gameState.bankJob.salaryankJob.salary}元}元`);
-        bankJob`);
-        bankJobModal.style.displayModal.style.display = 'none';
-        gameState = 'none';
-        gameState.bankJob.active =.bankJob.active = false false;
-        updateUI();
-    }
-}
-
-;
+        gameState.cash += gameState.bankJob.salary;
+        addToLog(`完成银行任务，获得薪水${gameState.bankJob.salary}元`);
+        bankJobModal.style.display = 'none';
+        gameState.bankJob.active = false;
         updateUI();
     }
 }
 
 // 检查答案
 function checkAnswer() {
-    const userAnswer = parseInt    const userAnswer = parseInt(answerInput(answerInputEl.value);
-   El.value);
-    const correct const correctAnswer = gameState.bankAnswer = gameState.bankJob.proJob.problems[gameState.bankJob.currentProblem].answer;
-    
-    if (userAnswer === correctAnswer) {
-        gameState.bankJob.currentProblem++;
-        showNextProblem();
-    } else {
-        alert('答案错误，请重新计算！');
-        answerInputEl.value = '';
-        answerInputEl.fblems[gameState.bankJob.currentProblem].answer;
+    const userAnswer = parseInt(answerInputEl.value);
+    const correctAnswer = gameState.bankJob.problems[gameState.bankJob.currentProblem].answer;
     
     if (userAnswer === correctAnswer) {
         gameState.bankJob.currentProblem++;
@@ -1604,21 +1272,11 @@ function checkAnswer() {
     }
 }
 
-//ocus();
-    }
-}
-
 // 添加日志
-function add 添加日志
-function addToLogToLog(message) {
-   (message) {
-    gameState.event gameState.eventLog.push(message);
-   Log.push(message);
-    if if (gameState.eventLog (gameState.eventLog.length > .length > 10) {
-10) {
-        gameState.event        gameState.eventLog.shift();
-    }
-Log.shift();
+function addToLog(message) {
+    gameState.eventLog.push(message);
+    if (gameState.eventLog.length > 10) {
+        gameState.eventLog.shift();
     }
 }
 
