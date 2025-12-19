@@ -163,6 +163,132 @@
         </div>
     </div>
 
+    <!-- 存档系统 -->
+    <div id="save-modal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 800px;">
+            <h2>🏦 游戏存档</h2>
+            <p>管理你的游戏进度</p>
+        
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="save-tab">保存游戏</button>
+                    <button class="tab-btn" data-tab="load-tab">加载游戏</button>
+                    <button class="tab-btn" data-tab="manage-tab">管理存档</button>
+                    <button class="tab-btn" data-tab="cloud-tab">云存档</button>
+                </div>
+            
+                <!-- 保存游戏标签页 -->
+                <div id="save-tab" class="tab-content active">
+                    <div class="save-slots">
+                        <div class="save-slot" onclick="saveGameToSlot('save1')">
+                            <div class="slot-header">
+                                <span class="slot-name">存档位 1</span>
+                                <span class="slot-status" id="slot1-status">空</span>
+                            </div>
+                            <div class="slot-info" id="slot1-info">暂无存档</div>
+                            <button class="save-btn">保存到此位</button>
+                        </div>
+                    
+                        <div class="save-slot" onclick="saveGameToSlot('save2')">
+                            <div class="slot-header">
+                                <span class="slot-name">存档位 2</span>
+                                <span class="slot-status" id="slot2-status">空</span>
+                            </div>
+                            <div class="slot-info" id="slot2-info">暂无存档</div>
+                                <button class="save-btn">保存到此位</button>
+                            </div>
+                    
+                        <div class="save-slot" onclick="saveGameToSlot('save3')">
+                            <div class="slot-header">
+                                <span class="slot-name">存档位 3</span>
+                                <span class="slot-status" id="slot3-status">空</span>
+                            </div>
+                            <div class="slot-info" id="slot3-info">暂无存档</div>
+                                <button class="save-btn">保存到此位</button>
+                            </div>
+                    </div>
+                
+                    <div class="save-options">
+                        <div class="option-group">
+                            <label>
+                                <input type="checkbox" id="auto-save" checked> 启用自动保存
+                            </label>
+                            <label>
+                                <input type="checkbox" id="backup-saves" checked> 创建备份存档
+                            </label>
+                        </div>
+                    
+                        <div class="quick-save-section">
+                            <button class="submit-btn" onclick="quickSaveGame()">快速保存</button>
+                            <button class="export-btn" onclick="exportCurrentSave()">导出当前存档</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 加载游戏标签页 -->
+                <div id="load-tab" class="tab-content">
+                    <div class="save-slots">
+                        <div class="save-slot load-slot" onclick="loadGameFromSlot('save1')">
+                            <div class="slot-header">
+                                <span class="slot-name">存档位 1</span>
+                                <span class="slot-status" id="load-slot1-status">空</span>
+                            </div>
+                            <div class="slot-info" id="load-slot1-info">暂无存档</div>
+                            <button class="load-btn">加载此存档</button>
+                        </div>
+                    
+                        <div class="save-slot load-slot" onclick="loadGameFromSlot('save2')">
+                            <div class="slot-header">
+                                <span class="slot-name">存档位 2</span>
+                                <span class="slot-status" id="load-slot2-status">空</span>
+                            </div>
+                            <div class="slot-info" id="load-slot2-info">暂无存档</div>
+                            <button class="load-btn">加载此存档</button>
+                        </div>
+                    
+                        <div class="save-slot load-slot" onclick="loadGameFromSlot('save3')">
+                            <div class="slot-header">
+                                <span class="slot-name">存档位 3</span>
+                                <span class="slot-status" id="load-slot3-status">空</span>
+                            </div>
+                            <div class="slot-info" id="load-slot3-info">暂无存档</div>
+                            <button class="load-btn">加载此存档</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 管理存档标签页 -->
+                <div id="manage-tab" class="tab-content">
+                    <div class="manage-actions">
+                        <button class="danger-btn" onclick="deleteAllSaves()">删除所有存档</button>
+                        <button class="warning-btn" onclick="repairSaves()">修复存档数据</button>
+                        <button class="info-btn" onclick="clearGameData()">清除游戏数据</button>
+                    </div>
+                
+                    <div class="save-stats">
+                        <h3>存档统计</h3>
+                            <div id="save-stats-info">加载中...</div>
+                        </div>
+                    </div>
+            
+                    <!-- 云存档标签页 -->
+                    <div id="cloud-tab" class="tab-content">
+                        <div class="cloud-section">
+                            <h3>导入存档</h3>
+                            <input type="file" id="import-file" accept=".json" style="margin: 10px 0;">
+                            <button onclick="importSaveFile()" class="submit-btn">导入存档</button>
+                    
+                            <h3 style="margin-top: 20px;">导出存档</h3>
+                            <button onclick="exportCurrentSave()" class="export-btn">导出当前存档</button>
+                            <button onclick="exportAllSaves()" class="export-btn">导出所有存档</button>
+                        </div>
+                    </div>
+                </div>
+        
+                <button class="submit-btn" onclick="closeSaveModal()" style="margin-top: 20px;">关闭</button>
+            </div>
+        </div>
+
     <script src="js/richGame.js"></script>
 </body>
 </html>
