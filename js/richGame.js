@@ -228,6 +228,9 @@ function initGame() {
     initInterestRates();
     updateUI();
     
+    // 创建存档按钮
+    createSaveButton();
+    
     // 事件监听
     document.getElementById('end-turn').addEventListener('click', endTurn);
     document.getElementById('buy-card-btn').addEventListener('click', buyCard);
@@ -1477,9 +1480,8 @@ function triggerRandomEvent() {
             gameState.news = secureRandomChoice secureRandomChoice(new(newsOptions);
             newssOptions);
             newsContentElContentEl.textContent = gameState..textContent = gameState.newsnews;
-            addToLog(`新闻;
             addToLog(`新闻更新：${gameState.news}`);
-            break更新：${gameState.news}`);
+            break;
 ;
     }
 }
@@ -1510,7 +1512,6 @@ function startBankJob() {
 Modal.style.display = 'flex';
 }
 
-// 生成数学问题
 // 生成数学问题
 function generateMathProblems(countfunction generateMathProblems(count) {
    ) {
@@ -1551,15 +1552,6 @@ function generateMathProblems(countfunction generateMathProblems(count) {
 
 // 显示下一个问题
 function showNextProblem() {
-    if (gameState.bankJob.currentProblem ${b} = ?`,
-            answer: answer
-        });
-    }
-    return problems;
-}
-
-// 显示下一个问题
-function showNextProblem() {
     if (gameState.bankJob.currentProblem < gameState.bankJob.problems.length) < gameState.bankJob.problems.length) {
  {
         const problem = gameState.b        const problem = gameState.bankJob.problemsankJob.problems[gameState.bankJob.currentProblem[gameState.bankJob.currentProblem];
@@ -1588,9 +1580,7 @@ function showNextProblem() {
     }
 }
 
-// // 检查答案
-function checkAnswer() {
-检查答案
+// 检查答案
 function checkAnswer() {
     const userAnswer = parseInt    const userAnswer = parseInt(answerInput(answerInputEl.value);
    El.value);
@@ -1632,7 +1622,214 @@ Log.shift();
     }
 }
 
-// 初始化}
+// 存档功能
 
-// 初始化游戏
-window.onload = initGame;
+// 1. 创建存档按钮
+function createSaveButton() {
+    const saveBtn = document.createElement('button');
+    saveBtn.id = 'save-btn';
+    saveBtn.textContent = '💾 存档';
+    saveBtn.onclick = showSaveModal;
+    document.body.appendChild(saveBtn);
+}
+
+// 2. 显示存档模态框
+function showSaveModal() {
+    const modal = document.getElementById('save-modal');
+    if (modal) {
+        updateSaveSlots();
+        modal.style.display = 'flex';
+    }
+}
+
+// 3. 关闭存档模态框
+function closeSaveModal() {
+    const modal = document.getElementById('save-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// 4. 更新存档槽位显示
+function updateSaveSlots() {
+    if (!window.saveManager) return;
+    
+    const saves = window.saveManager.getAllSaves();
+    
+    ['save1', 'save2', 'save3'].forEach(slot => {
+        const save = saves[slot];
+        
+        // 更新保存标签页
+        const statusEl = document.getElementById(`${slot}-status`);
+        const infoEl = document.getElementById(`${slot}-info`);
+        
+        if (save && save.saveTime) {
+            if (statusEl) {
+                statusEl.textContent = '已保存';
+                statusEl.setAttribute('data-status', 'saved');
+            }
+            if (infoEl) {
+                const date = new Date(save.saveTime);
+                infoEl.innerHTML = `
+                    <strong>${save.gameName}</strong><br>
+                    等级: ${save.level}<br>
+                    现金: ${save.cash.toLocaleString()}<br>
+                    保存时间: ${date.toLocaleDateString()}<br>
+                    游戏时间: ${Math.floor(save.playTime / 60)}分钟
+                `;
+            }
+        } else {
+            if (statusEl) {
+                statusEl.textContent = '空';
+                statusEl.setAttribute('data-status', 'empty');
+            }
+            if (infoEl) {
+                infoEl.textContent = '暂无存档';
+            }
+        }
+        
+        // 更新加载标签页
+        const loadStatusEl = document.getElementById(`load-${slot}-status`);
+        const loadInfoEl = document.getElementById(`load-${slot}-info`);
+        
+        if (loadStatusEl) loadStatusEl.textContent = statusEl.textContent;
+        if (loadStatusEl) loadStatusEl.setAttribute('data-status', statusEl.getAttribute('data-status'));
+        if (loadInfoEl) loadInfoEl.innerHTML = infoEl.innerHTML;
+    });
+}
+
+// 5. 保存游戏到指定槽位
+function saveGameToSlot(slot) {
+    const gameName = prompt('请输入存档名称:', `存档_${slot}_回合${gameState.turn}`);
+    if (gameName && window.saveManager) {
+        const success = window.saveManager.save(slot, gameName);
+        if (success) {
+            updateSaveSlots();
+        }
+    }
+}
+
+// 6. 从槽位加载游戏
+function loadGameFromSlot(slot) {
+    if (window.saveManager) {
+        const success = window.saveManager.load(slot);
+        if (success) {
+            closeSaveModal();
+            updateUI();
+        }
+    }
+}
+
+// 7. 快速保存
+function quickSaveGame() {
+    if (window.saveManager) {
+        const success = window.saveManager.save(window.saveManager.currentSlot, '快速保存');
+        if (success) {
+            updateSaveSlots();
+            addToLog('✅ 游戏已快速保存');
+        }
+    }
+}
+
+// 8. 导出当前存档
+function exportCurrentSave() {
+    if (window.saveManager) {
+        const exported = window.saveManager.exportSave(window.saveManager.currentSlot);
+        if (exported) {
+            addToLog('✅ 存档已导出');
+        }
+    }
+}
+
+// 9. 删除所有存档
+function deleteAllSaves() {
+    if (confirm('⚠️ 确定要删除所有存档吗？此操作不可恢复！')) {
+        ['save1', 'save2', 'save3'].forEach(slot => {
+            if (window.saveManager) {
+                window.saveManager.deleteSave(slot);
+            }
+        });
+        updateSaveSlots();
+    }
+}
+
+// 10. 导入存档文件
+function importSaveFile() {
+    const fileInput = document.getElementById('import-file');
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        alert('请选择要导入的存档文件');
+        return;
+    }
+    
+    const slot = prompt('导入到哪个槽位？(save1, save2, save3)', 'save1');
+    if (slot && window.saveManager) {
+        window.saveManager.importSave(file, slot)
+            .then(() => {
+                updateSaveSlots();
+                alert('存档导入成功！');
+            })
+            .catch(error => {
+                alert('导入失败: ' + error);
+            });
+    }
+}
+
+// 11. 修复存档数据
+function repairSaves() {
+    if (window.saveManager) {
+        // 这里可以添加存档修复逻辑
+        alert('存档修复功能开发中...');
+    }
+}
+
+// 12. 清除游戏数据
+function clearGameData() {
+    if (confirm('⚠️ 确定要清除所有游戏数据吗？包括存档和设置！')) {
+        localStorage.clear();
+        location.reload();
+    }
+}
+
+// 13. 导出所有存档
+function exportAllSaves() {
+    if (window.saveManager) {
+        // 这里可以实现批量导出功能
+        alert('批量导出功能开发中...');
+    }
+}
+
+// 14. 在游戏事件中添加自动保存点
+function addToLog(message) {
+    gameState.eventLog.push(message);
+    if (gameState.eventLog.length > 10) {
+        gameState.eventLog.shift();
+    }
+    
+    // 重要事件触发自动保存
+    if (message.includes('抢劫大成功') || 
+        message.includes('获得赦免') || 
+        message.includes('财富等级提升')) {
+        setTimeout(quickSaveGame, 1000);
+    }
+}
+
+// 15. 添加保存事件监听
+window.addEventListener('saveManagerEvent', (event) => {
+    const { type, slot, metadata } = event.detail;
+    console.log(`存档事件: ${type}, 槽位: ${slot}`);
+});
+
+// 16. 在页面加载时自动加载最近存档
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        // 自动加载最近存档的逻辑
+        const saves = window.saveManager ? window.saveManager.getAllSaves() : {};
+        const recentSave = Object.values(saves).find(save => save.saveTime);
+        
+        if (recentSave && confirm('检测到最近存档，是否加载？')) {
+            window.saveManager.load(recentSave.slotName);
+        }
+    }, 1000);
+});
