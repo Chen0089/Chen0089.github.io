@@ -443,38 +443,3 @@ form * {
         padding: 20px 12px;
     }
 }
-
-/* 横屏手机适配 */
-@media (max-height: 500px) and (orientation: landscape) {
-    .page1 {
-        min-height: 150vh;
-    }
-
-    .container {
-        padding: 20px 10px;
-    }
-
-    .box {
-        height: 280px;
-    }
-}
-
-/* 高分辨率屏幕适配 */
-@media (min-width: 1440px) {
-    .container {
-        max-width: 1400px;
-    }
-
-    .box {
-        max-width: 380px;
-        height: 450px;
-    }
-
-    .content {
-        padding: 25px 40px;
-    }
-
-    .box:hover .content {
-        padding: 70px 40px;
-    }
-}
