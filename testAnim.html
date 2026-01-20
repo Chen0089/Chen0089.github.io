@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chen0089 - 动画测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0f0f23;
+            color: white;
+            font-family: 'Consolas', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .test-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .animation-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            color: #00ccff;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: #ffbc00;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #00ccff, #0099ff);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-family: 'Consolas', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            min-width: 180px;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 204, 255, 0.3);
+        }
+        
+        /* 动画效果3：模糊消失 */
+        .effect-3 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            filter: blur(0px);
+            transition: opacity 1.5s ease, filter 1.5s ease;
+        }
+        
+        .effect-3.hide {
+            opacity: 0;
+            filter: blur(20px);
+        }
+        
+        /* 动画效果4：粒子消散 */
+        .effect-4 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0px);
+            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .effect-4.hide {
+            opacity: 0;
+            transform: scale(1.2);
+            filter: blur(10px);
+        }
+        
+        /* 圆形加载动画 */
+        .circle-loader {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #00ccff 0% 25%,
+                #ff0058 25% 50%,
+                #ffbc00 50% 75%,
+                #4dff03 75% 100%
+            );
+            animation: rotate 2s linear infinite;
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        .circle-loader::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #0f0f23;
+            top: 5px;
+            left: 5px;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 滚动圆圈变大的效果 */
+        .expanding-circle {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(0, 204, 255, 0.8) 0%,
+                rgba(0, 204, 255, 0.4) 50%,
+                rgba(0, 204, 255, 0) 70%
+            );
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .expanding-circle.active {
+            opacity: 1;
+            width: 300vh;
+            height: 300vh;
+            filter: blur(20px);
+        }
+        
+        /* 主页面内容 */
+        .main-content {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .main-content.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: left;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            border-left: 4px solid #00ccff;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- 动画效果3：模糊消失 -->
+    <div id="effect3" class="effect-3">
+        <h1 style="color: #00ccff; margin-bottom: 20px;">动画效果3</h1>
+        <div class="circle-loader"></div>
+        <p style="color: rgba(255,255,255,0.8);">模糊消失效果</p>
+    </div>
+    
+    <!-- 动画效果4：粒子消散 -->
+    <div id="effect4" class="effect-4">
+        <h1 style="color: #ff0058; margin-bottom: 20px;">动画效果4</h1>
+        <div class="circle-loader"></div>
+        <p style="color: rgba(255,255,255,0.8);">粒子消散效果</p>
+    </div>
+    
+    <!-- 滚动圆圈效果 -->
+    <div id="expandingCircle" class="expanding-circle"></div>
+    
+    <!-- 主测试页面 -->
+    <div class="test-container">
+        <h1>动画效果测试</h1>
+        
+        <div class="animation-box">
+            <h2>📱 选择动画效果</h2>
+            <p>测试不同的欢迎页面消失动画，观察哪种效果最适合你的网站风格。</p>
+            
+            <div class="btn-group">
+                <button onclick="testEffect3()">测试效果3：模糊消失</button>
+                <button onclick="testEffect4()">测试效果4：粒子消散</button>
+                <button onclick="testCombined()">测试完整流程</button>
+                <button onclick="resetTest()">重置测试</button>
+            </div>
+        </div>
+        
+        <div class="animation-box">
+            <h2>🎨 效果说明</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3 style="color: #00ccff;">效果3：模糊消失</h3>
+                    <p>页面逐渐模糊并淡出，营造一种柔和、梦幻的过渡效果。</p>
+                    <div class="code-block">
+/* CSS代码 */
+.effect-3.hide {
+    opacity: 0;
+    filter: blur(20px);
+    transition: 1.5s ease;
+}
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h3 style="color: #ff0058;">效果4：粒子消散</h3>
+                    <p>页面轻微放大、模糊并淡出，像粒子一样消散的效果。</p>
+                    <div class="code-block">
+/* CSS代码 */
+.effect-4.hide {
+    opacity: 0;
+    transform: scale(1.2);
+    filter: blur(10px);
+    transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h3 style="color: #4dff03;">滚动圆圈效果</h3>
+                    <p>加载完成后，圆圈不断放大直到覆盖整个屏幕，然后显示主页面。</p>
+                    <div class="code-block">
+/* CSS代码 */
+.expanding-circle.active {
+    opacity: 1;
+    width: 300vh;  /* 放大到300倍视口高度 */
+    height: 300vh;
+    filter: blur(20px);
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content" id="mainContent">
+            <h2 style="color: #00ccff;">🎉 欢迎来到主页面！</h2>
+            <p style="color: rgba(255,255,255,0.8); margin: 20px 0;">动画效果测试完成，这里是你的主页面内容。</p>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3 style="color: #ffbc00;">💡 使用建议</h3>
+                    <p>效果3更适合优雅、柔和的设计风格；效果4更有冲击力，适合科技感强的网站。</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3 style="color: #4dff03;">🚀 性能提示</h3>
+                    <p>模糊效果（filter: blur）需要GPU加速，确保动画流畅。</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3 style="color: #00d0ff;">🎬 动画时长</h3>
+                    <p>建议动画时长在1-1.5秒之间，太短显得仓促，太长会让用户等待。</p>
+                </div>
+            </div>
+            
+            <div class="btn-group" style="margin-top: 40px;">
+                <button onclick="window.location.reload()">重新开始</button>
+                <button onclick="exportCode()">导出代码</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentEffect = null;
+        
+        function testEffect3() {
+            resetTest();
+            currentEffect = 'effect3';
+            document.getElementById('effect3').style.display = 'flex';
+            
+            // 1秒后开始动画
+            setTimeout(() => {
+                document.getElementById('effect3').classList.add('hide');
+                
+                // 动画完成后显示主页面
+                setTimeout(() => {
+                    document.getElementById('effect3').style.display = 'none';
+                    document.getElementById('mainContent').classList.add('show');
+                }, 1500);
+            }, 1000);
+        }
+        
+        function testEffect4() {
+            resetTest();
+            currentEffect = 'effect4';
+            document.getElementById('effect4').style.display = 'flex';
+            
+            // 1秒后开始动画
+            setTimeout(() => {
+                document.getElementById('effect4').classList.add('hide');
+                
+                // 动画完成后显示主页面
+                setTimeout(() => {
+                    document.getElementById('effect4').style.display = 'none';
+                    document.getElementById('mainContent').classList.add('show');
+                }, 1500);
+            }, 1000);
+        }
+        
+        function testCombined() {
+            resetTest();
+            currentEffect = 'effect4'; // 使用效果4作为基础
+            
+            // 先显示欢迎页面
+            document.getElementById('effect4').style.display = 'flex';
+            document.getElementById('effect4').classList.remove('hide');
+            
+            // 模拟加载过程（2秒）
+            setTimeout(() => {
+                // 触发滚动圆圈效果
+                const circle = document.getElementById('expandingCircle');
+                circle.classList.add('active');
+                
+                // 同时开始欢迎页面动画
+                document.getElementById('effect4').classList.add('hide');
+                
+                // 圆圈放大动画完成后
+                setTimeout(() => {
+                    // 隐藏欢迎页面
+                    document.getElementById('effect4').style.display = 'none';
+                    
+                    // 重置圆圈
+                    circle.classList.remove('active');
+                    
+                    // 显示主页面
+                    setTimeout(() => {
+                        document.getElementById('mainContent').classList.add('show');
+                    }, 300);
+                    
+                }, 800); // 圆圈动画时长
+                
+            }, 2000); // 加载时长
+        }
+        
+        function resetTest() {
+            // 重置所有元素
+            const effects = ['effect3', 'effect4'];
+            effects.forEach(id => {
+                const element = document.getElementById(id);
+                element.classList.remove('hide');
+                element.style.display = 'none';
+            });
+            
+            document.getElementById('expandingCircle').classList.remove('active');
+            document.getElementById('mainContent').classList.remove('show');
+            currentEffect = null;
+        }
+        
+        function exportCode() {
+            const effectCode = currentEffect === 'effect3' ? 
+                `/* 模糊消失效果 */
+.welcome-screen.hide {
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 1.5s ease, filter 1.5s ease;
+}` :
+                `/* 粒子消散效果 */
+.welcome-screen.hide {
+    opacity: 0;
+    transform: scale(1.2);
+    filter: blur(10px);
+    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}`;
+            
+            const fullCode = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你的网站</title>
+    <style>
+        /* 欢迎页面 */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        ${effectCode}
+        
+        /* 滚动圆圈效果 */
+        .expanding-circle {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(0, 204, 255, 0.8) 0%,
+                rgba(0, 204, 255, 0.4) 50%,
+                rgba(0, 204, 255, 0) 70%
+            );
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .expanding-circle.active {
+            opacity: 1;
+            width: 300vh;
+            height: 300vh;
+            filter: blur(20px);
+        }
+        
+        /* 主页面 */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .main-content.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-screen" id="welcome">
+        <!-- 你的欢迎内容 -->
+    </div>
+    
+    <div class="expanding-circle" id="circle"></div>
+    
+    <div class="main-content" id="main">
+        <!-- 你的主页面内容 -->
+    </div>
+    
+    <script>
+        window.addEventListener('load', function() {
+            const welcome = document.getElementById('welcome');
+            const circle = document.getElementById('circle');
+            const main = document.getElementById('main');
+            
+            setTimeout(() => {
+                // 触发圆圈动画
+                circle.classList.add('active');
+                
+                // 同时开始欢迎页面动画
+                welcome.classList.add('hide');
+                
+                // 动画完成后
+                setTimeout(() => {
+                    welcome.style.display = 'none';
+                    circle.classList.remove('active');
+                    main.classList.add('show');
+                }, 1500);
+            }, 1000);
+        });
+    <\/script>
+</body>
+</html>`;
+            
+            // 创建下载
+            const blob = new Blob([fullCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'welcome-animation.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('代码已导出为 welcome-animation.html');
+        }
+        
+        // 初始状态
+        resetTest();
+        document.getElementById('mainContent').classList.remove('show');
+    </script>
+</body>
+</html>
