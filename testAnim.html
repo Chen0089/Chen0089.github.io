@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>粒子效果测试</title>
+    <title>修复版效果测试</title>
     <style>
         * {
             margin: 0;
@@ -16,80 +16,141 @@
             color: white;
             font-family: 'Consolas', monospace;
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 40px 20px;
         }
         
         h1 {
-            text-align: center;
             color: #00ccff;
-            font-size: 3rem;
-            margin-bottom: 50px;
-            text-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
         }
         
-        .effect-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .effect-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .effect-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .effect-title {
-            color: #ffbc00;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+        .test-container {
             display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .effect-desc {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            margin-bottom: 20px;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 800px;
+            width: 100%;
         }
         
         .test-btn {
             background: linear-gradient(135deg, #00ccff, #0099ff);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 15px 30px;
             border-radius: 25px;
             font-family: 'Consolas', monospace;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
-            font-size: 16px;
+            margin-top: 20px;
         }
         
         .test-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 204, 255, 0.3);
         }
         
-        /* 欢迎屏幕基础样式 */
-        .welcome-screen {
+        /* ===== 修复版粒子效果 ===== */
+        #particle-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            opacity: 0.9;
+            transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* 修复：粒子分散在整个屏幕 */
+        .particle.square {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00ccff, #0099ff);
+            border-radius: 8px;
+        }
+        
+        .particle.circle {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #ff0058, #ffbc00);
+            border-radius: 50%;
+        }
+        
+        .particle.triangle {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 50px solid #4dff03;
+            background: none;
+        }
+        
+        #particle-effect.hide .particle {
+            transform: 
+                translate(
+                    calc((Math.random() - 0.5) * 200vw),
+                    calc((Math.random() - 0.5) * 200vh)
+                )
+                scale(0.1)
+                rotate(calc(Math.random() * 720deg));
+            opacity: 0;
+        }
+        
+        /* ===== 修复版网格效果 ===== */
+        #grid-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            gap: 1px;
+            z-index: 9999;
+            padding: 1px;
+        }
+        
+        .grid-cell {
+            background: linear-gradient(135deg, 
+                rgba(0, 204, 255, 0.9),
+                rgba(0, 153, 255, 0.9)
+            );
+            transition: all 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        #grid-effect.hide .grid-cell {
+            transform: 
+                translate(
+                    calc((Math.random() - 0.5) * 100vw),
+                    calc((Math.random() - 0.5) * 100vh)
+                )
+                scale(0.1)
+                rotate(calc(Math.random() * 360deg));
+            opacity: 0;
+        }
+        
+        /* ===== 增强版模糊效果 ===== */
+        #enhanced-blur {
             position: fixed;
             top: 0;
             left: 0;
@@ -103,9 +164,156 @@
             z-index: 9999;
         }
         
-        .welcome-content {
-            text-align: center;
+        /* 多层模糊效果 */
+        #enhanced-blur::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(0, 204, 255, 0.1),
+                rgba(255, 0, 88, 0.1),
+                rgba(255, 188, 0, 0.1)
+            );
+            filter: blur(5px);
+            z-index: 1;
+        }
+        
+        /* 光晕效果 */
+        #enhanced-blur::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, 
+                rgba(0, 204, 255, 0.3) 0%,
+                rgba(0, 204, 255, 0.1) 50%,
+                transparent 70%
+            );
+            filter: blur(20px);
             z-index: 2;
+        }
+        
+        #enhanced-blur.hide {
+            animation: enhancedBlurOut 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes enhancedBlurOut {
+            0% {
+                opacity: 1;
+                filter: blur(0px);
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                filter: blur(10px);
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 0;
+                filter: blur(30px);
+                transform: scale(1.1);
+                display: none;
+            }
+        }
+        
+        /* ===== 升级版模糊效果（带粒子） ===== */
+        #blur-with-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        
+        .blur-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(1px);
+            animation: floatParticle 20s linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+            }
+            100% {
+                transform: translateY(-100px) translateX(calc(var(--x-end) * 100px));
+            }
+        }
+        
+        #blur-with-particles.hide {
+            animation: blurWithParticlesOut 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes blurWithParticlesOut {
+            0% {
+                opacity: 1;
+                filter: blur(0px);
+                backdrop-filter: blur(0px);
+            }
+            30% {
+                opacity: 0.8;
+                filter: blur(5px);
+                backdrop-filter: blur(5px);
+            }
+            100% {
+                opacity: 0;
+                filter: blur(25px);
+                backdrop-filter: blur(25px);
+                transform: scale(1.08);
+            }
+        }
+        
+        /* ===== 圆圈放大效果 ===== */
+        .expanding-circle {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(0, 204, 255, 0.95) 0%,
+                rgba(0, 204, 255, 0.7) 30%,
+                rgba(0, 204, 255, 0.4) 60%,
+                rgba(0, 204, 255, 0) 85%
+            );
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .expanding-circle.active {
+            opacity: 1;
+            width: 300vh;
+            height: 300vh;
+            filter: blur(40px);
+        }
+        
+        /* 欢迎内容样式 */
+        .welcome-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
         }
         
         .welcome-logo {
@@ -123,7 +331,6 @@
         .loading-text {
             color: rgba(255, 255, 255, 0.8);
             font-size: 1.2rem;
-            margin-top: 20px;
         }
         
         @keyframes gradientShift {
@@ -131,145 +338,8 @@
             100% { background-position: 300% 50%; }
         }
         
-        /* 效果1：大块方块粒子 */
-        .welcome-screen.effect-1 {
-            overflow: hidden;
-        }
-        
-        .effect-1 .particle {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #00ccff, #0099ff);
-            border-radius: 4px;
-            opacity: 0.8;
-            z-index: 1;
-            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .effect-1.hide .particle {
-            transform: 
-                translate(
-                    calc((Math.random() - 0.5) * 2000px),
-                    calc((Math.random() - 0.5) * 2000px)
-                )
-                scale(0.1)
-                rotate(calc(Math.random() * 720deg));
-            opacity: 0;
-        }
-        
-        /* 效果2：混合形状粒子 */
-        .welcome-screen.effect-2 {
-            overflow: hidden;
-        }
-        
-        .effect-2 .particle {
-            position: absolute;
-            background: linear-gradient(135deg, #ff0058, #ffbc00);
-            opacity: 0.9;
-            z-index: 1;
-            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .effect-2 .particle.square {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-        }
-        
-        .effect-2 .particle.circle {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-        }
-        
-        .effect-2 .particle.triangle {
-            width: 0;
-            height: 0;
-            border-left: 25px solid transparent;
-            border-right: 25px solid transparent;
-            border-bottom: 45px solid #4dff03;
-            background: none;
-        }
-        
-        .effect-2.hide .particle {
-            transform: 
-                translate(
-                    calc((Math.random() - 0.5) * 1500px),
-                    calc((Math.random() - 0.5) * 1500px)
-                )
-                scale(0)
-                rotate(calc(Math.random() * 1080deg));
-            opacity: 0;
-        }
-        
-        /* 效果3：彩色碎片效果 */
-        .welcome-screen.effect-3 {
-            overflow: hidden;
-        }
-        
-        .effect-3 .fragment {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, 
-                var(--color1), 
-                var(--color2)
-            );
-            clip-path: polygon(
-                50% 0%,
-                100% 25%,
-                100% 75%,
-                50% 100%,
-                0% 75%,
-                0% 25%
-            );
-            opacity: 0.85;
-            z-index: 1;
-            transition: all 1.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        .effect-3.hide .fragment {
-            transform: 
-                translate(
-                    calc((Math.random() - 0.5) * 1800px),
-                    calc((Math.random() - 0.5) * 1800px)
-                )
-                scale(0.05)
-                rotate(calc(Math.random() * 1440deg));
-            opacity: 0;
-            filter: blur(5px);
-        }
-        
-        /* 效果4：网格破碎效果 */
-        .welcome-screen.effect-4 {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-template-rows: repeat(8, 1fr);
-        }
-        
-        .effect-4 .grid-cell {
-            background: linear-gradient(135deg, 
-                rgba(0, 204, 255, 0.9),
-                rgba(0, 153, 255, 0.9)
-            );
-            margin: 1px;
-            transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-        
-        .effect-4.hide .grid-cell {
-            transform: 
-                translate(
-                    calc((Math.random() - 0.5) * 1000px),
-                    calc((Math.random() - 0.5) * 1000px)
-                )
-                scale(0.1)
-                rotate(calc(Math.random() * 360deg));
-            opacity: 0;
-        }
-        
-        /* 控制面板 */
-        .controls {
+        /* 结果展示 */
+        .result {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 30px;
@@ -277,450 +347,300 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .control-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .result h2 {
+            color: #ffbc00;
+            margin-bottom: 20px;
         }
         
-        .slider-container {
-            margin-bottom: 15px;
-        }
-        
-        label {
-            display: block;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 8px;
-        }
-        
-        input[type="range"] {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            outline: none;
-            -webkit-appearance: none;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #00ccff;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        .preview-btn {
-            background: linear-gradient(135deg, #4dff03, #00d0ff);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-family: 'Consolas', monospace;
-            font-size: 18px;
+        .recommendation {
+            color: #4dff03;
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
             margin-top: 20px;
-        }
-        
-        .preview-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(77, 255, 3, 0.3);
-        }
-        
-        /* 圆圈放大效果 */
-        .expanding-circle {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: radial-gradient(circle, 
-                rgba(0, 204, 255, 0.95) 0%,
-                rgba(0, 204, 255, 0.7) 30%,
-                rgba(0, 204, 255, 0.4) 60%,
-                rgba(0, 204, 255, 0) 85%
-            );
-            z-index: 10000;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .expanding-circle.active {
-            opacity: 1;
-            width: 400vh;
-            height: 400vh;
-            filter: blur(40px);
-        }
-        
-        /* 代码展示 */
-        .code-preview {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-            font-family: 'Consolas', monospace;
-            font-size: 14px;
-            line-height: 1.5;
-            overflow-x: auto;
-            border-left: 4px solid #00ccff;
+            padding: 10px;
+            background: rgba(77, 255, 3, 0.1);
+            border-radius: 8px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎨 粒子消散效果测试</h1>
+    <div class="test-container">
+        <h1>🎬 修复版效果测试</h1>
         
-        <div class="effect-group">
-            <div class="effect-card" data-effect="1">
-                <div class="effect-title">🔲 大块方块粒子</div>
-                <div class="effect-desc">
-                    40x40像素的大方块，数量较少但效果明显，粒子会飞向四面八方。
-                </div>
-                <button class="test-btn" onclick="testEffect(1)">测试效果</button>
-            </div>
-            
-            <div class="effect-card" data-effect="2">
-                <div class="effect-title">🔷 混合形状粒子</div>
-                <div class="effect-desc">
-                    方形、圆形、三角形混合，色彩鲜艳，粒子更大更醒目。
-                </div>
-                <button class="test-btn" onclick="testEffect(2)">测试效果</button>
-            </div>
-            
-            <div class="effect-card" data-effect="3">
-                <div class="effect-title">✨ 彩色碎片效果</div>
-                <div class="effect-desc">
-                    六边形彩色碎片，带有旋转和模糊效果，像玻璃破碎。
-                </div>
-                <button class="test-btn" onclick="testEffect(3)">测试效果</button>
-            </div>
-            
-            <div class="effect-card" data-effect="4">
-                <div class="effect-title">🧊 网格破碎效果</div>
-                <div class="effect-desc">
-                    整个页面分成网格，每个格子独立飞出，效果震撼。
-                </div>
-                <button class="test-btn" onclick="testEffect(4)">测试效果</button>
-            </div>
+        <div class="test-section">
+            <h2 style="color: #00ccff;">1. 修复版粒子效果</h2>
+            <p>粒子现在会分散在整个屏幕，而不是堆在中间</p>
+            <button class="test-btn" onclick="testEffect('particle')">测试粒子效果</button>
         </div>
         
-        <div class="controls">
-            <h2 style="color: #ffbc00; margin-bottom: 20px;">⚙️ 效果调节</h2>
-            
-            <div class="control-group">
-                <div class="slider-container">
-                    <label>粒子大小: <span id="sizeValue">40px</span></label>
-                    <input type="range" id="particleSize" min="20" max="80" value="40" oninput="updateSize()">
-                </div>
-                
-                <div class="slider-container">
-                    <label>粒子数量: <span id="countValue">15个</span></label>
-                    <input type="range" id="particleCount" min="5" max="30" value="15" oninput="updateCount()">
-                </div>
-                
-                <div class="slider-container">
-                    <label>动画时长: <span id="durationValue">1.5秒</span></label>
-                    <input type="range" id="animationDuration" min="5" max="30" value="15" oninput="updateDuration()">
-                </div>
-            </div>
-            
-            <button class="preview-btn" onclick="previewCurrentEffect()">
-                🎬 预览当前设置效果
-            </button>
+        <div class="test-section">
+            <h2 style="color: #ff0058;">2. 修复版网格效果</h2>
+            <p>网格现在会正确显示和破碎</p>
+            <button class="test-btn" onclick="testEffect('grid')">测试网格效果</button>
         </div>
         
-        <div class="code-preview" id="codeOutput">
-            // 代码将在这里显示
+        <div class="test-section">
+            <h2 style="color: #ffbc00;">3. 增强版模糊效果</h2>
+            <p>多层模糊 + 光晕 + 缩放，效果更丰富</p>
+            <button class="test-btn" onclick="testEffect('enhanced-blur')">测试增强模糊</button>
+        </div>
+        
+        <div class="test-section">
+            <h2 style="color: #4dff03;">4. 模糊+粒子组合效果</h2>
+            <p>背景模糊 + 浮动粒子，最推荐的效果！</p>
+            <button class="test-btn" onclick="testEffect('blur-with-particles')">测试组合效果</button>
+        </div>
+        
+        <div class="result" id="result" style="display: none;">
+            <h2>🎯 测试结果</h2>
+            <div id="result-content"></div>
+            <div class="recommendation" id="recommendation"></div>
         </div>
     </div>
     
-    <!-- 效果1：大块方块粒子 -->
-    <div id="effect1" class="welcome-screen effect-1" style="display: none;">
+    <!-- 效果容器 -->
+    <div id="particle-effect" class="welcome-screen">
         <div class="welcome-content">
             <div class="welcome-logo">chen0089</div>
-            <div class="loading-text">方块粒子效果加载中...</div>
+            <div class="loading-text">粒子效果测试</div>
         </div>
     </div>
     
-    <!-- 效果2：混合形状粒子 -->
-    <div id="effect2" class="welcome-screen effect-2" style="display: none;">
+    <div id="grid-effect" class="welcome-screen"></div>
+    
+    <div id="enhanced-blur" class="welcome-screen">
         <div class="welcome-content">
             <div class="welcome-logo">chen0089</div>
-            <div class="loading-text">混合粒子效果加载中...</div>
+            <div class="loading-text">增强模糊效果</div>
         </div>
     </div>
     
-    <!-- 效果3：彩色碎片效果 -->
-    <div id="effect3" class="welcome-screen effect-3" style="display: none;">
+    <div id="blur-with-particles" class="welcome-screen">
         <div class="welcome-content">
             <div class="welcome-logo">chen0089</div>
-            <div class="loading-text">彩色碎片效果加载中...</div>
+            <div class="loading-text">模糊+粒子组合</div>
         </div>
     </div>
     
-    <!-- 效果4：网格破碎效果 -->
-    <div id="effect4" class="welcome-screen effect-4" style="display: none;">
-        <div class="welcome-content">
-            <div class="welcome-logo">chen0089</div>
-            <div class="loading-text">网格破碎效果加载中...</div>
-        </div>
-    </div>
-    
-    <!-- 圆圈放大效果 -->
     <div id="expandingCircle" class="expanding-circle"></div>
 
     <script>
-        let currentEffect = null;
-        let settings = {
-            size: 40,
-            count: 15,
-            duration: 1.5
-        };
+        // 初始化所有效果为隐藏
+        document.querySelectorAll('.welcome-screen').forEach(el => {
+            el.style.display = 'none';
+        });
         
-        // 初始化设置显示
-        updateSize();
-        updateCount();
-        updateDuration();
-        
-        function testEffect(effectNum) {
-            resetAllEffects();
-            currentEffect = effectNum;
+        function testEffect(effectType) {
+            // 隐藏所有效果
+            document.querySelectorAll('.welcome-screen').forEach(el => {
+                el.style.display = 'none';
+                el.classList.remove('hide');
+            });
             
-            const effect = document.getElementById(`effect${effectNum}`);
-            effect.style.display = 'flex';
+            // 重置圆圈
+            document.getElementById('expandingCircle').classList.remove('active');
             
-            // 生成粒子
-            generateParticles(effectNum);
+            // 根据类型设置
+            const effect = document.getElementById(effectType);
+            effect.style.display = effectType === 'grid-effect' ? 'grid' : 'flex';
             
-            // 模拟加载
+            // 初始化效果元素
+            if (effectType === 'particle-effect') {
+                createParticles();
+            } else if (effectType === 'grid-effect') {
+                createGrid();
+            } else if (effectType === 'blur-with-particles') {
+                createBlurParticles();
+            }
+            
+            // 开始测试
             setTimeout(() => {
-                // 激活圆圈放大效果
+                // 先显示圆圈放大效果
                 const circle = document.getElementById('expandingCircle');
                 circle.classList.add('active');
                 
-                // 开始粒子动画
-                effect.classList.add('hide');
+                // 延迟一点开始效果动画
+                setTimeout(() => {
+                    effect.classList.add('hide');
+                }, 200);
                 
                 // 动画完成后
                 setTimeout(() => {
                     effect.style.display = 'none';
-                    circle.classList.remove('active');
                     effect.classList.remove('hide');
-                    resetParticles(effectNum);
+                    circle.classList.remove('active');
                     
-                    // 生成代码预览
-                    generateCodePreview(effectNum);
-                }, settings.duration * 1000 + 500);
-            }, 2000);
+                    // 显示测试结果
+                    showResult(effectType);
+                    
+                    // 清理创建的元素
+                    if (effectType === 'particle-effect') {
+                        clearParticles();
+                    } else if (effectType === 'grid-effect') {
+                        clearGrid();
+                    } else if (effectType === 'blur-with-particles') {
+                        clearBlurParticles();
+                    }
+                }, 2200);
+            }, 1000);
         }
         
-        function generateParticles(effectNum) {
-            const effect = document.getElementById(`effect${effectNum}`);
-            effect.innerHTML = '<div class="welcome-content"><div class="welcome-logo">chen0089</div><div class="loading-text">加载中...</div></div>';
+        function createParticles() {
+            const effect = document.getElementById('particle-effect');
+            const particleCount = 15;
             
-            const colors = [
-                ['#00ccff', '#0099ff'],   // 蓝
-                ['#ff0058', '#ffbc00'],   // 红黄
-                ['#4dff03', '#00d0ff'],   // 绿蓝
-                ['#ffbc00', '#ff0058'],   // 黄红
-                ['#9d00ff', '#00ccff']    // 紫蓝
-            ];
+            // 先清除现有粒子
+            clearParticles();
             
-            if (effectNum === 1) {
-                // 大块方块粒子
-                for (let i = 0; i < settings.count; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    particle.style.width = `${settings.size}px`;
-                    particle.style.height = `${settings.size}px`;
-                    particle.style.left = `calc(50% - ${settings.size/2}px)`;
-                    particle.style.top = `calc(50% - ${settings.size/2}px)`;
-                    const colorSet = colors[i % colors.length];
-                    particle.style.background = `linear-gradient(135deg, ${colorSet[0]}, ${colorSet[1]})`;
-                    effect.appendChild(particle);
-                }
-            } else if (effectNum === 2) {
-                // 混合形状粒子
+            // 创建新粒子（分散在整个屏幕）
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // 随机选择形状
                 const shapes = ['square', 'circle', 'triangle'];
-                for (let i = 0; i < settings.count; i++) {
-                    const particle = document.createElement('div');
-                    const shape = shapes[i % shapes.length];
-                    particle.className = `particle ${shape}`;
-                    
-                    if (shape === 'triangle') {
-                        particle.style.borderBottomColor = colors[i % colors.length][0];
-                    } else {
-                        const colorSet = colors[i % colors.length];
-                        particle.style.background = `linear-gradient(135deg, ${colorSet[0]}, ${colorSet[1]})`;
-                    }
-                    
-                    particle.style.left = '50%';
-                    particle.style.top = '50%';
-                    particle.style.transform = 'translate(-50%, -50%)';
-                    effect.appendChild(particle);
-                }
-            } else if (effectNum === 3) {
-                // 彩色碎片效果
-                for (let i = 0; i < settings.count; i++) {
-                    const fragment = document.createElement('div');
-                    fragment.className = 'fragment';
-                    fragment.style.width = `${settings.size * 1.5}px`;
-                    fragment.style.height = `${settings.size * 1.5}px`;
-                    fragment.style.left = '50%';
-                    fragment.style.top = '50%';
-                    fragment.style.transform = 'translate(-50%, -50%)';
-                    
-                    const colorSet = colors[i % colors.length];
-                    fragment.style.setProperty('--color1', colorSet[0]);
-                    fragment.style.setProperty('--color2', colorSet[1]);
-                    
-                    effect.appendChild(fragment);
-                }
-            } else if (effectNum === 4) {
-                // 网格破碎效果
-                const gridSize = Math.ceil(Math.sqrt(settings.count));
-                for (let row = 0; row < gridSize; row++) {
-                    for (let col = 0; col < gridSize; col++) {
-                        if (row * gridSize + col >= settings.count) break;
-                        
-                        const cell = document.createElement('div');
-                        cell.className = 'grid-cell';
-                        cell.style.gridColumn = `${col + 1}`;
-                        cell.style.gridRow = `${row + 1}`;
-                        
-                        const colorSet = colors[(row + col) % colors.length];
-                        cell.style.background = `linear-gradient(135deg, ${colorSet[0]}, ${colorSet[1]})`;
-                        
-                        effect.appendChild(cell);
-                    }
-                }
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                particle.classList.add(shape);
+                
+                // 随机位置（整个屏幕）
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                
+                effect.appendChild(particle);
             }
         }
         
-        function resetParticles(effectNum) {
-            const effect = document.getElementById(`effect${effectNum}`);
-            const particles = effect.querySelectorAll('.particle, .fragment, .grid-cell');
+        function clearParticles() {
+            const effect = document.getElementById('particle-effect');
+            const particles = effect.querySelectorAll('.particle');
             particles.forEach(p => p.remove());
         }
         
-        function resetAllEffects() {
-            for (let i = 1; i <= 4; i++) {
-                const effect = document.getElementById(`effect${i}`);
-                effect.style.display = 'none';
-                effect.classList.remove('hide');
-                resetParticles(i);
-            }
-            document.getElementById('expandingCircle').classList.remove('active');
-        }
-        
-        function updateSize() {
-            settings.size = parseInt(document.getElementById('particleSize').value);
-            document.getElementById('sizeValue').textContent = `${settings.size}px`;
-        }
-        
-        function updateCount() {
-            settings.count = parseInt(document.getElementById('particleCount').value);
-            document.getElementById('countValue').textContent = `${settings.count}个`;
-        }
-        
-        function updateDuration() {
-            const rawValue = parseInt(document.getElementById('animationDuration').value);
-            settings.duration = rawValue / 10;
-            document.getElementById('durationValue').textContent = `${settings.duration}秒`;
-        }
-        
-        function previewCurrentEffect() {
-            if (currentEffect) {
-                testEffect(currentEffect);
-            } else {
-                testEffect(1);
+        function createGrid() {
+            const grid = document.getElementById('grid-effect');
+            
+            // 先清除现有网格
+            clearGrid();
+            
+            // 创建10x10网格
+            for (let i = 0; i < 100; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                
+                // 添加一些颜色变化
+                const hue = (i * 3.6) % 360;
+                cell.style.background = `linear-gradient(135deg, 
+                    hsla(${hue}, 100%, 50%, 0.9),
+                    hsla(${(hue + 60) % 360}, 100%, 50%, 0.9)
+                )`;
+                
+                grid.appendChild(cell);
             }
         }
         
-        function generateCodePreview(effectNum) {
-            const codeTemplates = {
-                1: `/* 大块方块粒子效果 */
-.particle {
-    width: ${settings.size}px;
-    height: ${settings.size}px;
-    background: linear-gradient(135deg, #00ccff, #0099ff);
-    border-radius: 4px;
-    opacity: 0.8;
-    transition: all ${settings.duration}s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.welcome-screen.hide .particle {
-    transform: translate(randomX, randomY) scale(0.1) rotate(randomDeg);
-    opacity: 0;
-}`,
-                2: `/* 混合形状粒子效果 */
-.particle {
-    opacity: 0.9;
-    transition: all ${settings.duration}s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.particle.square {
-    width: ${settings.size}px;
-    height: ${settings.size}px;
-    border-radius: 8px;
-}
-
-.particle.circle {
-    width: ${settings.size}px;
-    height: ${settings.size}px;
-    border-radius: 50%;
-}
-
-.welcome-screen.hide .particle {
-    transform: translate(randomX, randomY) scale(0) rotate(randomDeg);
-    opacity: 0;
-}`,
-                3: `/* 彩色碎片效果 */
-.fragment {
-    width: ${settings.size * 1.5}px;
-    height: ${settings.size * 1.5}px;
-    background: linear-gradient(135deg, var(--color1), var(--color2));
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    opacity: 0.85;
-    transition: all ${settings.duration * 1.2}s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.welcome-screen.hide .fragment {
-    transform: translate(randomX, randomY) scale(0.05) rotate(randomDeg);
-    opacity: 0;
-    filter: blur(5px);
-}`,
-                4: `/* 网格破碎效果 */
-.welcome-screen {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 1fr);
-}
-
-.grid-cell {
-    background: linear-gradient(135deg, rgba(0,204,255,0.9), rgba(0,153,255,0.9));
-    margin: 1px;
-    transition: all ${settings.duration}s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-.welcome-screen.hide .grid-cell {
-    transform: translate(randomX, randomY) scale(0.1) rotate(randomDeg);
-    opacity: 0;
-}`
+        function clearGrid() {
+            const grid = document.getElementById('grid-effect');
+            while (grid.firstChild) {
+                grid.removeChild(grid.firstChild);
+            }
+        }
+        
+        function createBlurParticles() {
+            const effect = document.getElementById('blur-with-particles');
+            
+            // 先清除现有粒子
+            clearBlurParticles();
+            
+            // 创建浮动粒子
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'blur-particle';
+                
+                // 随机位置
+                const left = Math.random() * 100;
+                particle.style.left = `${left}%`;
+                
+                // 随机动画延迟
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // 随机水平移动距离
+                particle.style.setProperty('--x-end', (Math.random() - 0.5) * 2);
+                
+                // 随机大小
+                const size = 4 + Math.random() * 6;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 随机透明度
+                particle.style.opacity = 0.1 + Math.random() * 0.2;
+                
+                effect.appendChild(particle);
+            }
+        }
+        
+        function clearBlurParticles() {
+            const effect = document.getElementById('blur-with-particles');
+            const particles = effect.querySelectorAll('.blur-particle');
+            particles.forEach(p => p.remove());
+        }
+        
+        function showResult(effectType) {
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('result-content');
+            const recommendation = document.getElementById('recommendation');
+            
+            const results = {
+                'particle': {
+                    title: '粒子效果',
+                    pros: '视觉冲击力强，动画明显',
+                    cons: '可能会分散注意力，性能消耗稍高',
+                    score: '7/10'
+                },
+                'grid': {
+                    title: '网格破碎效果',
+                    pros: '效果独特，有创意',
+                    cons: '实现复杂，可能不够流畅',
+                    score: '6/10'
+                },
+                'enhanced-blur': {
+                    title: '增强模糊效果',
+                    pros: '流畅优雅，性能好',
+                    cons: '相对传统，不够创新',
+                    score: '8/10'
+                },
+                'blur-with-particles': {
+                    title: '模糊+粒子组合',
+                    pros: '既有模糊的优雅又有粒子的动感，平衡性好',
+                    cons: '实现稍复杂',
+                    score: '9/10'
+                }
             };
             
-            document.getElementById('codeOutput').textContent = codeTemplates[effectNum];
+            const result = results[effectType];
+            resultContent.innerHTML = `
+                <h3>${result.title}</h3>
+                <p><strong>优点:</strong> ${result.pros}</p>
+                <p><strong>缺点:</strong> ${result.cons}</p>
+                <p><strong>评分:</strong> ${result.score}</p>
+            `;
+            
+            // 推荐
+            if (effectType === 'blur-with-particles') {
+                recommendation.textContent = '🌟 推荐使用这个效果！平衡了美观和性能';
+            } else if (effectType === 'enhanced-blur') {
+                recommendation.textContent = '👍 不错的选择，简单有效';
+            } else {
+                recommendation.textContent = '💡 可以考虑，但可能不是最佳选择';
+            }
+            
+            resultDiv.style.display = 'block';
         }
         
-        // 初始代码预览
-        generateCodePreview(1);
+        // 初始隐藏结果
+        document.getElementById('result').style.display = 'none';
     </script>
 </body>
 </html>
