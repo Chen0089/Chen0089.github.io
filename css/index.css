@@ -17,11 +17,13 @@ body {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     flex-wrap: wrap;
-    gapgap: 30px;
+    gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .box {
@@ -30,11 +32,12 @@ body {
     width: 100%;
     max-width: 320px;
     min-width: 280px;
-    height: 400px;
+    height: 420px;
     justify-content: center;
     align-items: center;
     transition: 0.5s;
     flex: 1 1 300px;
+    overflow: hidden;
 }
 
 .content {
@@ -289,157 +292,57 @@ form * {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* 响应式设计改进 */
-@media (max-width: 1024px) {
+/* 中等屏幕 */
+@media (max-width: 900px) {
     .container {
-        gap: 25px;
+        gap: 20px;
         padding: 30px 15px;
     }
-
+    
     .box {
-        flex: 1 1 280px;
-        max-width: 300px;
+        flex: 1 1 45%;
+        max-width: none;
+        height: 380px;
     }
-
+    
     .content {
-        padding: 15px 25px;
+        padding: 15px 20px;
     }
-
+    
     .box:hover .content {
-        padding: 30px 25px;
         left: -10px;
+        padding: 25px 20px;
     }
 }
 
-@media (max-width: 768px) {
-    body {
-        padding: 15px;
-    }
-
+/* 小屏幕 */
+@media (max-width: 600px) {
     .container {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
         padding: 20px 10px;
     }
-
+    
     .box {
         flex: 1 1 auto;
-        max-width: 100%;
         width: 100%;
+        max-width: 100%;
         height: 350px;
-        margin: 0;
     }
-
+    
     .content {
         margin: 0 5px;
-        padding: 20px;
+        padding: 15px;
     }
-
+    
     .box:hover .content {
         left: 0;
-        padding: 30px 20px;
+        padding: 20px 15px;
     }
-
+    
     .box:hover::before,
     .box:hover::after {
         left: 10px;
         width: calc(100% - 20px);
-    }
-
-    .login-status {
-        top: 15px;
-        left: 15px;
-    }
-
-    #fps {
-        top: 15px;
-        right: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        gap: 15px;
-        padding: 15px 5px;
-    }
-
-    .box {
-        height: 320px;
-    }
-
-    .content {
-        padding: 15px;
-        margin: 0 2px;
-    }
-
-    .content h2 {
-        font-size: 1.3em;
-    }
-
-    .content p {
-        font-size: 0.9em;
-        line-height: 1.3em;
-    }
-
-    .content a {
-        padding: 6px 12px;
-        font-size: 0.9em;
-    }
-
-    .box:hover .content {
-        padding: 25px 15px;
-    }
-
-    .login-status {
-        top: 10px;
-        left: 10px;
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    #fps {
-        top: 10px;
-        right: 10px;
-        padding: 6px 10px;
-    }
-
-    .box:hover span::before {
-        top: -20px;
-        left: 20px;
-        width: 60px;
-        height: 60px;
-    }
-
-    .box:hover span::after {
-        bottom: -20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-    }
-}
-
-@media (max-width: 320px) {
-    .box {
-        height: 300px;
-    }
-
-    .content {
-        padding: 12px;
-    }
-
-    .content h2 {
-        font-size: 1.2em;
-    }
-
-    .content p {
-        font-size: 0.85em;
-    }
-
-    .box:hover .content {
-        padding: 20px 12px;
     }
 }
