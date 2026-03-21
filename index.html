@@ -8,6 +8,30 @@
     <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
+    <div id="movePopup" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+    <div style="background: white; padding: 30px; border-radius: 16px; text-align: center; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); font-family: sans-serif;">
+        <h2 style="margin-top: 0;">📦 搬家公告</h2>
+        <p style="font-size: 16px; line-height: 1.5;">我的 GitHub 主页已搬家到：<br>
+        <strong style="color: #0366d6; font-size: 18px;">chen0201.github.io</strong></p>
+        <p style="font-size: 14px; color: #666;">点击下方按钮前往新家</p>
+        <button id="goToNewHome" style="background: #0366d6; color: white; border: none; padding: 10px 24px; border-radius: 24px; font-size: 16px; cursor: pointer; margin-top: 10px;">🚀 前往新家</button>
+        <p style="font-size: 12px; color: #999; margin-top: 20px;">（本弹窗只出现一次）</p>
+    </div>
+</div>
+
+<script>
+    // 弹窗只显示一次（用 localStorage 记录）
+    if (!localStorage.getItem('visitedOldHome')) {
+        localStorage.setItem('visitedOldHome', 'true');
+    } else {
+        document.getElementById('movePopup').style.display = 'none';
+    }
+
+    // 点击按钮跳转
+    document.getElementById('goToNewHome').onclick = function() {
+        window.location.href = 'https://chen0201.github.io';
+    };
+</script>
     <div id="loader" class="center"></div>
     
     <!-- 登录状态区域 -->
