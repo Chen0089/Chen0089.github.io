@@ -1,3 +1,5 @@
+# 注意：此网站已不再维护，任何issue都不用提了，去bot0201.github.io这个存储库提！
+---
 # 这是我的website.
 > 悄悄告诉你一句：你可以遵循许可证复制我写的所有代码(just like a shit💩)!
 <a href="chen0089.github.io">Let's go!</a>
