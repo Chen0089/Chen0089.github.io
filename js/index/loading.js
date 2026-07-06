@@ -1,155 +1,76 @@
-document.onreadystatechange = function() {
-    if (document.readyState !== "complete") {
-        document.querySelector("body").style.visibility = "hidden";
-		document.querySelector("#loader").style.visibility = "visible";
-	}
-	else {
-        document.querySelector("#loader").style.display = "none";
-        document.querySelector("body").style.visibility = "visible";
-	}
-};
-document.getElementById('flarum-loading').style.display = 'block';
-var flarum = {
-	extensions: {}
-};
+document.addEventListener('DOMContentLoaded', function () {
+    // 防止重复创建开屏遮罩
+    if (document.getElementById('welcome-screen')) return;
 
-document.addEventListener('DOMContentLoaded', function() {
-    // 创建欢迎页面
+    // 开屏HTML结构
     const welcomeHTML = `
-        <div id="welcome-screen">
-            <div class="welcome-content">
-                <div class="welcome-logo">chen0089</div>
-                <div class="welcome-subtitle">个人学习与创作空间</div>
-                <div class="loading-bar">
-                    <div class="loading-progress"></div>
-                </div>
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="welcome-logo">chen0089</div>
+            <div class="welcome-subtitle">个人学习与创作空间</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
             </div>
         </div>
-        <div class="expanding-circle"></div>
+    </div>
+    <div class="expanding-circle"></div>
     `;
-    
-    // 插入到body最前面
     document.body.insertAdjacentHTML('afterbegin', welcomeHTML);
-    
+
+    // DOM缓存
     const welcomeScreen = document.getElementById('welcome-screen');
     const loadingProgress = document.querySelector('.loading-progress');
     const expandingCircle = document.querySelector('.expanding-circle');
-    
-    // 简单加载进度
+    let transitionTriggered = false; // 过渡锁，防止多次执行
+
+    // 进度自动增长
     let progress = 0;
-    const interval = setInterval(() => {
-        progress += Math.random() * 15 + 5;
+    const progressTimer = setInterval(() => {
+        // 增速放缓，前快后慢更自然
+        const add = progress < 60 ? Math.random() * 12 + 4 : Math.random() * 6 + 1;
+        progress += add;
         if (progress >= 100) {
             progress = 100;
-            clearInterval(interval);
-            setTimeout(startTransition, 500);
+            clearInterval(progressTimer);
+            if (!transitionTriggered) setTimeout(startTransition, 400);
         }
-        loadingProgress.style.width = progress + '%';
-    }, 150);
-    
-    function startTransition() {
-        // 等待1秒
-        setTimeout(() => {
-            // 开始圆圈放大
-            expandingCircle.classList.add('active');
-            
-            // 开始模糊消失
-            setTimeout(() => {
-                welcomeScreen.classList.add('fade-out');
-            }, 150);
-            
-            // 完成后显示主页
-            setTimeout(() => {
-                welcomeScreen.remove();
-                expandingCircle.remove();
-                document.querySelector('.main-content').classList.add('show');
-            }, 1650);
-        }, 1000);
-    }
-    
-    // 页面加载完成加速
+        loadingProgress.style.width = `${progress}%`;
+    }, 120);
+
+    // 页面完全加载时直接拉满进度，快速跳过等待
     window.addEventListener('load', () => {
-        clearInterval(interval);
+        clearInterval(progressTimer);
         loadingProgress.style.width = '100%';
-        setTimeout(startTransition, 300);
+        if (!transitionTriggered) setTimeout(startTransition, 200);
     });
-    
-    // 超时保护
+
+    // 超时兜底：5秒强制关闭开屏，避免卡死
     setTimeout(() => {
-        if (!welcomeScreen.classList.contains('fade-out')) {
-            clearInterval(interval);
-            loadingProgress.style.width = '100%';
-            setTimeout(startTransition, 300);
-        }
+        if (transitionTriggered) return;
+        clearInterval(progressTimer);
+        loadingProgress.style.width = '100%';
+        startTransition();
     }, 5000);
-});// 新建一个welcome.js文件或添加到现有JS中
-document.addEventListener('DOMContentLoaded', function() {
-    // 创建欢迎页面
-    const welcomeHTML = `
-        <div id="welcome-screen">
-            <div class="welcome-content">
-                <div class="welcome-logo">chen0089</div>
-                <div class="welcome-subtitle">个人学习与创作空间</div>
-                <div class="loading-bar">
-                    <div class="loading-progress"></div>
-                </div>
-            </div>
-        </div>
-        <div class="expanding-circle"></div>
-    `;
-    
-    // 插入到body最前面
-    document.body.insertAdjacentHTML('afterbegin', welcomeHTML);
-    
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const loadingProgress = document.querySelector('.loading-progress');
-    const expandingCircle = document.querySelector('.expanding-circle');
-    
-    // 简单加载进度
-    let progress = 0;
-    const interval = setInterval(() => {
-        progress += Math.random() * 15 + 5;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(interval);
-            setTimeout(startTransition, 500);
-        }
-        loadingProgress.style.width = progress + '%';
-    }, 150);
-    
+
+    // 退场动画逻辑
     function startTransition() {
-        // 等待1秒
+        if (transitionTriggered) return;
+        transitionTriggered = true;
+
+        // 环形扩散光效
+        expandingCircle.classList.add('active');
+
+        // 延迟淡出遮罩
         setTimeout(() => {
-            // 开始圆圈放大
-            expandingCircle.classList.add('active');
-            
-            // 开始模糊消失
-            setTimeout(() => {
-                welcomeScreen.classList.add('fade-out');
-            }, 150);
-            
-            // 完成后显示主页
-            setTimeout(() => {
-                welcomeScreen.remove();
-                expandingCircle.remove();
-                document.querySelector('.main-content').classList.add('show');
-            }, 1650);
-        }, 1000);
+            welcomeScreen.classList.add('fade-out');
+        }, 180);
+
+        // 动画结束后销毁DOM、显示主页内容
+        setTimeout(() => {
+            welcomeScreen.remove();
+            expandingCircle.remove();
+            const mainDom = document.querySelector('.main-content');
+            if (mainDom) mainDom.classList.add('show');
+        }, 1700);
     }
-    
-    // 页面加载完成加速
-    window.addEventListener('load', () => {
-        clearInterval(interval);
-        loadingProgress.style.width = '100%';
-        setTimeout(startTransition, 300);
-    });
-    
-    // 超时保护
-    setTimeout(() => {
-        if (!welcomeScreen.classList.contains('fade-out')) {
-            clearInterval(interval);
-            loadingProgress.style.width = '100%';
-            setTimeout(startTransition, 300);
-        }
-    }, 5000);
 });
